@@ -1,12 +1,12 @@
 # Celebrity
 ---
 ## Juego similar al juego de cartas Time's Up! 
-Los jugadores, divididos en dos equipos, intentan adivinar personajes, títulos, para conseguir puntos para su equipo
+Los jugadores, divididos en dos equipos, intentan adivinar conceptos (Personajes, títulos de obras, etc) para conseguir puntos para su equipo
 
 ---
 **Iteración 1**
 
-El juego debe ser capaz de seleccionar un número de tarjetas (entre 15 y 30) y realizar varias rondas en una partida. Irá mostrando las cartas disponibles, y ofrecerá tres opciones:
+El juego debe ser capaz de seleccionar un número de tarjetas (40 en principio) y realizar varias rondas en una partida. Irá mostrando las cartas disponibles, y ofrecerá tres opciones:
 
 - *Acierto*. El equipo ha acertado. Un punto para el equipo
 
@@ -19,7 +19,7 @@ Después, si quedan cartas, continuará el otro equipo.
 
 Se realizarán 3 rondas (Y una cuarta ronda opcional). Cada ronda tendrá una pantalla de presentación de ronda, con una pequeña explicación de lo que hay que hacer.
 
-| Ronda     | Descripción    | Nº de Respuestas aceptadas | Se pude pasar |
+| Ronda     | Descripción    | Nº de Respuestas aceptadas | Se puede pasar |
 | --------|---------|-------|------|
 | 1  | Describir el concepto pudiendo hablar con libertad, pero sin utilizar partes de la palabra o su traducción en otro idioma.   | Sin límite | NO    |
 | 2 | Solo una palabra para describir el personaje | 1 | SÍ |
@@ -76,7 +76,15 @@ Permitir la personalización de tarjetas.
 
 - Añadir, editar y borrar tarjetas
 
-**Iteración 5 **
+- Importar desde excel conceptos para una nueva categoría o una ya existente
+
+---
+**Iteración 5**
+
+Permitir el juego en solitario. Para ello, cada concepto debe constar de descripción. Se mostrará la descripción, y luego las respuestas, con una serie de 4 posibles opciones. Las opciones se cogerán de la misma categoría. Se puntuarán el total de respuestas correctas
+
+---
+**Iteración 6 **
 
 Permitir la edición durante la partida. Para errores realizados al darle a acierto o fallo, permitir la edición de algún resultado
 
