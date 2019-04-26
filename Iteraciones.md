@@ -66,14 +66,18 @@ Categorías:
 	- Los Simpsons
 	- Disney
 
+- Nacionalidades
+	- Una categoría por cada nacioalidad
+	
+- Tecnología
+
+- Ciencia
+
+- Deporte
+
 
 ---
 **Iteración 3**
-
-Añadir un contador a cada tarjeta. Cada vez que una tarjeta sea acertada, este contador aumentará. De esta manera, cada vez que se recuperen cartas para un nuevo juego, las cartas que menos veces hayan salido tendrán prioridad sobre las ya acertadas.
-
----
-**Iteración 4**
 
 Permitir la personalización de tarjetas.
 
@@ -84,12 +88,28 @@ Permitir la personalización de tarjetas.
 - Importar desde excel conceptos para una nueva categoría o una ya existente
 
 ---
+**Iteración 4**
+
+Añadir un contador a cada tarjeta. Cada vez que una tarjeta sea acertada, este contador aumentará. De esta manera, cada vez que se recuperen cartas para un nuevo juego, las cartas que menos veces hayan salido tendrán prioridad sobre las ya acertadas.
+
+---
 **Iteración 5**
 
 Permitir el juego en solitario. Para ello, cada concepto debe constar de descripción. Se mostrará la descripción, y luego las respuestas, con una serie de 4 posibles opciones. Las opciones se cogerán de la misma categoría. Se puntuarán el total de respuestas correctas
 
 ---
-**Iteración 6 **
+**Iteración 6**
 
 Permitir la edición durante la partida. Para errores realizados al darle a acierto o fallo, permitir la edición de algún resultado
 
+---
+**Iteración 7**
+
+Habilitar un modo en el que, cada vez que un concepto sea fallado x veces, muestre una nueva pista. Las pistas son las categorías en los que se encuadra el concepto.
+
+---
+**Iteración 8**
+
+Nuevo modo de Juego:
+
+Seleccionar una o varias categorías, y la aplicación me irá dando conceptos al azar. Los demás jugadores me harán preguntas de Si o No, y yo iré contestando, hasta que acierten el concepto.
