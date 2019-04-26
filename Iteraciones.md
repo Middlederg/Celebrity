@@ -1,30 +1,23 @@
-# Celebrity
+# Iteraciones
 ---
-## Juego similar al juego de cartas Time's Up! 
-Los jugadores, divididos en dos equipos, intentan adivinar conceptos (Personajes, títulos de obras, etc) para conseguir puntos para su equipo
+
+Para tratar de dividir la realización del proyecto, se proponen varias iteraciones. La primera contiene el MVP, y cada iteración implementa funcionalidad que añade valor.
+
 
 ---
-**Iteración 1**
+**Iteración 1 (MVP)**
 
-El juego debe ser capaz de seleccionar un número de tarjetas (40 en principio) y realizar varias rondas en una partida. Irá mostrando las cartas disponibles, y ofrecerá tres opciones:
+Implementar una solución que:
 
-- *Acierto*. El equipo ha acertado. Un punto para el equipo
+- Inicie el juego con una serie de conceptos determinados.
 
-- *Pasar / Fallo*. El jugador decide pasar porque no adivinarán la tarjeta en tiempo / O el equipo ha fallado y se pasa a la siguiente tarjeta
+- Permita a cada equipo intentar adivinar los conceptos en un turno con un tiempo determinado.
 
-- *Fin de turno*  El tiempo del equipo ha finalizado.
+- Contabilice los aciertos y fallos de cada equipo.
 
-Cada acierto será un punto para el equipo con el turno en curso. Cuando finalice el tiempo (30 segundos normalmente), se mostrará un resumen de turno (Aciertos realizados, y puntuación general).
-Después, si quedan cartas, continuará el otro equipo.
+- Gestione las rondas y los turnos, y que al final de cada ronda muestre una tabla-resumen de puntuación.
 
-Se realizarán 3 rondas (Y una cuarta ronda opcional). Cada ronda tendrá una pantalla de presentación de ronda, con una pequeña explicación de lo que hay que hacer.
-
-| Ronda     | Descripción    | Nº de Respuestas aceptadas | Se puede pasar |
-| --------|---------|-------|------|
-| 1  | Describir el concepto pudiendo hablar con libertad, pero sin utilizar partes de la palabra o su traducción en otro idioma.   | Sin límite | NO    |
-| 2 | Solo una palabra para describir el personaje | 1 | SÍ |
-| 3 | Mímica y sonidos para describir el personaje | 1 | SÍ |
-| 4 | Escenificar una posición, como si el jugador fuese una estatua, para describir el personaje | 1 | SÍ |
+- Muestre, al finalizar la partida, una pantalla con el ganador de la partida.
 
 ---
 **Iteración 2**
@@ -37,29 +30,41 @@ Las categorías serán las siguientes:
 
 Categorías:
 
-- Personajes históricos famosos
+- Personajes famosos
+	- Antiguedad
+	- Medieval
+	- Moderno
+	- Contemporaneo
 
-- Personajes contemporaneos famosos
+- Personajes de ficción famosos
 
-- Películas
-
-- Series
-
-- Literatura
-
-- Teatro
-
-- Comic
-
-- Música
-
-- Videojuegos
-
-- Juegos de mesa
+- Obras artísticas
+	- Películas
+	- Series
+	- Literatura
+	- Teatro
+	- Comic
+	- Música
+	- Videojuegos
+	- Juegos de mesa
 
 - Lugares
+	- Paises
+	- Ciudades
+	- Ríos
+	- Montañas
+	- Mares y lagos
 
-- Proverbios y refranes
+- Citas
+	- Citas históricas
+	- Proverbios y refranes
+	- Frases de la tele
+	
+- Universos de ficción
+	- Star Wars
+	- Harry Potter
+	- Los Simpsons
+	- Disney
 
 
 ---
