@@ -1,6 +1,7 @@
 # Celebrity
----
-## Juego similar al juego de cartas Time's Up! 
+**Juego similar al juego de cartas Time's Up!**
+
+*Nota a futuro: Quizá sería buena idea encapsular el back en una api rest (aspnet core, tirando de ficheros para no tener que pagar BBDD), y el hacerlo mediante un fwk tipo vue.*
 
 Los jugadores, divididos en dos equipos, intentan adivinar conceptos (Personajes, títulos de obras, etc) para conseguir puntos para su equipo.
 El equipo que más puntos consiga a lo largo de tres rondas, será el ganador.
