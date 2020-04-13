@@ -1,0 +1,69 @@
+﻿@if (Show)
+{
+    <div class="modal-dialog" role="document">
+        <div class="modal-content border-primary">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Select your team color</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="btn-group my-3 d-flex justify-content-center" role="group" aria-label="Colors">
+                    @foreach (Color avaliableColor in Enum.GetValues(typeof(Color)))
+                    {
+                        <button type="button" 
+                                class="@($"btn btn-{avaliableColor.ColorClass()}")" 
+                                @onclick="() => color = avaliableColor">
+                            &nbsp;
+                        </button>
+                    }
+                </div>
+                <div class="input-group my-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="teamName">Name</div>
+                    </div>
+                    <input type="text" class="form-control" 
+                           aria-label="Input team name" 
+                           aria-describedby="teamName"
+                           @bind="name">
+                </div>
+                @if (isError)
+                {
+                <p class="text-danger">
+                    Select a color for the team
+                </p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="() => OnCreateTeam(color, name)">Create</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+
+    private bool isError = false;
+
+    private Color? color;
+    private string name;
+
+    [Parameter]
+    public bool Show { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<Team> OnTeamAdded { get; set; }
+
+    async Task OnCreateTeam(Color? color, string name)
+    {
+        if (color.HasValue)
+        {
+            var team = new Team(color.Value, name);
+            await OnTeamAdded.InvokeAsync(team);
+            Show = false;
+            isError = false;
+        }
+        else isError = true;
+    }
+}

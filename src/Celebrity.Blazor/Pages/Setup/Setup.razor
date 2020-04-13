@@ -1,0 +1,45 @@
+﻿@page "/setup"
+@inject NavigationManager NavigationManager
+
+<h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Set up game</h1>
+<div class="d-flex justify-content-center mt-4 mb-5">
+    <button class="btn btn-lg btn-outline-dark text-xl-center text-uppercase px-5 py-3" @onclick="Play">
+        <span class="oi oi-play-circle mr-2" title="add new team" aria-hidden="true"></span>
+        Start
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <TeamsSelection></TeamsSelection>
+
+
+    </div>
+    <div class="col-lg-6">
+
+        <OptionsSelection Options="options"></OptionsSelection>
+
+    </div>
+</div>
+
+<div class="row">
+
+
+
+
+</div>
+
+
+@code {
+    private GameOptions options;
+
+    protected override void OnInitialized()
+    {
+        options = new GameOptions();
+    }
+
+    private void Play()
+    {
+        NavigationManager.NavigateTo("game");
+    }
+}

@@ -1,0 +1,112 @@
+﻿<h3 class="my-1">
+    Options
+</h3>
+<hr class="mt-0 mb-2" />
+
+<div class="form-group row my-4 d-flex align-items-center">
+    <label for="conceptCount" class="col-sm-2 col-form-label">Concepts</label>
+    <div class="col-sm-4">
+        <input type="number" id="conceptCount"
+               @bind="Options.ConceptCount"
+               min="@Deck.MinConcepts"
+               max="@Deck.MaxConcepts"
+               class="form-control mx-sm-3"
+               aria-describedby="conceptsHelp">
+    </div>
+    <small id="conceptsHelp" class="col-sm-6 text-muted">
+        Total number of concepts that will be added to the deck. Recomended between 20-60.
+    </small>
+</div>
+
+<div class="form-group row my-4 d-flex align-items-center">
+    <label for="roundCount" class="col-sm-2">Rounds</label>
+    <div class="col-sm-4">
+        <input type="number" id="roundCount"
+               @bind="Options.RoundCount"
+               min="@RoundFactory.MinimunRounds"
+               max="@RoundFactory.MaximunRounds"
+               class="form-control mx-sm-3"
+               aria-describedby="roundsHelp">
+    </div>
+    <small id="roundsHelp" class="col-sm-6 text-muted">
+        Total number of rounds that will be played. Must be between 1-4.
+        <button class="btn btn-info btn-sm py-0" @onclick="@ShowRoundsModal">
+            <span class="oi oi-info small" title="info" aria-hidden="true"></span>
+        </button>
+    </small>
+    @if (roundsModal)
+    {
+        <div class="modal fade show" id="myModal" style="display:block" aria-modal="true" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirm action</h4>
+                        <button type="button" class="close" @onclick="@HideRoundsModal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p>This is the modal content!</p>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn" @onclick="@HideRoundsModal">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="form-group row my-4 d-flex align-items-center">
+    <label for="roundCount" class="col-sm-2">Seconds</label>
+    <div class="col-sm-4">
+        <input type="number" id="roundCount"
+               @bind="Options.Seconds"
+               min="10"
+               max="120"
+               class="form-control mx-sm-3"
+               aria-describedby="secondsHelp">
+    </div>
+    <small id="secondsHelp" class="col-sm-6 text-muted">
+        Seconds per round
+    </small>
+</div>
+
+<fieldset class="form-group">
+    <div class="custom-control custom-switch custom-control-inline">
+        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+        <label class="custom-control-label" for="customSwitch1">Random mode</label>
+    </div>
+</fieldset>
+
+
+<fieldset class="form-group">
+    <legend>Difficulty</legend>
+
+    @foreach (var difficulty in Options.DifficultiesList)
+    {
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input" id="@difficulty.ToString()"
+                   @bind="difficulty.IsChecked">
+            <label class="custom-control-label" for="@difficulty.ToString()">@difficulty.ToString()</label>
+        </div>
+    }
+
+</fieldset>
+
+
+@code {
+
+    private bool roundsModal = false;
+    void ShowRoundsModal() => roundsModal = true;
+    void HideRoundsModal() => roundsModal = false;
+
+    [Parameter]
+    public GameOptions Options { get; set; }
+
+}

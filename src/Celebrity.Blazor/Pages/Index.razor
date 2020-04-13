@@ -1,0 +1,18 @@
+﻿@page "/"
+
+<h1>Prepare new game</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code 
+{
+    private Game game;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //game = new Game();
+        //forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

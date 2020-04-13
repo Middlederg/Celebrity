@@ -1,0 +1,35 @@
+﻿<div class="d-flex justify-content-start align-items-center">
+    <h3>Teams</h3>
+    <button class="btn btn-light btn-sm ml-3"  @onclick="() => createTeamModal = true">
+        <span class="oi oi-plus mr-2 small" title="add new team" aria-hidden="true"></span>
+        add team
+    </button>
+
+  <CreateTeam Show="createTeamModal" OnTeamAdded="TeamCreated" ></CreateTeam>
+</div>
+
+<hr class="mt-0 mb-2" />
+
+<div class="card-columns">
+
+    @foreach (Team team in Teams)
+    {
+        <TeamCard Team="team" OnTeamRemoved="(team) => Teams.Remove(team)"></TeamCard>
+    }
+</div>
+
+@code {
+    private bool createTeamModal = false;
+
+    [Parameter]
+    public List<Team> Teams { get; set; } = new List<Team>()
+    {
+        new Team(Color.Bluemoon),
+        new Team(Color.Lemon)
+    };
+
+    void TeamCreated(Team team)
+    {
+        Teams.Add(team);
+    }
+}

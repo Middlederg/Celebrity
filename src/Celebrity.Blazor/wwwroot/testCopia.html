@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celebrity</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    <div class="main">
+        <div class="top-row px-4 auth">
+            <a href="Identity/Account/Register">Register</a>
+            <a href="Identity/Account/Login">Log in</a>
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <div class="content px-4">
+
+            <h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Set up game</h1>
+            <div class="d-flex justify-content-center mt-4 mb-5">
+                <button class="btn btn-lg btn-outline-dark text-xl-center text-uppercase px-5 py-3">
+                    <span class="oi oi-play-circle mr-2" title="add new team" aria-hidden="true"></span>
+                    Start
+                </button>
+            </div>
+            
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="d-flex justify-content-start align-items-center">
+                        <h3>Teams</h3>
+                        <button class="btn btn-light btn-sm ml-3" data-toggle="modal" data-target="#exampleModal">
+                            <span class="oi oi-plus mr-2 small" title="add new team" aria-hidden="true"></span>
+                            add team
+                        </button>
+
+                        <!-- Modal -->
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content border-primary">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Select your team color</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="btn-group my-3 d-flex justify-content-center" role="group" aria-label="Colors">
+                                            <button type="button" class="btn btn-primary">&nbsp;</button>
+                                            <button type="button" class="btn btn-success">&nbsp;</button>
+                                            <button type="button" class="btn btn-danger">&nbsp;</button>
+                                            <button type="button" class="btn btn-warning">&nbsp;</button>
+                                            <button type="button" class="btn btn-dark">&nbsp;</button>
+                                            <button type="button" class="btn btn-info">&nbsp;</button>
+                                        </div>
+                                        <div class="input-group my-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text" id="teamName">Name</div>
+                                            </div>
+                                            <input type="text" class="form-control" aria-label="Input team name" aria-describedby="teamName">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                  
+                    <hr class="mt-0 mb-2" />
+
+                    <div class="card-columns">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                            <div class="card-body">
+                                <strong>Blue team</strong>
+                                <button type="button" class="ml-2 mb-1 close text-white" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                            <div class="card-body">
+                                <strong>Yellow team</strong>
+                                <button type="button" class="ml-2 mb-1 close text-white" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="my-1">
+                        Options
+                    </h3>
+                    <hr class="mt-0 mb-2" />
+
+                    <div class="form-group row my-4 d-flex align-items-center">
+                        <label for="conceptCount" class="col-sm-2 col-form-label">Concepts</label>
+                        <div class="col-sm-4">
+                            <input type="number" id="conceptCount"
+                                   min="10"
+                                   max="100"
+                                   value="40"
+                                   class="form-control mx-sm-3"
+                                   aria-describedby="conceptsHelp">
+                        </div>
+                        <small id="conceptsHelp" class="col-sm-6 text-muted">
+                            Total number of concepts that will be added to the deck. Recomended between 20-60.
+                        </small>
+                    </div>
+
+                    <div class="form-group row my-4 d-flex align-items-center">
+                        <label for="roundCount" class="col-sm-2">Rounds</label>
+                        <div class="col-sm-4">
+                            <input type="number" id="roundCount"
+                                   min="1"
+                                   max="4"
+                                   value="3"
+                                   class="form-control mx-sm-3"
+                                   aria-describedby="roundsHelp">
+
+                        </div>
+                        <small id="roundsHelp" class="col-sm-6 text-muted">
+                            Total number of rounds that will be played. Must be between 1-4.
+                            <button class="btn btn-info btn-sm py-0">
+                                <span class="oi oi-info small" title="info" aria-hidden="true"></span>
+                            </button>
+                        </small>
+                    </div>
+
+                    <div class="form-group row my-4 d-flex align-items-center">
+                        <label for="roundCount" class="col-sm-2">Seconds</label>
+                        <div class="col-sm-4">
+                            <input type="number" id="roundCount"
+                                   min="10"
+                                   max="120"
+                                   value="30"
+                                   class="form-control mx-sm-3"
+                                   aria-describedby="secondsHelp">
+                        </div>
+                        <small id="secondsHelp" class="col-sm-6 text-muted">
+                            Seconds per round
+                        </small>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <div class="custom-control custom-switch custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1">Random mode</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <legend>Difficulty</legend>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="easy">
+                            <label class="custom-control-label" for="easy">Easy</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="intermediate" checked="">
+                            <label class="custom-control-label" for="intermediate">Intermediate</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="hard" checked="checked">
+                            <label class="custom-control-label" for="hard">Hard</label>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="my-1">
+                            Categories
+                        </h3>
+                    </div>
+
+                    <hr class="my-0" />
+                </div>
+                <div class="col-lg-12">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 mb-3">
+                        <div class="form-inline my-2 my-lg-0">
+                            <div class="input-group">
+                                <input class="form-control form-control-sm"
+                                       type="search"
+                                       placeholder="Search"
+                                       aria-label="Search"
+                                       aria-describedby="searchButton">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary btn-sm my-2 my-sm-0" type="submit" id="searchButton">
+                                        <span class="oi oi-magnifying-glass" title="icon name" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-light btn-sm ml-4">
+                            select all categories
+                        </button>
+                        <button class="btn btn-light btn-sm ml-4">
+                            unselect all categories
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card border-info mb-3">
+                        <div class="card-header">
+                            <div class="custom-control custom-checkbox" indeterminate="true">
+                                <input type="checkbox" class="custom-control-input" indeterminate="true" id="customCheck1">
+                                <label class="custom-control-label text-uppercase" for="customCheck1">
+                                    <strong>Personajes históricos</strong>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-body text-dark">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="antiguedad">
+                                <label class="custom-control-label" for="antiguedad">Antigüedad</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="medieval">
+                                <label class="custom-control-label" for="medieval">Medieval</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-info mb-3">
+                        <div class="card-header">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label text-uppercase" for="customCheck1">
+                                    <strong>Universos</strong>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-body text-dark">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="starWars">
+                                <label class="custom-control-label" for="starWars">Star wars</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="harryPotter">
+                                <label class="custom-control-label" for="harryPotter">Harry Potter</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="marvel">
+                                <label class="custom-control-label" for="marvel">Marvel</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>
