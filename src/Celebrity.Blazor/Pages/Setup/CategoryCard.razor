@@ -1,5 +1,48 @@
-﻿<h3>CategoryCard</h3>
+﻿<div class="col-lg-4">
+    <div class="card border-info mb-3">
+        <div class="card-header">
+            <button class="btn btn-link text-decoration-none text-dark" @onclick="Toggle">
+                <span class="@icon" title="select all" aria-hidden="true"></span>
+                <strong class="ml-2">@Category.ToString()</strong>
+            </button>
+        </div>
+        <div class="card-body text-dark">
+            @foreach (var subcategory in Category.Subcategories)
+            {
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" 
+                           class="custom-control-input" 
+                           id="@subcategory.ToString()"
+                           @bind="subcategory.IsChecked">
+                    <label class="custom-control-label" for="@subcategory.ToString()">@subcategory.ToString()</label>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @code {
+    private bool allSelected;
+    private string icon;
 
+    [Parameter]
+    public CategoryViewModel Category { get; set; }
+
+    protected override void OnInitialized()
+    {
+        allSelected = Category.AllSelected;
+        ChangeIcon();
+    }
+
+    private void Toggle()
+    {
+        allSelected = !allSelected;
+        if (allSelected) Category.SelectAll(); else Category.UnselectAll();
+        ChangeIcon();
+    }
+
+    private void ChangeIcon()
+    {
+        icon = Category.AllSelected ?  "oi oi-media-stop" : "oi oi-task";
+    }
 }

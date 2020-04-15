@@ -1,6 +1,7 @@
 ﻿using Celebrity;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Celebrity.Repositories
 {
@@ -10,7 +11,7 @@ namespace Celebrity.Repositories
         void EditCategory(Category category);
         void DeleteCategory(Category category);
 
-        Category GetCategory(Guid id);
-        IEnumerable<Category> GetCategories();
+        Task<Category> GetCategory(Guid id);
+        Task<IEnumerable<Category>> GetCategories();
     }
 }

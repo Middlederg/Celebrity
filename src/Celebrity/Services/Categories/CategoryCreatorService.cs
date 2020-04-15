@@ -1,4 +1,5 @@
 ﻿using Celebrity.Repositories;
+using System.Linq;
 
 namespace Celebrity
 {

@@ -1,0 +1,29 @@
+﻿@using System.Threading;
+<h3>Timer</h3>
+
+@code {
+
+    [Parameter]
+    public int Seconds { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnTimesUp { get; set; }
+
+    void StartCountdown()
+    {
+        var timer = new System.Threading.Timer(new TimerCallback(async _ =>
+        {
+            if (Seconds <= 0)
+            {
+                await OnTimesUp.InvokeAsync(true);
+                return;
+            }
+            Seconds--;
+
+            // Note that the following line is necessary because otherwise
+            // Blazor would not recognize the state change and not refresh the UI
+            this.StateHasChanged();
+        }), null, 1000, 1000);
+    }
+
+}

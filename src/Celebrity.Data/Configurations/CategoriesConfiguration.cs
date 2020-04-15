@@ -10,6 +10,11 @@ namespace Celebrity.Data
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(CategoryName.MaxLength);
+
+            builder.HasMany(e => e.Subcategories)
+                .WithOne(e => e.Category)
+                .HasForeignKey(e => e.IdCategory)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

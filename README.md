@@ -1,7 +1,51 @@
-# Celebrity
+﻿# Celebrity
+
 **Juego similar al juego de cartas Time's Up!**
 
-*Nota a futuro: Quizá sería buena idea encapsular el back en una api rest (aspnet core, tirando de ficheros para no tener que pagar BBDD), y el hacerlo mediante un fwk tipo vue.*
+---
+
+# Migraciones de base de datos
+
+
+
+Migraciones en base de datos
+El proyecto utiliza Entity framework core 3.1. Para cambiar el modelo de base de datos se siguen los siguientes pasos:
+
+1. Asegurarte que dotnet-ef (llamado EF Core Tools) están actualizadas. Si no lo están:
+a) Actualizar dotnet a la última versión
+b) Actualizar a la última versión con:
+````
+dotnet tool update --global dotnet-ef
+````
+
+2. Realizar los cambios necesarios en el modelo de datos, en los proyectos que se requieran
+
+3. En la consola del administrador de paquetes, ejecutar la migración y actualizar la base de datos en desarrollo:
+
+````
+dotnet ef migrations add "nombremigracion" --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Blazor\Celebrity.Blazor.csproj -v
+dotnet ef database update --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Blazor\Celebrity.Blazor.csproj
+````
+
+4. Cambiar a Debug, compilar el proyecto y pasar los test
+
+5. Cambiar a Release, compilar el proyecto y publicarlo
+
+6. Generar el script para produccion:
+
+````
+dotnet ef migrations script --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Blazor\Celebrity.Blazor.csproj -o ./script.sql nombreMigracionAnterior
+````
+
+7. Copiar el script generado y ejecutarlo en producción
+
+8. Subir la aplicación publicada en producción
+
+
+--- 
+
+
+# Operativa de la aplicación
 
 Los jugadores, divididos en dos equipos, intentan adivinar conceptos (Personajes, títulos de obras, etc) para conseguir puntos para su equipo.
 El equipo que más puntos consiga a lo largo de tres rondas, será el ganador.

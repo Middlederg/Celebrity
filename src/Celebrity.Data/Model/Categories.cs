@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Celebrity
 {
@@ -6,5 +7,12 @@ namespace Celebrity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<Subcategories> Subcategories { get; set; }
+
+        public Categories()
+        {
+            Subcategories = new HashSet<Subcategories>();
+        }
     }
 }

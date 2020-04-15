@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
+using Celebrity.Repositories;
 
 namespace Celebrity.Blazor
 {
@@ -12,6 +13,16 @@ namespace Celebrity.Blazor
         {
             //services.AddScoped<Random>();
             //services.AddScoped<IRandomProvider, RandomProvider>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<IConceptRepository, ConceptRepository>();
+            services.AddScoped<CategoryCreatorService>();
+            services.AddScoped<CategoryDeleteService>();
+            services.AddScoped<CategoryEditorService>();
+            services.AddScoped<GameCreatorService>();
+            services.AddScoped<GameLoaderService>();
+            services.AddScoped<GameSaverService>();
+            services.AddScoped<CategoriesQuery>();
             return services;
         }
 

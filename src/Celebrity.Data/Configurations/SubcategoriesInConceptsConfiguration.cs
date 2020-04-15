@@ -9,11 +9,13 @@ namespace Celebrity.Data
         {
             builder.HasOne(x => x.Subcategories)
                 .WithMany(s => s.SubcategoriesInconcepts)
-                .HasForeignKey(sc => sc.SubcategoryId);
+                .HasForeignKey(sc => sc.SubcategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Concepts)
                 .WithMany(s => s.SubcategoriesInconcepts)
-                .HasForeignKey(sc => sc.ConceptId);
+                .HasForeignKey(sc => sc.ConceptId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

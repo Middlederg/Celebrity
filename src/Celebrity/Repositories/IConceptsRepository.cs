@@ -2,17 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Celebrity.Repositories
 {
-    public interface IConceptsRepository
+    public interface IConceptRepository
     {
-        IEnumerable<Concept> GetConcept(ConceptId id);
-        IEnumerable<Concept> GetConcepts(DeckSelectionCriteria criteria);
+        Task<Concept> GetConcept(ConceptId id);
+        Task<IEnumerable<Concept>> GetConcepts(GameCreationCriteria criteria);
+        Task<IEnumerable<BaseOption<Concept>>> GetConceptsFromGame(GameId id);
 
         void AddConcept(Concept concept);
         void EditConcept(Concept concept);
         void DeleteConcept(Concept concept);
-
     }
 }

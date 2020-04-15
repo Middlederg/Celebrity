@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace Celebrity.Blazor
 {
+
     public class GameOptions
     {
         public int ConceptCount { get; set; }
