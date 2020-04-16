@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Celebrity.Repositories
+namespace Celebrity
 {
     public class GameCreationCriteria
     {

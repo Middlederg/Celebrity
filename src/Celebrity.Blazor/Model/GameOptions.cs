@@ -3,8 +3,7 @@ using System.Linq;
 
 namespace Celebrity.Blazor
 {
-
-    public class GameOptions
+    public class GameOptionsViewModel
     {
         public int ConceptCount { get; set; }
 
@@ -18,7 +17,7 @@ namespace Celebrity.Blazor
             return DifficultiesList.First(x => x.Entity == difficulty);
         }
 
-        public GameOptions()
+        public GameOptionsViewModel()
         {
             ConceptCount = 40;
             RoundCount = 3;

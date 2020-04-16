@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject UserFinderService userFinderService
 
 <h1>Prepare new game</h1>
 
@@ -14,5 +15,15 @@ Welcome to your new app.
     {
         //game = new Game();
         //forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var user = await userFinderService.GetCurrentUser();
+        }
+    }
+
 }

@@ -16,36 +16,31 @@ namespace Celebrity.Data
             this.context = context;
         }
 
-        public void AddCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void EditCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            var categories = await context.Categories.Include(x => x.Subcategories).ToListAsync();
-
-            return categories.Select(x =>
+            var subcategories = await context
+                .Subcategories
+                .ToListAsync();
+            
+            return ((CategoryValue[])Enum.GetValues(typeof(CategoryValue))).Select(value =>
             {
-                return Category.FromDataBase(x.Id, x.Name, x.Subcategories
-                    .Select(sc => new SubcategoryObject(sc.Id, sc.Name))
-                    .ToArray());
+                var subcategoriesInCategory = subcategories
+                    .Where(x => x.Category == value)
+                    .Select(x => new SubcategoryObject(x.Id, x.Name))
+                    .ToArray();
+
+                return new Category(value, subcategoriesInCategory);
             });
         }
 
-        public Task<Category> GetCategory(Guid id)
+        public async Task<Category> GetCategory(CategoryValue value)
         {
-            throw new NotImplementedException();
+            var subcategories = await context
+               .Subcategories
+               .Where(x => x.Category == value)
+               .Select(x => new SubcategoryObject(x.Id, x.Name))
+               .ToListAsync();
+            return new Category(value, subcategories.ToArray());
         }
     }
 }

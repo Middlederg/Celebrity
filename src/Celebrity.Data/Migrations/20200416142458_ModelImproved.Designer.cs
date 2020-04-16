@@ -3,14 +3,16 @@ using System;
 using Celebrity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Celebrity.Data.Migrations
 {
     [DbContext(typeof(CelebrityContext))]
-    partial class CelebrityContextModelSnapshot : ModelSnapshot
+    [Migration("20200416142458_ModelImproved")]
+    partial class ModelImproved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,24 +102,19 @@ namespace Celebrity.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GameId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("IpAddress")
+                    b.Property<string>("ClientInfo")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasMaxLength(100);
+
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("LoadedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("User")
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("UserAgent")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(250);
 
                     b.HasKey("Id");
 

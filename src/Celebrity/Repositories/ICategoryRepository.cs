@@ -7,11 +7,7 @@ namespace Celebrity.Repositories
 {
     public interface ICategoryRepository
     {
-        void AddCategory(Category category);
-        void EditCategory(Category category);
-        void DeleteCategory(Category category);
-
-        Task<Category> GetCategory(Guid id);
+        Task<Category> GetCategory(CategoryValue value);
         Task<IEnumerable<Category>> GetCategories();
     }
 }

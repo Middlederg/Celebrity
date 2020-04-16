@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Celebrity;
+using System.Threading.Tasks;
 
 namespace Celebrity.Data
 {
-    public class CelebrityContext : IdentityDbContext<Users>
+    public class CelebrityContext : IdentityDbContext<Users>, IUnitOfWork
     {
         internal DbSet<Concepts> Concepts { get; set; }
-        internal DbSet<Categories> Categories { get; set; }
         internal DbSet<Subcategories> Subcategories { get; set; }
         internal DbSet<SubcategoriesInConcepts> SubcategoriesInConcepts { get; set; }
 
@@ -24,12 +24,11 @@ namespace Celebrity.Data
             base.OnModelCreating(modelBuilder);
             //string cs = @"<add name="Model1sdfzg" connectionString="data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=F:\DESARROLLO\Repos\Personas\src\Personas.Data\PersonasDB.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />"
 
-            var categoryCreator = new CategoryCreator(modelBuilder);
-            var subcategoryCreator = new SubcategoryCreator(modelBuilder, categoryCreator);
-            new ConceptsCreator(modelBuilder, subcategoryCreator);
+            //new SubcategoryCreator(modelBuilder);
         }
 
- 
+        public void Complete() => SaveChanges();
+        public Task CompleteAsync() => SaveChangesAsync();
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //{

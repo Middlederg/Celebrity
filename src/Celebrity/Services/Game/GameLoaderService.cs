@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Celebrity
 {
@@ -9,14 +10,16 @@ namespace Celebrity
     {
         private readonly IGameRepository gameRepository;
         private readonly IConceptRepository conceptsRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public GameLoaderService(IGameRepository gameRepository, IConceptRepository conceptsRepository)
+        public GameLoaderService(IGameRepository gameRepository, IConceptRepository conceptsRepository, IUnitOfWork unitOfWork)
         {
             this.gameRepository = gameRepository;
             this.conceptsRepository = conceptsRepository;
+            this.unitOfWork = unitOfWork;
         }
 
-        public async Task<Game> Load(Guid id)
+        public async Task<Game> Load(Guid id, User user)
         {
             var gameId = new GameId(id);
             var concepts = await conceptsRepository.GetConceptsFromGame(gameId);
@@ -29,8 +32,12 @@ namespace Celebrity
                 GetRoundContext(gameInfo.TotalRounds, gameInfo.CurrentRound),
                 deck,
                 GetTeams(avaliableTeams, gameInfo.CurrentTeam),
-                gameinf
+                gameInfo.Owner,
+                gameInfo.CreationDate
                );
+
+            gameRepository.AddLoadedLog(game.Id, user);
+            await unitOfWork.CompleteAsync();
 
             return game;
         }

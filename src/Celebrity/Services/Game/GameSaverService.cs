@@ -1,20 +1,24 @@
 ﻿using Celebrity.Repositories;
+using System.Threading.Tasks;
 
 namespace Celebrity
 {
     public class GameSaverService
     {
         private readonly IGameRepository gameRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public GameSaverService(IGameRepository gameRepository)
+        public GameSaverService(IGameRepository gameRepository, IUnitOfWork unitOfWork)
         {
             this.gameRepository = gameRepository;
+            this.unitOfWork = unitOfWork;
         }
 
-        public void Save(Game game)
+        public async Task Save(Game game)
         {
-            gameRepository.DeleteGame(game.Id);
+            await gameRepository.DeleteGame(game.Id);
             gameRepository.CreateGame(game);
+            await unitOfWork.CompleteAsync();
         }
     }
 }

@@ -6,7 +6,8 @@ namespace Celebrity.Data
     {
         public Guid Id { get; set; }
         public DateTime LoadedDate { get; set; }
-        public string ClientInfo { get; set; }
+        public string IpAddress { get; set; }
+        public string UserAgent { get; set; }
         public Guid? User { get; set; }
 
         public Guid GameId { get; set; }

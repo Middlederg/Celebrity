@@ -6,9 +6,9 @@ namespace Celebrity.Blazor
     public class CategoryViewModel
     {
         private readonly string name;
-        public string Id { get; }
 
         public List<BaseOption<SubcategoryObject>> Subcategories { get; set; }
+        
         public bool AllSelected => Subcategories.TrueForAll(x => x.IsChecked);
         public void SelectAll() => MarkAllAs(selected:true);
         public void UnselectAll() => MarkAllAs(selected:false);
@@ -25,12 +25,15 @@ namespace Celebrity.Blazor
         public CategoryViewModel(Category category)
         {
             name = category.ToString();
-            Id = category.Id.ToString();
             Subcategories = category.GetSubcategories()
                 .Select(x => new BaseOption<SubcategoryObject>(x, false))
                 .ToList();
             Visible = true;
         }
+
+        public IEnumerable<SubcategoryId> GetSelectedIds => Subcategories
+            .Where(x => x.IsChecked)
+            .Select(x => x.Entity.Id);
 
         public override string ToString() => name;
     }

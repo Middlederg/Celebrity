@@ -11,7 +11,7 @@ namespace Celebrity
         public Difficulty Difficulty { get; private set; }
         public void SetDifficulty(Difficulty difficulty) => Difficulty = difficulty;
 
-        public bool IsCustomized { get; }
+        public ConceptType Type { get; }
 
         private readonly IEnumerable<SubcategoryObject> subcategories;
         public bool HasSubcategory(SubcategoryId id) => subcategories.Any(x => x.Is(id));
@@ -21,17 +21,11 @@ namespace Celebrity
         public void Guess() => guessed = true;
         public void Reset() => guessed = false;
 
-        internal static Concept Undefined(ConceptId id) => new Concept(id, new ConceptName($"{id} concept not found"), Difficulty.NotDefined, false);
-        internal static Concept Create(string name, int stars, params SubcategoryObject[] subcategories)
-             => new Concept(new ConceptId(), new ConceptName(name), Difficulty.GetValue(stars), isCustomized: true, subcategories);
+        internal static Concept Undefined(ConceptId id) => new Concept(id, new ConceptName($"{id} concept not found"), Difficulty.NotDefined, ConceptType.None);
+        public static Concept Create(Guid id, string name, int stars, ConceptType type, params SubcategoryObject[] subcategories)
+             => new Concept(new ConceptId(id), new ConceptName(name), Difficulty.GetValue(stars), type, subcategories);
 
-        public static Concept CreateCustom(string name, int stars, params SubcategoryObject[] subcategories)
-             => new Concept(new ConceptId(), new ConceptName(name), Difficulty.GetValue(stars), isCustomized: true, subcategories);
-
-        public static Concept FromDataBase(Guid id, string name, int stars, bool isCustomized, params SubcategoryObject[] subcategories) 
-            => new Concept(new ConceptId(id), new ConceptName(name), Difficulty.GetValue(stars), isCustomized, subcategories);
-
-        private Concept(ConceptId conceptId, ConceptName name, Difficulty difficulty, bool isCustomized, params SubcategoryObject[] subcategories) 
+        private Concept(ConceptId conceptId, ConceptName name, Difficulty difficulty, ConceptType type, params SubcategoryObject[] subcategories) 
             : base(conceptId)
         {
             if (Difficulty == null)
@@ -39,8 +33,8 @@ namespace Celebrity
                 throw new ArgumentNullException(nameof(difficulty));
             }
             this.name = name;
-            IsCustomized = isCustomized;
             Difficulty = difficulty;
+            Type = type;
             this.subcategories = subcategories;
             guessed = false;
         }

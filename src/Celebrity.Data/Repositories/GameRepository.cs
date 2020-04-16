@@ -52,7 +52,7 @@ namespace Celebrity.Data
             {
                 Id = info.Id,
                 CreationDate = info.CreationDate,
-                OwnerId = user.Id.ToString(),
+                OwnerId = info.Owner.Id?.ToString(),
                 CurrentRound = info.CurrentRound,
                 CurrentTeam = info.CurrentTeam,
                 TotalRounds = info.TotalRounds,
@@ -107,6 +107,20 @@ namespace Celebrity.Data
                 }
                 return team;
             });
+        }
+
+        public void AddLoadedLog(GameId id, User user)
+        {
+            var loadedGames = new LoadedGames()
+            {
+                Id = Guid.NewGuid(),
+                GameId = id,
+                User = user.Id,
+                LoadedDate = DateTime.Now,
+                UserAgent = user.ClientInfo.UserAgent.ToString(),
+                IpAddress = user.ClientInfo.IpAddress.ToString()
+            };
+            context.LoadedGames.Add(loadedGames);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Celebrity
 {
     public static class DeckFactory
     {
-        public static Deck Create(IEnumerable<Concept> concepts) => new Deck(concepts);
+        public static Deck Create(IEnumerable<Concept> concepts) => new Deck(concepts.ToList());
         public static Deck Create(IEnumerable<BaseOption<Concept>> concepts)
         {
             var listOfConcepts = concepts.Select(option => {

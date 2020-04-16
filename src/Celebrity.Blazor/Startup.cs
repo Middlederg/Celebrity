@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Celebrity.Blazor.Areas.Identity;
 using Celebrity.Blazor.Data;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Celebrity.Blazor
 {
@@ -31,12 +33,15 @@ namespace Celebrity.Blazor
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddHttpContextAccessor();
             services.AddCustomServices();
             services.AddSqlite(Configuration);
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<ClientInfoFinderService>();
+            services.AddScoped<UserFinderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,27 +4,14 @@ using System.Linq;
 
 namespace Celebrity
 {
-    public class Category : Identity<CategoryId>
+    public class Category : ValueObject
     {
-        private readonly CategoryName name;
-        public void EditName(string newName) => new CategoryName(newName);
+        private readonly CategoryValue value;
 
-        public static Category FromDataBase(Guid id, string name, params SubcategoryObject[] subcategories)
+        public Category(CategoryValue value, params SubcategoryObject[] subcategories)
         {
-            var category = new Category(new CategoryId(id), new CategoryName(name));
-            foreach (var subcategory in subcategories)
-            {
-                category.AddSubcategory(subcategory);
-            }
-            return category;
-        }
-
-        public static Category Create(string name) => new Category(new CategoryId(), new CategoryName(name));
-
-        private Category(CategoryId categoryId, CategoryName name) : base(categoryId)
-        {
-            this.name = name;
-            categories = new List<SubcategoryObject>();
+            this.value = value;
+            categories = subcategories.ToList();
         }
 
         private readonly List<SubcategoryObject> categories;
@@ -32,6 +19,11 @@ namespace Celebrity
         public IEnumerable<SubcategoryObject> GetSubcategories() => categories.ToList();
         public bool HasSubcategories => categories.Any();
 
-        public override string ToString() => name.ToString();
+        public override string ToString() => value.Description();
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return value;
+        }
     }
 }

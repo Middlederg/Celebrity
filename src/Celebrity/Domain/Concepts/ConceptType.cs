@@ -4,6 +4,10 @@
     {
         Character,
         Animal,
-        Thing
+        Object,
+        Publication,
+        Phrase,
+        Concept,
+        None
     }
 }

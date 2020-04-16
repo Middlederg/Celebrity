@@ -7,10 +7,8 @@ namespace Celebrity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public bool IsCustomized { get; set; }
 
-        public Guid IdCategory { get; set; }
-        public Categories Category { get; set; }
+        public CategoryValue Category { get; set; }
 
         public ICollection<SubcategoriesInConcepts> SubcategoriesInconcepts { get; set; }
 
@@ -19,6 +17,4 @@ namespace Celebrity
             SubcategoriesInconcepts = new HashSet<SubcategoriesInConcepts>();
         }
     }
-
-
 }

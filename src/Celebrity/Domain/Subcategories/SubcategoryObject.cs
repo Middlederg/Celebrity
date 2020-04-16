@@ -5,20 +5,20 @@ namespace Celebrity
 {
     public class SubcategoryObject : ValueObject
     {
-        private readonly SubcategoryId id;
-        public bool Is(SubcategoryId id) => this.id == id;
+        public SubcategoryId Id { get; }
+        public bool Is(SubcategoryId id) => Id == id;
 
         private readonly string name;
 
         public SubcategoryObject(Guid id, string name)
         {
-            this.id = new SubcategoryId(id);
+            Id = new SubcategoryId(id);
             this.name = name;
         }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return id;
+            yield return Id;
             yield return name;
         }
 

@@ -22,11 +22,7 @@
     private bool createTeamModal = false;
 
     [Parameter]
-    public List<Team> Teams { get; set; } = new List<Team>()
-    {
-        new Team(Color.Bluemoon),
-        new Team(Color.Lemon)
-    };
+    public List<Team> Teams { get; set; } 
 
     void TeamCreated(Team team)
     {

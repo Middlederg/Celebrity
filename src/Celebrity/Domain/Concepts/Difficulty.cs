@@ -2,7 +2,7 @@
 
 namespace Celebrity
 {
-    public class Difficulty
+    public class Difficulty : ValueObject
     {
         private static readonly IDictionary<int, Difficulty> statuses = new Dictionary<int, Difficulty>();
 
@@ -30,6 +30,11 @@ namespace Celebrity
         internal string name;
 
         public override string ToString() => name;
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return stars;
+        }
 
         public static IReadOnlyCollection<Difficulty> Values => statuses.Values as IReadOnlyCollection<Difficulty>;
     }

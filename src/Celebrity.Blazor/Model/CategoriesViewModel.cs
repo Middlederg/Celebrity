@@ -8,6 +8,7 @@ namespace Celebrity.Blazor
     {
         public string SearchText { get; set; }
         public List<CategoryViewModel> Categories { get; }
+        public IEnumerable<SubcategoryId> GetSelectedIds => Categories.SelectMany(x => x.GetSelectedIds);
 
         public CategoriesViewModel(IEnumerable<Category> categories)
         {

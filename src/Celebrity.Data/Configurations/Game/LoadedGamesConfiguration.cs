@@ -7,9 +7,13 @@ namespace Celebrity.Data
     {
         public void Configure(EntityTypeBuilder<LoadedGames> builder)
         {
-            builder.Property(x => x.ClientInfo)
+            builder.Property(x => x.UserAgent)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(UserAgent.MaxLength);
+
+            builder.Property(x => x.IpAddress)
+                .IsRequired()
+                .HasMaxLength(IpAddress.MaxLength);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Celebrity.Data
             var subcategories = concept.SubcategoriesInconcepts
                 .Select(x => new SubcategoryObject(x.SubcategoryId, x.Subcategories.Name))
                 .ToArray();
-            return Concept.FromDataBase(concept.Id, concept.Name, (int)concept.Difficulty, concept.IsCustomized, subcategories);
+            return Concept.Create(concept.Id, concept.Name, (int)concept.Difficulty, concept.Type, subcategories);
         }
     }
 }
