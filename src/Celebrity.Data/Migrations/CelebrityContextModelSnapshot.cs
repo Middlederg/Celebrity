@@ -190,6 +190,10 @@ namespace Celebrity.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Culture")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Email")
                         .HasColumnType("TEXT")
                         .HasMaxLength(256);

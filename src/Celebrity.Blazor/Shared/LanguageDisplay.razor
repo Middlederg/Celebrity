@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.Extensions.Options
+@using System.Globalization;
+
+@inject IOptions<RequestLocalizationOptions> LocalizationOptions
+@inject UserEditorService userEditorService
+@inject NavigationManager navigationManager
+
+
+<div class="btn-group btn-group-sm mr-4" role="group" aria-label="language">
+
+    @foreach (var culture in supportedCultures)
+    {
+        <button class="@($"btn {ButtonClass(culture)} btn-sm mx-1")" @onclick="async () => await ChangeCulture(culture)">
+
+            @if (IsSelected(culture))
+            {
+                <span class="oi oi-flag" aria-hidden="true"></span>
+            }
+            @($"{culture.Name}")
+        </button>
+    }
+</div>
+
+
+@code {
+
+    private string ButtonClass(CultureInfo culture) => IsSelected(culture) ? "btn-outline-secondary" : "btn-light";
+    private bool IsSelected(CultureInfo culture) => culture.Equals(currentCulture);
+
+    private CultureInfo currentCulture;
+    private IEnumerable<CultureInfo> supportedCultures;
+
+    protected override void OnInitialized()
+    {
+        currentCulture = CultureInfo.CurrentCulture;
+        supportedCultures = LocalizationOptions.Value.SupportedUICultures;
+    }
+
+    private async Task ChangeCulture(System.Globalization.CultureInfo newCulture)
+    {
+        await userEditorService.ChangeCulture(newCulture);
+        StateHasChanged();
+        navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
+    }
+} 

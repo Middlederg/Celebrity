@@ -13,6 +13,6 @@ namespace Celebrity.Repositories
      
         Task DeleteGame(GameId id);
 
-        void AddLoadedLog(GameId id, User user);
+        void AddLoadedLog(GameId id, User user, ClientInfo clientInfo);
     }
 }

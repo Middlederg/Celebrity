@@ -19,7 +19,7 @@ namespace Celebrity
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<Game> Load(Guid id, User user)
+        public async Task<Game> Load(Guid id, User user, ClientInfo clientInfo)
         {
             var gameId = new GameId(id);
             var concepts = await conceptsRepository.GetConceptsFromGame(gameId);
@@ -36,7 +36,7 @@ namespace Celebrity
                 gameInfo.CreationDate
                );
 
-            gameRepository.AddLoadedLog(game.Id, user);
+            gameRepository.AddLoadedLog(game.Id, user, clientInfo);
             await unitOfWork.CompleteAsync();
 
             return game;

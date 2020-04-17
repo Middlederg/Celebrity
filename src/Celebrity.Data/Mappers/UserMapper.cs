@@ -10,6 +10,6 @@ namespace Celebrity.Data
         {
             this.user = user;
         }
-        public User Map() => User.Create(user.Id, user.UserName, ClientInfo.Undefined);
+        public User Map() => User.Create(user.Id, user.UserName, user.GetCulture());
     }
 }

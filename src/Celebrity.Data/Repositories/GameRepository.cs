@@ -109,7 +109,7 @@ namespace Celebrity.Data
             });
         }
 
-        public void AddLoadedLog(GameId id, User user)
+        public void AddLoadedLog(GameId id, User user, ClientInfo clientInfo)
         {
             var loadedGames = new LoadedGames()
             {
@@ -117,8 +117,8 @@ namespace Celebrity.Data
                 GameId = id,
                 User = user.Id,
                 LoadedDate = DateTime.Now,
-                UserAgent = user.ClientInfo.UserAgent.ToString(),
-                IpAddress = user.ClientInfo.IpAddress.ToString()
+                UserAgent = clientInfo.UserAgent.ToString(),
+                IpAddress = clientInfo.IpAddress.ToString()
             };
             context.LoadedGames.Add(loadedGames);
         }

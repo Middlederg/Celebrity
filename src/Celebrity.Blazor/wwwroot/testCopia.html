@@ -14,24 +14,59 @@
 
 <body>
 
+    <nav class="navbar navbar-light navbar-expand-sm bg-light navbar-toggleable-sm border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">Celebrity</a>
+            <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="@NavMenuCssClass navbar-collapse" @onclick="ToggleNavMenu">
+                <ul class="navbar-nav flex-grow-1 ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="" Match="NavLinkMatch.All">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="counter">Counter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fetchdata">Fetch data</a>
+                    </li>
+                </ul>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="language">
+                    <button type="button" class="btn btn-light btn-sm">
+                  
+                        en
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm mx-1">
+                        <span class="oi oi-flag" aria-hidden="true"></span>
+                        es
+                    </button>
+                    <button class="btn btn-light btn-sm">
+      
+                        it
+                    </button>
+                </div>
+
+            </div>
+
+          
+        </div>
+    </nav>
 
     <div class="main">
-        <div class="top-row px-4 auth">
-            <a href="Identity/Account/Register">Register</a>
-            <a href="Identity/Account/Login">Log in</a>
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
 
         <div class="content px-4">
 
-            <h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Set up game</h1>
+            <h1 class="display-4 text-center text-secondary text-uppercase">Set up game</h1>
             <div class="d-flex justify-content-center mt-4 mb-5">
                 <button class="btn btn-lg btn-outline-dark text-xl-center text-uppercase px-5 py-3">
                     <span class="oi oi-play-circle mr-2" title="add new team" aria-hidden="true"></span>
                     Start
                 </button>
             </div>
-            
+
 
             <div class="row">
                 <div class="col-lg-6">
@@ -43,37 +78,37 @@
                         </button>
 
                         <!-- Modal -->
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content border-primary">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Select your team color</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content border-primary">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Select your team color</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="btn-group my-3 d-flex justify-content-center" role="group" aria-label="Colors">
+                                        <button type="button" class="btn btn-primary">&nbsp;</button>
+                                        <button type="button" class="btn btn-success">&nbsp;</button>
+                                        <button type="button" class="btn btn-danger">&nbsp;</button>
+                                        <button type="button" class="btn btn-warning">&nbsp;</button>
+                                        <button type="button" class="btn btn-dark">&nbsp;</button>
+                                        <button type="button" class="btn btn-info">&nbsp;</button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="btn-group my-3 d-flex justify-content-center" role="group" aria-label="Colors">
-                                            <button type="button" class="btn btn-primary">&nbsp;</button>
-                                            <button type="button" class="btn btn-success">&nbsp;</button>
-                                            <button type="button" class="btn btn-danger">&nbsp;</button>
-                                            <button type="button" class="btn btn-warning">&nbsp;</button>
-                                            <button type="button" class="btn btn-dark">&nbsp;</button>
-                                            <button type="button" class="btn btn-info">&nbsp;</button>
+                                    <div class="input-group my-3">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text" id="teamName">Name</div>
                                         </div>
-                                        <div class="input-group my-3">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text" id="teamName">Name</div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Input team name" aria-describedby="teamName">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary">Create</button>
+                                        <input type="text" class="form-control" aria-label="Input team name" aria-describedby="teamName">
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary">Create</button>
+                                </div>
                             </div>
+                        </div>
                     </div>
-                  
+
                     <hr class="mt-0 mb-2" />
 
                     <div class="card-columns">
@@ -264,6 +299,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script src="_framework/blazor.server.js"></script>
     <script>

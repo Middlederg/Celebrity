@@ -1,22 +1,31 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Celebrity
 {
     public class User
     {
-        public static User Anonymous(ClientInfo clientInfo) => new User(null, nameof(Anonymous), clientInfo);
-        public static User Create(string id, string username, ClientInfo clientInfo) => new User(Guid.Parse(id), username, clientInfo);
+        public const string DefaultCulture = "en";
+
+        public static User Anonymous(CultureInfo culture) 
+            => new User(null, nameof(Anonymous), culture, loggedInUser:false);
+
+        public static User Create(string id, string username, CultureInfo culture) 
+            => new User(Guid.Parse(id), username, culture, loggedInUser:true);
 
         public Guid? Id { get; }
 
         private readonly string username;
-        public ClientInfo ClientInfo { get; }
+        public bool IsLoggedIn { get; }
 
-        private User(Guid? id, string username, ClientInfo clientInfo)
+        public CultureInfo Culture { get; }
+
+        private User(Guid? id, string username, CultureInfo culture, bool loggedInUser)
         {
             Id = id;
             this.username = username;
-            ClientInfo = clientInfo;
+            Culture = culture;
+            IsLoggedIn = loggedInUser;
         }
 
         public override string ToString() => username;

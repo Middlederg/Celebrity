@@ -1,29 +1,21 @@
 ﻿@page "/"
 @inject UserFinderService userFinderService
 
-<h1>Prepare new game</h1>
-
-Welcome to your new app.
+<h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Welcome to your new app</h1>
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-@code 
+<p>Current culture : @user.Culture.DisplayName (@user.Culture.NativeName)</p>
+
+<p>Current date : @DateTime.Now</p>
+
+@code
 {
-    private Game game;
+    private User user;
 
     protected override async Task OnInitializedAsync()
     {
-        //game = new Game();
-        //forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var user = await userFinderService.GetCurrentUser();
-        }
+        user = await userFinderService.GetCurrentUser();
     }
 
 }

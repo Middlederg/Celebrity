@@ -17,6 +17,7 @@ using Celebrity.Blazor.Areas.Identity;
 using Celebrity.Blazor.Data;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 
 namespace Celebrity.Blazor
 {
@@ -37,11 +38,14 @@ namespace Celebrity.Blazor
             //services.AddHttpContextAccessor();
             services.AddCustomServices();
             services.AddSqlite(Configuration);
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.ConfigureRequestLocalization();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<ClientInfoFinderService>();
             services.AddScoped<UserFinderService>();
+            services.AddScoped<UserEditorService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +62,7 @@ namespace Celebrity.Blazor
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -65,8 +70,9 @@ namespace Celebrity.Blazor
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseRequestLocalization();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

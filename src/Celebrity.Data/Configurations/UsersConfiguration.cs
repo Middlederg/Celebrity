@@ -7,6 +7,8 @@ namespace Celebrity.Data
     {
         public void Configure(EntityTypeBuilder<Users> builder)
         {
+            builder.Property(x => x.Culture).HasMaxLength(20);
+
             builder.HasMany(e => e.Games)
                 .WithOne(e => e.Owner)
                 .HasForeignKey(e => e.OwnerId)
