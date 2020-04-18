@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celebrity</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="main">
+
+        <nav class="navbar navbar-light navbar-expand-sm bg-light navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-page="Index">
+                    <img src="img/logos/blue.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <strong class="text-uppercase text-blue">Celebrity</strong>
+                </a>
+                <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav flex-grow-1 ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="" Match="NavLinkMatch.All">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="counter">Counter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="fetchdata">Fetch data</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <ul class="navbar-nav d-flex align-items-center justify-content-lg-end justify-content-sm-center">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-blue btn-sm px-2 py-1 text-light d-flex align-items-center" href="manage">
+                            <span class="oi oi-person mr-2" title="user configuration" aria-hidden="true"></span>
+                            Name
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">
+                            <span class="oi oi-account-logout" title="logout" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="container">
+            <h1 class="display-4 text-dark text-center mb-4">Concepts in x subcategory</h1>
+            <nav class="navbar navbar-light bg-light p-2 mb-3">
+
+                <div class="d-flex">
+                    <button class="btn btn-secondary btn-sm mr-2">
+                        <span class="oi oi-plus mr-2 small" title="add concepts" aria-hidden="true"></span>
+                        Add concepts
+                    </button>
+
+                    <button class="btn btn-primary btn-sm">
+                        <span class="oi oi-cloud-upload mr-1" title="upload concepts file" aria-hidden="true"></span>
+                        Upload
+                    </button>
+
+                </div>
+               
+                <div class="form-inline">
+                    <button class="btn btn-success btn-sm mr-2">
+                        <span class="oi oi-check mr-2" title="delete category" aria-hidden="true"></span>
+                        Save changes
+                    </button>
+                    <select class="form-control form-control-sm mr-2">
+                        <option value="1">All categories</option>
+                        <option value="2" selected>Categ 1345</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <div class="input-group">
+                        <input class="form-control form-control-sm"
+                               type="search"
+                               placeholder="Search"
+                               aria-label="Search"
+                               aria-describedby="searchButton">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm" type="submit" id="searchButton">
+                                <span class="oi oi-magnifying-glass" title="icon name" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Concepto</th>
+                        <th scope="col" class="text-center">Dificultad</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text"
+                                   class="form-control form-control-sm"
+                                   placeholder="Nombre del concepto">
+                        </td>
+                        <td class="text-center">
+
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-sm btn-info">
+                                    <span class="oi oi-bolt" title="easy" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-sm btn-info">
+                                    <span class="oi oi-bolt" title="intermediate" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-sm btn-info text-info">
+                                    <span class="oi oi-bolt" title="hard" aria-hidden="true"></span>
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>
+                            <select class="form-control form-control-sm">
+                                <option value="1">One</option>
+                                <option value="2" selected>Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">
+                                <span class="oi oi-trash" title="delete category" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="text"
+                                   class="form-control form-control-sm"
+                                   placeholder="Nombre del concepto">
+                        </td>
+                        <td class="text-center">
+
+                            <div class="btn-group btn-group-sm border-dark">
+                                <button class="btn btn-sm btn-info">
+                                    <span class="oi oi-bolt" title="easy" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-sm btn-info">
+                                    <span class="oi oi-bolt" title="intermediate" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-sm btn-info text-info">
+                                    <span class="oi oi-bolt" title="hard" aria-hidden="true"></span>
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>
+                            <select class="form-control form-control-sm">
+                                <option value="1">One</option>
+                                <option value="2" selected>Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">
+                                <span class="oi oi-trash" title="delete category" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>

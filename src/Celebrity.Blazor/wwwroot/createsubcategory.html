@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celebrity</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="main">
+
+        <nav class="navbar navbar-light navbar-expand-sm bg-light navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-page="Index">
+                    <img src="img/logos/blue.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <strong class="text-uppercase text-blue">Celebrity</strong>
+                </a>
+                <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav flex-grow-1 ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="" Match="NavLinkMatch.All">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="counter">Counter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="fetchdata">Fetch data</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <ul class="navbar-nav d-flex align-items-center justify-content-lg-end justify-content-sm-center">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-blue btn-sm px-2 py-1 text-light d-flex align-items-center" href="manage">
+                            <span class="oi oi-person mr-2" title="user configuration" aria-hidden="true"></span>
+                            Name
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">
+                            <span class="oi oi-account-logout" title="logout" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="container">
+
+            <div class="card border-0">
+                <div class="card-body">
+                    <h1 class="display-4 text-dark text-center mb-4">Create subcategory</h1>
+
+                    <div class="form mt-4">
+                        <div class="form-group row">
+                            <label for="category-selector" class="col-sm-2 col-form-label">Category</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="category-selector">
+                                    <option value="1">One</option>
+                                    <option value="2" selected>Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label for="subcategoryName" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="subcategoryName" placeholder="Name">
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button class="btn btn-outline-secondary btn-lg mr-2">
+                                <span class="oi oi-chevron-left mr-2 small" title="back to the categories list" aria-hidden="true"></span>
+                                Back
+                            </button>
+
+                            <button class="btn btn-success btn-lg">
+                                <span class="oi oi-check mr-2 small" title="add new subcategory" aria-hidden="true"></span>
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>
