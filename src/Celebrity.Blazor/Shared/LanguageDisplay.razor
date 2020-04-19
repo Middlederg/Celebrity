@@ -6,26 +6,27 @@
 @inject UserEditorService userEditorService
 @inject NavigationManager navigationManager
 
-
-<div class="btn-group btn-group-sm mr-4" role="group" aria-label="language">
-
-    @foreach (var culture in supportedCultures)
-    {
-        <button class="@($"btn {ButtonClass(culture)} btn-sm mx-1")" @onclick="async () => await ChangeCulture(culture)">
-
-            @if (IsSelected(culture))
+<ul class="navbar-nav mx-auto">
+    <li class="nav-item mr-0">
+        <div class="btn-group btn-group-sm" role="group" aria-label="language">
+            @foreach (var culture in supportedCultures)
             {
-                <span class="oi oi-flag" aria-hidden="true"></span>
-            }
-            @($"{culture.Name}")
-        </button>
-    }
-</div>
+                <button class="@($"btn {ButtonClass(culture)} btn-sm mx-0")" @onclick="async () => await ChangeCulture(culture)">
 
+                    @if (IsSelected(culture))
+                    {
+                        <span class="oi oi-flag" aria-hidden="true"></span>
+                    }
+                    @($"{culture.Name}")
+                </button>
+            }
+        </div>
+    </li>
+</ul>
 
 @code {
 
-    private string ButtonClass(CultureInfo culture) => IsSelected(culture) ? "btn-outline-secondary" : "btn-light";
+    private string ButtonClass(CultureInfo culture) => IsSelected(culture) ? "btn-outline-secondary" : "";
     private bool IsSelected(CultureInfo culture) => culture.Equals(currentCulture);
 
     private CultureInfo currentCulture;
@@ -43,4 +44,4 @@
         StateHasChanged();
         navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
     }
-} 
+}

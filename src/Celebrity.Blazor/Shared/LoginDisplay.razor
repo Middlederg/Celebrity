@@ -1,51 +1,57 @@
 ﻿
 <AuthorizeView>
     <Authorized>
-        <LanguageDisplay></LanguageDisplay>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link btn btn-secondary btn-sm text-light d-flex align-items-center" href="manage">
-                    <span class="oi oi-person mr-2" title="user configuration" aria-hidden="true"></span>
-                    @context.User.Identity.Name
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link btn btn-link" href="logout">
-                    <span class="oi oi-account-logout" title="logout" aria-hidden="true"></span>
-                </a>
-            </li>
-        </ul>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="@NavMenuCssClass navbar-collapse" @onclick="ToggleNavMenu">
+            <!--Aqui enumerar cada opción si el usuario tiene la policy correspondiente.-->
+            <ul class="navbar-nav flex-grow-1 ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="subcategories">Subcategories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="concepts">Concepts</a>
+                </li>
+            </ul>
+            <LanguageDisplay></LanguageDisplay>
+        </div>
+        <a class="btn btn-sm btn-blue btn-sm px-2 py-1 mr-2" href="manage">
+            <span class="oi oi-person mr-2" title="user configuration" aria-hidden="true"></span>
+            @context.User.Identity.Name
+        </a>
 
-        <ul class="navbar-nav d-flex align-items-center">
-            <li class="nav-item">
-                <a class="nav-link btn btn-blue btn-sm px-2 py-1 text-light d-flex align-items-center" href="manage">
-                    <span class="oi oi-person mr-2" title="user configuration" aria-hidden="true"></span>
-                    @context.User.Identity.Name
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logout">
-                    <span class="oi oi-account-logout" title="logout" aria-hidden="true"></span>
-                </a>
-            </li>
-        </ul>
+        <form class="form-inline" action="logout">
+            <button class="btn btn-sm px-2 py-1">
+                Logout
+                <span class="oi oi-account-logout" title="logout" aria-hidden="true"></span>
+            </button>
+        </form>
+
     </Authorized>
     <NotAuthorized>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="login">
-                    Login
-                    <span class="oi oi-account-login ml-2" title="login" aria-hidden="true"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link btn btn-outline-secondary btn-sm" href="register">
-                    Register
-                </a>
-            </li>
-        </ul>
-        <form class="form-inline">
-            <button class="btn btn-outline-success btn-sm">Register</button>
-        </form>
+
+        <a class="btn btn-outline-blue btn-sm px-2 py-1" href="register">
+            Register
+        </a>
+
+        <a class="btn btn-sm ml-2" href="manage">
+            <span class="oi oi-account-login mr-1" title="login" aria-hidden="true"></span>
+            Login
+        </a>
+
     </NotAuthorized>
 </AuthorizeView>
+
+@code {
+
+    bool collapseNavMenu = true;
+
+    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

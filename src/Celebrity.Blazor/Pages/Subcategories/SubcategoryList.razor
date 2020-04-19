@@ -1,0 +1,138 @@
+﻿@page "/subcategories"
+
+@inject NavigationManager navigationManager
+@inject SubcategoriesQuery subcategoriesQuery
+@inject SubcategoryEditorService subcategoryEditorService
+
+<div class="container">
+    <h1 class="display-4 text-dark text-center mb-4">Subcategories</h1>
+    <nav class="navbar navbar-light bg-light p-2 mb-3">
+
+        <button class="btn btn-secondary btn-sm" @onclick="AddCategory">
+            <span class="oi oi-plus mr-2 small" title="add new team" aria-hidden="true"></span>
+            Add subcategory
+        </button>
+
+        <div class="form-inline">
+            @if (subcategories.HasChanges())
+            {
+                <button class="btn btn-success btn-sm mr-2" @onclick="SaveChanges">
+                    <span class="oi oi-check mr-2" title="delete category" aria-hidden="true"></span>
+                    Save changes
+                </button>
+            }
+            <div class="input-group">
+                <input class="form-control form-control-sm"
+                       @bind="subcategories.SearchText"
+                       type="search"
+                       placeholder="Search"
+                       aria-label="Search"
+                       aria-describedby="searchButton">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-sm"
+                            type="submit"
+                            id="searchButton"
+                            @onclick="Search">
+                        <span class="oi oi-magnifying-glass" title="search subcategories" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Categoría</th>
+                <th scope="col">Nombre</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SubcategoryViewModel subcategory in subcategories.Subcategories)
+            {
+                <tr>
+                    <td>
+                        <CategoryCombo @bind-Category="subcategory.Category"></CategoryCombo>
+                    </td>
+                    <td>
+                        <input type="text"
+                               class="form-control"
+                               @bind="subcategory.Name"
+                               placeholder="Nombre de subcategoría">
+                    </td>
+
+                    <td>
+                        <button class="@($"btn btn-outline-secondary {subcategory.HasConceptsClass}")"
+                                @onclick="() => ShowConceptsInSubcategory(subcategory.Id)">
+                            @subcategory.TotalConcepts<span class="oi oi-list ml-1" title="see concepts" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary"
+                                @onclick="() => AddConceptsToSubcategory(subcategory.Id)">
+                            <span class="oi oi-plus" title="add concepts to this subcategory" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="@($"btn btn-danger {subcategory.HasConceptsClass}")">
+                            <span class="oi oi-trash small" title="delete category" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <thead>
+            <tr>
+                <td colspan="5">
+                    @subcategories.ErrorMessage
+                </td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@code {
+    private SubcategoriesViewModel subcategories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await subcategoriesQuery.GetAll();
+        subcategories = new SubcategoriesViewModel(list);
+    }
+
+    private void Search()
+    {
+        subcategories.Search();
+    }
+
+    private void AddCategory()
+    {
+        navigationManager.NavigateTo($"createcategory/{navigationManager.Uri}");
+    }
+
+    private async Task SaveChanges()
+    {
+        await subcategoryEditorService.Edit(subcategories.GetModified());
+        StateHasChanged();
+        navigationManager.NavigateTo("createcategory");
+    }
+
+    private void CategoryChange(CategoryValue category, int index)
+    {
+        subcategories.Subcategories
+    }
+
+    private void ShowConceptsInSubcategory(Guid idSubcategory)
+    {
+        navigationManager.NavigateTo($"createconcepts/{idSubcategory}");
+    }
+
+    private void AddConceptsToSubcategory(Guid idSubcategory)
+    {
+        navigationManager.NavigateTo($"createconcepts/{idSubcategory}");
+    }
+}

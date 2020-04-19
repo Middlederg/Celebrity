@@ -35,7 +35,7 @@ namespace Celebrity.Data
             }
         }
 
-        public async Task EditSubcategoryName(Subcategory subcategory)
+        public async Task EditSubcategory(Subcategory subcategory)
         {
             var subcategories = await context.Subcategories.FindAsync((Guid)subcategory.Id);
             if (subcategories != null)

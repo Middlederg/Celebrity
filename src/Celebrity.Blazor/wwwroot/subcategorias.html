@@ -19,40 +19,18 @@
                     <img src="img/logos/blue.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     <strong class="text-uppercase text-blue">Celebrity</strong>
                 </a>
-                <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse">
-                    <ul class="navbar-nav flex-grow-1 ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="" Match="NavLinkMatch.All">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="counter">Counter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="fetchdata">Fetch data</a>
-                        </li>
-                    </ul>
 
+                <div>
+                    <a class="btn btn-outline-blue btn-sm px-2 py-1" href="register">
+                        Register
+                    </a>
+                    <a class="btn btn-sm ml-2" href="manage">
+                        <span class="oi oi-account-login mr-1" title="login" aria-hidden="true"></span>
+                        Login
+                    </a>
                 </div>
-                <ul class="navbar-nav d-flex align-items-center justify-content-lg-end justify-content-sm-center">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-blue btn-sm px-2 py-1 text-light d-flex align-items-center" href="manage">
-                            <span class="oi oi-person mr-2" title="user configuration" aria-hidden="true"></span>
-                            Name
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout">
-                            <span class="oi oi-account-logout" title="logout" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </nav>
-
 
         <div class="container">
             <h1 class="display-4 text-dark text-center mb-4">Subcategories</h1>

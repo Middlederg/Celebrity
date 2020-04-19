@@ -1,4 +1,5 @@
 ﻿using Celebrity.Repositories;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Celebrity
@@ -14,9 +15,12 @@ namespace Celebrity
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task Edit(Subcategory category)
+        public async Task Edit(IEnumerable<Subcategory> subcategories)
         {
-            subcategoryRepository.EditSubcategoryName(category);
+            foreach (var subcategory in subcategories)
+            {
+                await subcategoryRepository.EditSubcategory(subcategory);
+            }
             await unitOfWork.CompleteAsync();
         }
     }

@@ -1,38 +1,12 @@
-﻿<nav class="navbar navbar-light navbar-expand-sm bg-light navbar-toggleable-sm border-bottom box-shadow mb-3 fixed-top">
+﻿<nav class="navbar navbar-light navbar-expand-sm bg-light navbar-toggleable-sm border-bottom box-shadow mb-3">
     <div class="container-fluid">
         <a class="navbar-brand" asp-area="" asp-page="Index">
             <img src="img/logos/blue.png" width="30" height="30" class="d-inline-block align-top" alt="">
             <strong class="text-uppercase text-blue">Celebrity</strong>
         </a>
-        <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="@NavMenuCssClass navbar-collapse" @onclick="ToggleNavMenu">
-            <ul class="navbar-nav flex-grow-1 ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="" Match="NavLinkMatch.All">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="counter">Counter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="fetchdata">Fetch data</a>
-                </li>
-            </ul>
-            <LoginDisplay></LoginDisplay>
-        </div>
+      
+        <LoginDisplay></LoginDisplay>
     </div>
 </nav>
 
-@code {
 
-    bool collapseNavMenu = true;
-
-    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}

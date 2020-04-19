@@ -96,5 +96,20 @@ a, .btn-link {
 .btn-blue {
     color: #fff;
     background-color: #0E4D8D;
-    border-color: #1861ac;
+    border-color: #0E4D8D;
+}
+
+.btn-blue:hover {
+    color: #eee;
+}
+
+.btn-outline-blue {
+    color: #0E4D8D;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: #0E4D8D;
+}
+
+.btn-outline-blue:hover {
+    color: #eee;
+    background-color: #0E4D8D;
 }

@@ -1,0 +1,26 @@
+﻿<select class="form-control" @onchange=CategoryChanged>
+    @foreach (CategoryValue category in Enum.GetValues(typeof(CategoryValue)))
+    {
+        <option value="@((int)category)">@category.Description()</option>
+    }
+</select>
+
+@code {
+    private CategoryValue selectedCategory;
+
+    [Parameter]
+    public CategoryValue Category
+    {
+        get => selectedCategory;
+        set => selectedCategory = value;
+    }
+
+    private async Task CategoryChanged(ChangeEventArgs e)
+    {
+        selectedCategory = (CategoryValue)e.Value;
+        await OnCategoryChanged.InvokeAsync(selectedCategory);
+    }
+
+    [Parameter]
+    public EventCallback<CategoryValue> OnCategoryChanged { get; set; }
+}
