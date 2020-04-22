@@ -10,10 +10,11 @@ namespace Celebrity.Repositories
     {
         Task<Concept> GetConcept(ConceptId id);
         Task<IEnumerable<Concept>> GetConcepts(GameCreationCriteria criteria);
+        Task<IEnumerable<Concept>> GetConceptsFromCategory(CategoryValue category);
         Task<IEnumerable<BaseOption<Concept>>> GetConceptsFromGame(GameId id);
 
         void AddConcept(Concept concept);
-        void EditConcept(Concept concept);
-        void DeleteConcept(Concept concept);
+        Task EditConcept(Concept concept);
+        Task DeleteConcept(Concept concept);
     }
 }

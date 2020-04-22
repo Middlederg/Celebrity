@@ -4,13 +4,13 @@ namespace Celebrity
 {
     public class Difficulty : ValueObject
     {
-        private static readonly IDictionary<int, Difficulty> statuses = new Dictionary<int, Difficulty>();
+        private static readonly IDictionary<DifficultyValue, Difficulty> statuses = new Dictionary<DifficultyValue, Difficulty>();
 
-        public static readonly Difficulty NotDefined = new Difficulty(0, nameof(NotDefined));
-        public static readonly Difficulty Easy = new Difficulty(1, nameof(Easy));
-        public static readonly Difficulty Intermediate = new Difficulty(2, nameof(Intermediate));
-        public static readonly Difficulty Hard = new Difficulty(3, nameof(Hard));
-        public static Difficulty GetValue(int stars)
+        public static readonly Difficulty NotDefined = new Difficulty(DifficultyValue.NotDefined, nameof(NotDefined));
+        public static readonly Difficulty Easy = new Difficulty(DifficultyValue.Easy, nameof(Easy));
+        public static readonly Difficulty Intermediate = new Difficulty(DifficultyValue.Intermediate, nameof(Intermediate));
+        public static readonly Difficulty Hard = new Difficulty(DifficultyValue.Hard, nameof(Hard));
+        public static Difficulty GetValue(DifficultyValue stars)
         {
             if (statuses.TryGetValue(stars, out Difficulty result))
             {
@@ -19,21 +19,21 @@ namespace Celebrity
             return NotDefined;
         }
 
-        private Difficulty(int stars, string name)
+        private Difficulty(DifficultyValue stars, string name)
         {
-            this.stars = stars;
+            this.Value = stars;
             this.name = name;
             statuses.Add(stars, this);
         }
 
-        internal int stars;
-        internal string name;
+        public DifficultyValue Value { get; }
+        private readonly string name;
 
         public override string ToString() => name;
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return stars;
+            yield return Value;
         }
 
         public static IReadOnlyCollection<Difficulty> Values => statuses.Values as IReadOnlyCollection<Difficulty>;

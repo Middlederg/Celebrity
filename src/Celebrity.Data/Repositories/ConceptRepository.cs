@@ -18,17 +18,42 @@ namespace Celebrity.Data
 
         public void AddConcept(Concept concept)
         {
-            throw new NotImplementedException();
+            var concepts = new Concepts()
+            {
+                Id = Guid.NewGuid(),
+                Name = concept.ToString(),
+                
+            };
+            foreach (var subcategory in concept.Subcategories)
+            {
+                concepts.AddSubcategory(subcategory.Id);
+            }
+            context.Concepts.Add(concepts);
         }
 
-        public void DeleteConcept(Concept concept)
+        public async Task DeleteConcept(Concept concept)
         {
-            throw new NotImplementedException();
+            var concepts = await context.Concepts.FindAsync((Guid)concept.Id);
+            if (concepts != null)
+            {
+                context.Concepts.Remove(concepts);
+            }
         }
 
-        public void EditConcept(Concept concept)
+        public async Task EditConcept(Concept concept)
         {
-            throw new NotImplementedException();
+            var concepts = await context.Concepts
+                .Include(x => x.SubcategoriesInconcepts)
+                .FirstOrDefaultAsync(x => x.Id.Equals(concept.Id));
+
+            if (concepts != null)
+            {
+                concepts.Name = concept.ToString();
+                concepts.Difficulty = concept.Difficulty.Value;
+                concepts.Type = concept.Type;
+                concepts.UpdateSubcategorias(concept.Subcategories.Select(x => (Guid)x.Id));
+                context.Entry(concepts).State = EntityState.Modified;
+            }
         }
 
         public async Task<Concept> GetConcept(ConceptId id)
@@ -71,6 +96,17 @@ namespace Celebrity.Data
                     return new BaseOption<Concept>(concept, currentConcept.IsGuessed);
                  });
             return conceptList;
+        }
+
+        public async Task<IEnumerable<Concept>> GetConceptsFromSubcategory(SubcategoryId subcategoryId)
+        {
+            var list = await context.Concepts
+             .WithSubcategory(subcategoryId)
+             .Include(x => x.SubcategoriesInconcepts)
+             .ThenInclude(x => x.Subcategories)
+             .ToListAsync();
+
+            return list.Select(x => new ConceptMapper(x).Map());
         }
     }
 }

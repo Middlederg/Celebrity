@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Celebrity
 {
@@ -16,6 +17,30 @@ namespace Celebrity
         public Concepts()
         {
             SubcategoriesInconcepts = new HashSet<SubcategoriesInConcepts>();
+        }
+
+        public void AddSubcategory(Guid subcategoryId)
+        {
+            if (!SubcategoriesInconcepts.Any(x => x.SubcategoryId == subcategoryId))
+            {
+                SubcategoriesInconcepts.Add(new SubcategoriesInConcepts()
+                {
+                    SubcategoryId = subcategoryId
+                });
+            }
+        }
+        public void UpdateSubcategorias(IEnumerable<Guid> subcategories)
+        {
+            var elementsToRemove = SubcategoriesInconcepts.Where(x => !subcategories.Contains(x.SubcategoryId));
+            foreach (var subcategorInConcept in SubcategoriesInconcepts.ToList().Where(x => elementsToRemove.Contains(x)))
+            {
+                SubcategoriesInconcepts.Remove(subcategorInConcept);
+            }
+
+            foreach (var newSubcategory in subcategories)
+            {
+                AddSubcategory(newSubcategory);
+            }
         }
     }
 }

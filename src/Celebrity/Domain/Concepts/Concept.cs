@@ -14,6 +14,7 @@ namespace Celebrity
         public ConceptType Type { get; }
 
         private readonly IEnumerable<SubcategoryObject> subcategories;
+        public IEnumerable<SubcategoryObject> Subcategories => subcategories;
         public bool HasSubcategory(SubcategoryId id) => subcategories.Any(x => x.Is(id));
 
         private bool guessed;

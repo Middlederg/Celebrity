@@ -8,6 +8,7 @@ namespace Celebrity.Repositories
     {
         Task<GameInfo> GetGameInfo(GameId id);
         Task<IEnumerable<Team>> GetTeams(GameId id, Deck deck);
+        Task<IEnumerable<GameInfo>> GetGamesWithConcept(ConceptId id);
 
         void CreateGame(Game game);
      

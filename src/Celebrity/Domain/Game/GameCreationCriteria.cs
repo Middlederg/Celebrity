@@ -10,11 +10,11 @@ namespace Celebrity
         public bool IncludeEasy { get; }
         public bool IncludeIntermediate { get; }
         public bool IncludeHard { get;  }
-        public IEnumerable<Guid> SubcategoriesToInclude { get; }
+        public Guid[] SubcategoriesToInclude { get; }
         public IEnumerable<Team> Teams { get; }
 
         public GameCreationCriteria(int maximunNumber, int totalRounds, bool inludeEasy, bool includeIntermediate, bool includeHard, 
-            IEnumerable<Guid> subcategoriesToInclude, IEnumerable<Team> teams)
+            Guid[] subcategoriesToInclude, Team[] teams)
         {
             MaximunNumber = maximunNumber;
             TotalRounds = totalRounds;

@@ -24,14 +24,20 @@ namespace Celebrity.Blazor
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IConceptRepository, ConceptRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<SubcategoryCreatorService>();
             services.AddScoped<SubcategoryDeleteService>();
             services.AddScoped<SubcategoryEditorService>();
+            services.AddScoped<ConceptCreatorService>();
+            services.AddScoped<ConceptDeleteService>();
+            services.AddScoped<ConceptEditorService>();
             services.AddScoped<GameCreatorService>();
             services.AddScoped<GameLoaderService>();
             services.AddScoped<GameSaverService>();
+
             services.AddScoped<CategoriesQuery>();
-       
+            services.AddScoped<SubcategoriesQuery>();
+            services.AddScoped<ConceptsQuery>();
             return services;
         }
 

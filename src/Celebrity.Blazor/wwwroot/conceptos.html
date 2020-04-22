@@ -7,6 +7,7 @@
     <title>Celebrity</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -81,6 +82,7 @@
                         <option value="2" selected>Categ 1345</option>
                         <option value="3">Three</option>
                     </select>
+
                     <div class="input-group">
                         <input class="form-control form-control-sm"
                                type="search"
@@ -102,6 +104,8 @@
                         <th scope="col">Concepto</th>
                         <th scope="col" class="text-center">Dificultad</th>
                         <th scope="col">Tipo</th>
+                        <th scope="col"></th>
+                        <th scope="col">Subcategories</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -133,6 +137,28 @@
                                 <option value="2" selected>Two</option>
                                 <option value="3">Three</option>
                             </select>
+                        </td>
+                        <td>
+                            <input list="subcategoryInConcept" value="" class="form-control form-control-sm" placeholder="Add subcategory...">
+                            <datalist id="subcategoryInConcept">
+                                <option value="ISO-8859-1"></option>
+                                <option value="cp1252">ANSI</option>
+                                <option value="utf8">UTF-8</option>
+                            </datalist>
+                        </td>
+                        <td>
+                            <span class="badge badge-info">
+                                Personaje histórico
+                                <button type="button" class="btn btn-sm py-0 p-0 ml-2" aria-label="Close">
+                                    <span aria-hidden="true" class="text-white">&times;</span>
+                                </button>
+                            </span>
+                            <span class="badge badge-info">
+                                Francia
+                                <button type="button" class="btn btn-sm py-0 p-0 ml-2" aria-label="Close">
+                                    <span aria-hidden="true" class="text-white">&times;</span>
+                                </button>
+                            </span>
                         </td>
                         <td>
                             <button class="btn btn-sm btn-danger">
@@ -168,6 +194,28 @@
                                 <option value="2" selected>Two</option>
                                 <option value="3">Three</option>
                             </select>
+                        </td>
+                        <td>
+                            <input list="subcategoryInConcept" value="" class="form-control form-control-sm" placeholder="Add subcategory...">
+                            <datalist id="subcategoryInConcept">
+                                <option value="ISO-8859-1"></option>
+                                <option value="cp1252">ANSI</option>
+                                <option value="utf8">UTF-8</option>
+                            </datalist>
+                        </td>
+                        <td>
+                            <span class="badge badge-info">
+                                Personaje histórico
+                                <button type="button" class="btn btn-sm py-0 p-0 ml-2" aria-label="Close">
+                                    <span aria-hidden="true" class="text-white">&times;</span>
+                                </button>
+                            </span>
+                            <span class="badge badge-info">
+                                Francia
+                                <button type="button" class="btn btn-sm py-0 p-0 ml-2" aria-label="Close">
+                                    <span aria-hidden="true" class="text-white">&times;</span>
+                                </button>
+                            </span>
                         </td>
                         <td>
                             <button class="btn btn-sm btn-danger">

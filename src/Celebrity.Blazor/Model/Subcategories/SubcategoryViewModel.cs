@@ -8,7 +8,7 @@ namespace Celebrity.Blazor
 
         private string name;
         public string Name
-        { 
+        {
             get => name;
             set
             {
@@ -68,6 +68,7 @@ namespace Celebrity.Blazor
             Modified = false;
             Deleted = false;
             Visible = true;
+            ErrorMessage = "";
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Celebrity.Data
             return list;
         }
 
-        public static IQueryable<Concepts> WithSubcategory(this IQueryable<Concepts> list, IEnumerable<Guid> subcategories)
+        public static IQueryable<Concepts> WithSubcategory(this IQueryable<Concepts> list, params Guid[] subcategories)
         {
             if (subcategories.Any())
             {

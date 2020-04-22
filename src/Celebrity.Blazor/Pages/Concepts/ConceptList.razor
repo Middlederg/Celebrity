@@ -26,6 +26,13 @@
                 <span class="oi oi-check mr-2" title="delete category" aria-hidden="true"></span>
                 Save changes
             </button>
+            @if (conce.HasChanges())
+            {
+                <button class="btn btn-success btn-sm mr-2" @onclick="SaveChanges">>
+                    <span class="oi oi-check mr-2" title="delete category" aria-hidden="true"></span>
+                    Save changes
+                </button>
+            }
             <select class="form-control form-control-sm mr-2">
                 <option value="1">All categories</option>
                 <option value="2" selected>Categ 1345</option>
@@ -130,5 +137,28 @@
 </div>
 
 @code {
+    private ConceptsViewModel concepts;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await conceptsQuery.GetFromSubcategory();
+        subcategories = new SubcategoriesViewModel(list);
+    }
+
+    private void Search()
+    {
+        subcategories.Search();
+    }
+
+    private void AddCategory()
+    {
+        navigationManager.NavigateTo($"createcategory/{navigationManager.Uri}");
+    }
+
+    private async Task SaveChanges()
+    {
+        await subcategoryEditorService.Edit(subcategories.GetModified());
+        StateHasChanged();
+        navigationManager.NavigateTo("createcategory");
+    }
 }
