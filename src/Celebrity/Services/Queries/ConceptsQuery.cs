@@ -16,7 +16,7 @@ namespace Celebrity
 
         public async Task<IEnumerable<Concept>> GetFromCategory(CategoryValue category)
         {
-            var concepts = await repository.GetConceptsFromSubcategory(new SubcategoryId(id));
+            var concepts = await repository.GetConceptsFromCategory(category);
             return concepts;
         }
     }

@@ -11,6 +11,5 @@ namespace Celebrity.Repositories
 
         Task<Subcategory> GetSubcategory(SubcategoryId id);
         Task<IEnumerable<Subcategory>> GetSubcategories();
-        //Task<IEnumerable<Subcategory>> GetSubcategories(CategoryValue category);
     }
 }

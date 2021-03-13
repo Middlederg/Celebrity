@@ -98,10 +98,10 @@ namespace Celebrity.Data
             return conceptList;
         }
 
-        public async Task<IEnumerable<Concept>> GetConceptsFromSubcategory(SubcategoryId subcategoryId)
+        public async Task<IEnumerable<Concept>> GetConceptsFromCategory(CategoryValue category)
         {
             var list = await context.Concepts
-             .WithSubcategory(subcategoryId)
+             .WithCategory(category)
              .Include(x => x.SubcategoriesInconcepts)
              .ThenInclude(x => x.Subcategories)
              .ToListAsync();

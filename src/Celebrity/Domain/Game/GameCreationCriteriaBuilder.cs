@@ -53,7 +53,7 @@ namespace Celebrity
 
         public GameCreationCriteria Build()
         {
-            return new GameCreationCriteria(totalConcepts, totalRounds, easy, intermediate, hard, subcategoriesToInclude, teams);
+            return new GameCreationCriteria(totalConcepts, totalRounds, easy, intermediate, hard, subcategoriesToInclude.ToArray(), teams.ToArray());
         }
     }
 }

@@ -51,5 +51,10 @@ namespace Celebrity.Data
             }
             return list;
         }
+
+        public static IQueryable<Concepts> WithCategory(this IQueryable<Concepts> list, params CategoryValue[] category)
+        {
+            return list.Where(x => x.SubcategoriesInconcepts.Any(x => category.Contains(x.Subcategories.Category)));
+        }
     }
 }

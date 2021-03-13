@@ -10,6 +10,7 @@ namespace Celebrity
         public static readonly Difficulty Easy = new Difficulty(DifficultyValue.Easy, nameof(Easy));
         public static readonly Difficulty Intermediate = new Difficulty(DifficultyValue.Intermediate, nameof(Intermediate));
         public static readonly Difficulty Hard = new Difficulty(DifficultyValue.Hard, nameof(Hard));
+        public static Difficulty GetValue(int stars) => GetValue((DifficultyValue)stars);
         public static Difficulty GetValue(DifficultyValue stars)
         {
             if (statuses.TryGetValue(stars, out Difficulty result))
@@ -37,5 +38,10 @@ namespace Celebrity
         }
 
         public static IReadOnlyCollection<Difficulty> Values => statuses.Values as IReadOnlyCollection<Difficulty>;
+
+        public bool IsEqualOrHiger(Difficulty difficulty)
+        {
+            return ((int)Value) >= ((int)difficulty.Value);
+        }
     }
 }

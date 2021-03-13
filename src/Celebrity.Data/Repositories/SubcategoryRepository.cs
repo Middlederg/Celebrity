@@ -44,5 +44,15 @@ namespace Celebrity.Data
                 context.Entry(subcategories).State = EntityState.Modified;
             }
         }
+
+        public Task<IEnumerable<Subcategory>> GetSubcategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Subcategory> GetSubcategory(SubcategoryId id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
