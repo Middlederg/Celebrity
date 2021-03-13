@@ -2,15 +2,24 @@
   <ItemGroup Label="AspNetCore">
     <PackageReference Update="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4"  />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Design" Version="5.0.4" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
     <PackageReference Update="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.4" />
     <PackageReference Update="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
+    <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.4" />
+    <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.4" />
+    <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.4" />
+    <PackageReference Update="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Update="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Update="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup Label="ThirdParty">
-    <PackageReference Update="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Update="Serilog.AspNetCore" Version="3.4.0" />
+    <PackageReference Update="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
+    <PackageReference Update="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
     <PackageReference Update="Polly" Version="7.2.1" />
     <PackageReference Update="Hellang.Middleware.ProblemDetails" Version="5.0.0" />
     <PackageReference Update="SendGrid" Version="9.19.0" />

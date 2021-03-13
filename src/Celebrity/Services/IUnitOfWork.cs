@@ -4,7 +4,9 @@ namespace Celebrity
 {
     public interface IUnitOfWork
     {
-        void Complete(); 
+        void Complete();
         Task CompleteAsync();
     }
+
+  
 }

@@ -1,0 +1,25 @@
+﻿<div class="btn-group btn-group-sm">
+
+    @foreach (var difficulty in Celebrity.Difficulty.Values)
+    {
+        <button class="btn btn-sm btn-info">
+            <span class="oi oi-bolt" title="@difficulty.ToString()" aria-hidden="true"></span>
+        </button>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public DifficultyValue Difficulty { get; set; }
+
+    private async Task DifficultyChanged(ChangeEventArgs e)
+    {
+        Difficulty = Difficulty.GetValue((DifficultyValue)e.Value);
+        await OnCategoryChanged.InvokeAsync(Difficulty);
+    }
+
+    [Parameter]
+    public EventCallback<Difficulty> OnDifficultyChanged { get; set; }
+
+    private string GetClass(Difficulty difficulty) => Difficulty.IsEqualOrHiger(difficulty) ? "btn btn-sm btn-info text-info" : "btn btn-sm btn-info";
+}

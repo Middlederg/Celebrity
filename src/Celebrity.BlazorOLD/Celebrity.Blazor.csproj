@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetVersion)</TargetFramework>
+    <UserSecretsId>aspnet-Celebrity.Blazor-C86F2483-65C8-4190-93D3-A9B1350D197D</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"  />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"  />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools"  />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Celebrity.Data\Celebrity.Data.csproj" />
+    <ProjectReference Include="..\Celebrity\Celebrity.csproj" />
+  </ItemGroup>
+
+</Project>

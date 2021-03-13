@@ -1,0 +1,36 @@
+﻿@inject SubcategoriesQuery subcategoriesQuery
+
+<select class="form-control" @onchange=CategoryChanged>
+
+    @foreach (CategoryValue category in subcategories.Select(x => x.Category).Distinct())
+    {
+        <optgroup label="@category.Description()">
+            @foreach (Subcategory subcategory in subcategories.Where(x => x.Category == category))
+            {
+                <option value="@(subcategory.Id.ToString())">@subcategory.ToString()</option>
+            }
+        </optgroup>
+    }
+</select>
+
+@code {
+    private IEnumerable<Subcategory> subcategories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        subcategories = await subcategoriesQuery.GetAll();
+    }
+
+    [Parameter]
+    public Subcategory SelectedSubcategory { get; set; }
+
+    private async Task CategoryChanged(ChangeEventArgs e)
+    {
+        var selectedId = (Guid)e.Value;
+        SelectedSubcategory = subcategories.FirstOrDefault(x => x.Id == selectedId);
+        await OnSubcategoryChanged.InvokeAsync(SelectedSubcategory);
+    }
+
+    [Parameter]
+    public EventCallback<Subcategory> OnSubcategoryChanged { get; set; }
+}

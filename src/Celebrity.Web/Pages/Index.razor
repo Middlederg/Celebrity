@@ -1,11 +1,20 @@
 ﻿@page "/"
+@inject UserFinderService userFinderService
 
-<h1>Hello, world!</h1>
+<h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Welcome to your new app</h1>
 
-<div class="alert alert-warning" role="alert">
-    Before authentication will function correctly, you must configure your provider details in <code>Program.cs</code>
-</div>
+<p>Current culture : @user.Culture.DisplayName (@user.Culture.NativeName)</p>
 
-Welcome to your new app.
+<p>Current date : @DateTime.Now</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code
+{
+    private User user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await userFinderService.GetCurrentUser();
+    }
+
+}
+

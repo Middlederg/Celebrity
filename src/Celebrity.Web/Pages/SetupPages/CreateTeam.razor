@@ -1,0 +1,85 @@
+﻿@if (Show)
+{
+    <div class="modal fade show" id="rounds-modal" style="display:block" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="@($"modal-content border-{color.ColorClass()}")">
+                <div class="@($"modal-header border-{color.ColorClass()}")">
+                    <h5 class="@($"modal-title text-{color.ColorClass("dark")}")" id="create-team-title">Select your team color</h5>
+                    <button type="button" class="close" 
+                            data-dismiss="modal" 
+                            aria-label="Close"
+                            @onclick="CloseWindow">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="@($"modal-body border-{color.ColorClass()}")">
+                    <div class="btn-group my-3 d-flex justify-content-center" role="group" aria-label="Colors">
+                        @foreach (Color avaliableColor in Enum.GetValues(typeof(Color)))
+                        {
+                            <button type="button"
+                                    class="@($"btn btn-{avaliableColor.ColorClass()}")"
+                                    @onclick="() =>
+                                    {
+                                        color = avaliableColor;
+                                        name = avaliableColor.Description();
+                                    }">
+                                &nbsp;
+                            </button>
+                        }
+                    </div>
+                    <div class="input-group my-3">
+                        <div class="@($"input-group-prepend bg-{color.ColorClass()}")">
+                            <div class="input-group-text" id="teamName">Name</div>
+                        </div>
+                        <input type="text" class="form-control"
+                               aria-label="Input team name"
+                               aria-describedby="teamName"
+                               @bind="name">
+                    </div>
+                    @if (isError)
+                    {
+                        <p class="text-danger">
+                            Select a color for the team
+                        </p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="@($"btn btn-{color.ColorClass()}")" @onclick="() => OnCreateTeam(color, name)">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+
+    private bool isError = false;
+
+    private Color? color;
+    private string name;
+
+    [Parameter]
+    public bool Show { get; set; }
+
+    [Parameter]
+    public EventCallback<Team> OnTeamAdded { get; set; }
+
+    async Task OnCreateTeam(Color? color, string name)
+    {
+        if (color.HasValue)
+        {
+            var team = new Team(color.Value, name);
+            await OnTeamAdded.InvokeAsync(team);
+            CloseWindow();
+        }
+        else isError = true;
+    }
+
+    private void CloseWindow()
+    {
+        Show = false;
+        isError = false;
+        color = null;
+        name = "";
+    }
+}

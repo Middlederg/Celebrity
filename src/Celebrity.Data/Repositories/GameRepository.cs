@@ -122,5 +122,10 @@ namespace Celebrity.Data
             };
             context.LoadedGames.Add(loadedGames);
         }
+
+        public Task<IEnumerable<GameInfo>> GetGamesWithConcept(ConceptId id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
