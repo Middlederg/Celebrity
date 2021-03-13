@@ -20,8 +20,8 @@ namespace Celebrity.Blazor
             }
         }
 
-        private int stars;
-        public int Stars 
+        private DifficultyValue stars;
+        public DifficultyValue Stars 
         {
             get => stars;
             set

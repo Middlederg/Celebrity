@@ -1,4 +1,4 @@
-﻿<select class="form-control" @onchange=CategoryChanged>
+﻿<select class="@($"form-control {ComboClass}")" @onchange=CategoryChanged>
     @foreach (CategoryValue category in Enum.GetValues(typeof(CategoryValue)))
     {
         <option value="@((int)category)">@category.Description()</option>
@@ -14,6 +14,9 @@
         get => selectedCategory;
         set => selectedCategory = value;
     }
+
+    [Parameter]
+    public string ComboClass { get; set; }
 
     private async Task CategoryChanged(ChangeEventArgs e)
     {
