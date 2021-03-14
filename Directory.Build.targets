@@ -2,7 +2,6 @@
   <ItemGroup Label="AspNetCore">
     <PackageReference Update="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
-    <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4"  />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Design" Version="5.0.4" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
@@ -14,6 +13,7 @@
     <PackageReference Update="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Update="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Update="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Update="IdentityModel" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup Label="ThirdParty">

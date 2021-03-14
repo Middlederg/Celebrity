@@ -30,7 +30,7 @@ namespace Celebrity.Api
         public static IApplicationBuilder Configure(IApplicationBuilder app, Func<IApplicationBuilder, IApplicationBuilder> configureHost)
         {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
+            
             return configureHost(app)
                 .UseProblemDetails()
                 .UseHttpsRedirection()

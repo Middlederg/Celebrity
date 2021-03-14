@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -9,9 +10,11 @@ namespace Celebrity.Host
 {
     public static class AuthenticationExtensions
     {
-        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, 
+            IConfiguration configuration,
+            IWebHostEnvironment environment)
         {
-            string apiKeyValue = configuration.GetValue<string>(key: Api.TokenGenerator.ApiKeyConfigurationName);
+            string apiKeyValue = configuration.GetValue<string>(key: Celebrity.Api.TokenGenerator.ApiKeyConfigurationName);
 
             var key = Encoding.ASCII.GetBytes(apiKeyValue);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -25,7 +28,7 @@ namespace Celebrity.Host
                             var userId = Guid.Parse(context.Principal.Identity.Name);
                             var user = await userRepository.GetUser(userId);
 
-                            if (user == null)
+                            if (user is null)
                             {
                                 context.Fail("Unauthorized");
                             }
@@ -45,6 +48,4 @@ namespace Celebrity.Host
             return services;
         }
     }
-}
-
 }

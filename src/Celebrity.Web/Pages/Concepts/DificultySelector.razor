@@ -14,12 +14,12 @@
 
     private async Task DifficultyChanged(ChangeEventArgs e)
     {
-        Difficulty = Difficulty.GetValue((DifficultyValue)e.Value);
-        await OnCategoryChanged.InvokeAsync(Difficulty);
+        //Difficulty = Difficulty.GetValue((DifficultyValue)e.Value);
+        //await OnCategoryChanged.InvokeAsync(Difficulty);
     }
 
     [Parameter]
     public EventCallback<Difficulty> OnDifficultyChanged { get; set; }
 
-    private string GetClass(Difficulty difficulty) => Difficulty.IsEqualOrHiger(difficulty) ? "btn btn-sm btn-info text-info" : "btn btn-sm btn-info";
+    //private string GetClass(Difficulty difficulty) => Difficulty.IsEqualOrHiger(difficulty) ? "btn btn-sm btn-info text-info" : "btn btn-sm btn-info";
 }

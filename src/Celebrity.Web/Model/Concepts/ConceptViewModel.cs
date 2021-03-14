@@ -97,7 +97,7 @@ namespace Celebrity.Web
 
         public Concept CreateConcept()
         {
-            var concept = Concept.Create(new ConceptId(), Name, Stars, ConceptType, 
+            var concept = Concept.Create(new ConceptId(), Name, (int)Stars, ConceptType, 
                 Tags.Select(x => x.CreateSubcategory()).ToArray());
             return concept;
         }

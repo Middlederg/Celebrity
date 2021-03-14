@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace Celebrity
@@ -7,5 +8,6 @@ namespace Celebrity
     {
         Task<string> GetCurrentUserCulture(string userid);
         Task UpdateUserData(User user, CultureInfo culture);
+        Task<User> GetUser(Guid id);
     }
 }

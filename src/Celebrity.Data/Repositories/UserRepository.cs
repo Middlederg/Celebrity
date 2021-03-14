@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System;
 
 namespace Celebrity.Data
 {
@@ -18,6 +19,12 @@ namespace Celebrity.Data
         {
             var user = await context.Users.FindAsync(id);
             return user.Culture;
+        }
+
+        public async Task<User> GetUser(Guid id)
+        {
+            var user = await context.Users.FindAsync(id);
+            return User.Create(user.Id, user.UserName, CultureInfo.CurrentCulture);
         }
 
         public async Task UpdateUserData(User user, CultureInfo culture)

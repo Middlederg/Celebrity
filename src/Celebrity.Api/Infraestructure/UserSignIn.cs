@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Api
 {
-    public class UserSignIn : IUserSignIn
+    public class UserSignIn
     {
-        private readonly SignInManager<Data.User> signInManager;
+        private readonly SignInManager<User> signInManager;
 
-        public UserSignIn(SignInManager<Data.User> signInManager)
+        public UserSignIn(SignInManager<User> signInManager)
         {
             this.signInManager = signInManager;
         }

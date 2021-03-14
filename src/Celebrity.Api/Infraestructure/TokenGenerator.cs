@@ -8,8 +8,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using IdentityModel;
 
-namespace Celebrity
+namespace Celebrity.Api
 {
     public class TokenGenerator
     {
@@ -31,14 +32,14 @@ namespace Celebrity
 
             var claims = new List<Claim>()
             {
-                new Claim(JwtClaims.Name, user.Id.ToString()),
-                new Claim(ClaimTypes.GivenName, user.ToString()),
+                new Claim(JwtClaimTypes.Subject, user.Id.ToString()),
+                new Claim(JwtClaimTypes.Name, user.ToString())
             };
-            claims.AddRange(user.Roles.Select(x => new Claim(ClaimTypes.Role, x)));
+            // claims.AddRange(user.Roles.Select(x => new Claim(JwtClaimTypes.Role, x)));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims) ,
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(ExpirationDays),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -48,3 +49,4 @@ namespace Celebrity
         }
     }
 }
+

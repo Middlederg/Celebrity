@@ -1,7 +1,7 @@
 ﻿@page "/play/{gameId:guid}"
 @inject GameLoaderService gameLoaderService
-@inject UserFinderService userFinderService
-@inject ClientInfoFinderService clientInfoFinderService
+@*@inject UserFinderService userFinderService
+@inject ClientInfoFinderService clientInfoFinderService*@
 
 <h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Play</h1>
 <div class="d-flex justify-content-center mt-4 mb-5">
@@ -20,8 +20,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var currentUser = await userFinderService.GetCurrentUser();
-        var clientInfo = await clientInfoFinderService.GetClientInfo();
-        game = await gameLoaderService.Load(gameId, currentUser, clientInfo);
+        //var currentUser = await userFinderService.GetCurrentUser();
+        //var clientInfo = await clientInfoFinderService.GetClientInfo();
+        //game = await gameLoaderService.Load(gameId, currentUser, clientInfo);
     }
 }

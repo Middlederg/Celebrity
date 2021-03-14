@@ -1,6 +1,8 @@
 ﻿using Celebrity.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Celebrity.Host
 {
@@ -19,7 +21,7 @@ namespace Celebrity.Host
                 });
             });
 
-            services.AddDefaultIdentity<Users>(options =>
+            services.AddIdentityCore<Users>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedAccount = true;
@@ -27,8 +29,6 @@ namespace Celebrity.Host
 
             return services;
         }
-
-      
     }
 
 }

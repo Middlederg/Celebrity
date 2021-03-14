@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject UserFinderService userFinderService
+@*@inject UserFinderService userFinderService*@
 
 <h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Welcome to your new app</h1>
 
@@ -13,7 +13,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        user = await userFinderService.GetCurrentUser();
+        //user = await userFinderService.GetCurrentUser();
     }
 
 }
