@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
@@ -16,7 +17,7 @@ namespace Celebrity.Data
             this.context = context;
         }
 
-        public void AddConcept(Concept concept)
+        public void AddConcept(DeckConcept concept)
         {
             var concepts = new Concepts()
             {
@@ -31,7 +32,7 @@ namespace Celebrity.Data
             context.Concepts.Add(concepts);
         }
 
-        public async Task DeleteConcept(Concept concept)
+        public async Task DeleteConcept(DeckConcept concept)
         {
             var concepts = await context.Concepts.FindAsync((Guid)concept.Id);
             if (concepts != null)
@@ -40,7 +41,7 @@ namespace Celebrity.Data
             }
         }
 
-        public async Task EditConcept(Concept concept)
+        public async Task EditConcept(DeckConcept concept)
         {
             var concepts = await context.Concepts
                 .Include(x => x.SubcategoriesInconcepts)
@@ -56,7 +57,7 @@ namespace Celebrity.Data
             }
         }
 
-        public async Task<Concept> GetConcept(ConceptId id)
+        public async Task<DeckConcept> GetConcept(ConceptId id)
         {
             var concept = await context.Concepts
               .Include(x => x.SubcategoriesInconcepts)
@@ -66,7 +67,7 @@ namespace Celebrity.Data
             return new ConceptMapper(concept).Map();
         }
 
-        public async Task<IEnumerable<Concept>> GetConcepts(GameCreationCriteria criteria)
+        public async Task<IEnumerable<DeckConcept>> GetConcepts(Shared.GameCreationCriteria criteria)
         {
             var list = await context.Concepts
                 .WithCriteria(criteria)
@@ -77,7 +78,7 @@ namespace Celebrity.Data
             return list.Select(x => new ConceptMapper(x).Map());
         }
 
-        public async Task<IEnumerable<BaseOption<Concept>>> GetConceptsFromGame(GameId id)
+        public async Task<IEnumerable<BaseOption<DeckConcept>>> GetConceptsFromGame(GameId id)
         {
             var concepts = await context.DeckConcepts
                 .Where(x => x.GameId == id)
@@ -93,12 +94,12 @@ namespace Celebrity.Data
                 .Select(origin => {
                     var currentConcept = concepts.First(x => x.Id == origin.Id);
                     var concept = new ConceptMapper(origin).Map();
-                    return new BaseOption<Concept>(concept, currentConcept.IsGuessed);
+                    return new BaseOption<DeckConcept>(concept, currentConcept.IsGuessed);
                  });
             return conceptList;
         }
 
-        public async Task<IEnumerable<Concept>> GetConceptsFromCategory(CategoryValue category)
+        public async Task<IEnumerable<DeckConcept>> GetConceptsFromCategory(CategoryValue category)
         {
             var list = await context.Concepts
              .WithCategory(category)

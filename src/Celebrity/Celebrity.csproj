@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="GamingContext\Rounds\Application\" />
-    <Folder Include="GamingContext\Teams\Application\" />
+    <Folder Include="Domain\Rounds\Application\" />
+    <Folder Include="Domain\Teams\Application\" />
   </ItemGroup>
 
   <ItemGroup>

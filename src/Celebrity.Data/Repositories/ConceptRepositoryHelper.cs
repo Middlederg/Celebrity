@@ -1,5 +1,4 @@
-﻿using Celebrity.Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Linq;
 
@@ -7,7 +6,7 @@ namespace Celebrity.Data
 {
     public static class ConceptRepositoryHelper
     {
-        public static IQueryable<Concepts> WithCriteria(this IQueryable<Concepts> list, GameCreationCriteria criteria)
+        public static IQueryable<Concepts> WithCriteria(this IQueryable<Concepts> list, Shared.GameCreationCriteria criteria)
         {
             return list
                 .IncludeEasy(criteria.IncludeEasy)
@@ -50,11 +49,6 @@ namespace Celebrity.Data
                 return list.Where(x => x.SubcategoriesInconcepts.Any(x => subcategories.Contains(x.SubcategoryId)));
             }
             return list;
-        }
-
-        public static IQueryable<Concepts> WithCategory(this IQueryable<Concepts> list, params CategoryValue[] category)
-        {
-            return list.Where(x => x.SubcategoriesInconcepts.Any(x => category.Contains(x.Subcategories.Category)));
         }
     }
 }
