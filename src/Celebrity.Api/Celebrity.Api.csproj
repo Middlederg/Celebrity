@@ -19,6 +19,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Celebrity.Data\Celebrity.Data.csproj" />
+    <ProjectReference Include="..\Celebrity.Shared\Celebrity.Shared.csproj" />
     <ProjectReference Include="..\Celebrity\Celebrity.csproj" />
   </ItemGroup>
 

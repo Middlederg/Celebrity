@@ -4,4 +4,13 @@
     <TargetFramework>$(NetStandardVersion)</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="GamingContext\Rounds\Application\" />
+    <Folder Include="GamingContext\Teams\Application\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Celebrity.Shared\Celebrity.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

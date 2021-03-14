@@ -20,7 +20,7 @@ namespace Celebrity.Data
         {
             if (includeEasy)
             {
-                return list.Where(x => x.Difficulty == DifficultyValue.Easy);
+                return list.Where(x => x.Difficulty == Difficulty.Easy);
             }
             return list;
         }
@@ -29,7 +29,7 @@ namespace Celebrity.Data
         {
             if (includeIntermediate)
             {
-                return list.Where(x => x.Difficulty == DifficultyValue.Intermediate);
+                return list.Where(x => x.Difficulty == Difficulty.Intermediate);
             }
             return list;
         }
@@ -38,7 +38,7 @@ namespace Celebrity.Data
         {
             if (includeHard)
             {
-                return list.Where(x => x.Difficulty == DifficultyValue.Hard);
+                return list.Where(x => x.Difficulty == Difficulty.Hard);
             }
             return list;
         }

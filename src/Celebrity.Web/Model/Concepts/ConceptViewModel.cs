@@ -20,8 +20,8 @@ namespace Celebrity.Web
             }
         }
 
-        private DifficultyValue stars;
-        public DifficultyValue Stars 
+        private Difficulty stars;
+        public Difficulty Stars 
         {
             get => stars;
             set
