@@ -5,8 +5,8 @@ namespace Celebrity.Domain
 {
     public interface ISubcategoryRepository
     {
-        void AddSubcategory(Subcategory subcategory);
-        Task EditSubcategory(Subcategory subcategory);
+        Task Add(Subcategory subcategory);
+        Task Save(Subcategory subcategory);
         Task DeleteCategory(Subcategory subcategory);
 
         Task<Subcategory> GetSubcategory(SubcategoryId id);

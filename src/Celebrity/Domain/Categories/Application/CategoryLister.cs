@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
-    public class CategoriesLister
+    public class CategoryLister
     {
         private readonly ICategoryRepository categoryRepository;
 
-        public CategoriesLister(ICategoryRepository categoryRepository)
+        public CategoryLister(ICategoryRepository categoryRepository)
         {
             this.categoryRepository = categoryRepository;
         }

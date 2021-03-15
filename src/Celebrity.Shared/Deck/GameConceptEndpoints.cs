@@ -4,6 +4,4 @@
     {
         public const string Base = "api/game-concepts";
     }
-
-
 }

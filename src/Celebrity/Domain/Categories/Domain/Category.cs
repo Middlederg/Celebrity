@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Celebrity.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,21 +7,32 @@ namespace Celebrity.Domain
 {
     public class Category : ValueObject
     {
-        private readonly CategoryValue value;
+        public CategoryValue Value { get; }
 
         public Category(CategoryValue value, params BaseObject[] subcategories)
         {
-            this.value = value;
+            Value = value;
             GetSubcategories = subcategories.ToList();
         }
 
         public IEnumerable<BaseObject> GetSubcategories { get; }
 
-        public override string ToString() => value.Description();
+        public override string ToString() => Value.Description();
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return value;
+            yield return Value;
+        }
+    }
+
+    public static class CategoryMapper
+    {
+        public static Shared.Category ToDto(this Category category)
+        {
+            return new Shared.Category()
+            {
+                Value = category.GetSubcategories
+            };
         }
     }
 }

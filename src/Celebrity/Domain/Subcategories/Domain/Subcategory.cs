@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Celebrity.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +10,8 @@ namespace Celebrity.Domain
         public SubcategoryName Name { get; private set; }
         public void EditName(string newName) => new SubcategoryName(newName);
 
-        public CategoryValue Category { get; }
+        public CategoryValue Category { get; private set; }
+        public void EditCategory(CategoryValue category) => CategoryValue = category;
 
         public static Subcategory Create(string name, CategoryValue category) 
             => new Subcategory(new SubcategoryId(), new SubcategoryName(name), category);

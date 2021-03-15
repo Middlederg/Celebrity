@@ -1,19 +1,18 @@
-﻿using Celebrity.Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
-    public class SubcategoriesQuery
+    public class SubcategoryLister
     {
         private readonly ISubcategoryRepository repository;
 
-        public SubcategoriesQuery(ISubcategoryRepository repository)
+        public SubcategoryLister(ISubcategoryRepository repository)
         {
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<Subcategory>> GetAll()
+        public async Task<IEnumerable<Shared.Subcategory>> ToList()
         {
             var categories = await repository.GetSubcategories();
             return categories;

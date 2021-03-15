@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Celebrity.Shared;
+using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {

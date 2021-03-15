@@ -1,21 +1,26 @@
-﻿using Celebrity.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
-    public class SubcategoryDeleteService
+    public class SubcategoryEraser
     {
         private readonly ISubcategoryRepository subcategoryRepository;
+        private readonly SubcategoryFinder finder;
         private readonly IUnitOfWork unitOfWork;
 
-        public SubcategoryDeleteService(ISubcategoryRepository subcategoryRepository, IUnitOfWork unitOfWork)
+        public SubcategoryEraser(ISubcategoryRepository subcategoryRepository, 
+            SubcategoryFinder finder, 
+            IUnitOfWork unitOfWork)
         {
             this.subcategoryRepository = subcategoryRepository;
+            this.finder = finder;
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task Delete(Subcategory subcategory)
+        public async Task Delete(SubcategoryId id)
         {
+            var subcategory = await finder.Find(id);
+
             if (subcategory.HasConcepts)
             {
                 throw new DeleteDependencyException(nameof(Subcategory));

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Celebrity.Domain
+namespace Celebrity.Shared
 {
     public enum CategoryValue
     {
