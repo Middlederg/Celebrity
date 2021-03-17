@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
-    public class ConceptsQuery
+    public class ConceptsFromCategoryLister
     {
         private readonly IDeckRepository repository;
 
-        public ConceptsQuery(IDeckRepository repository)
+        public ConceptsFromCategoryLister(IDeckRepository repository)
         {
             this.repository = repository;
         }
