@@ -5,7 +5,7 @@ namespace Celebrity.Api
 {
     [ApiController]
     [Route(Shared.GameConceptEndpoints.Base)]
-    public class GameConceptsController : ControllerBase
+    public class DeckController : ControllerBase
     {
         [HttpPost]
         public async Task<ActionResult<Shared.GuessConceptResponse>> Guess(Shared.GuessConceptCommand command)

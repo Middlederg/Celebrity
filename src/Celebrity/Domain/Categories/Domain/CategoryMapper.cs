@@ -1,4 +1,6 @@
-﻿namespace Celebrity.Domain
+﻿using System.Linq;
+
+namespace Celebrity.Domain
 {
     public static class CategoryMapper
     {
@@ -6,7 +8,12 @@
         {
             return new Shared.Category()
             {
-                Value = category.GetSubcategories
+                Value = category.Value,
+                Subcategories = category.Subcategories.Select(x => new Shared.BaseObject()
+                {
+                    Id = x.Id,
+                    Name = x.ToString()
+                }),
             };
         }
     }

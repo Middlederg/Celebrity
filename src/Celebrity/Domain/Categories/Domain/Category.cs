@@ -12,10 +12,10 @@ namespace Celebrity.Domain
         public Category(CategoryValue value, params BaseObject[] subcategories)
         {
             Value = value;
-            GetSubcategories = subcategories.ToList();
+            Subcategories = subcategories.ToList();
         }
 
-        public IEnumerable<BaseObject> GetSubcategories { get; }
+        public IEnumerable<BaseObject> Subcategories { get; }
 
         public override string ToString() => Value.Description();
 

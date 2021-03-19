@@ -11,7 +11,7 @@ namespace Celebrity.Domain
         public void EditName(string newName) => new SubcategoryName(newName);
 
         public CategoryValue Category { get; private set; }
-        public void EditCategory(CategoryValue category) => CategoryValue = category;
+        public void EditCategory(CategoryValue category) => Category = category;
 
         public static Subcategory Create(string name, CategoryValue category) 
             => new Subcategory(new SubcategoryId(), new SubcategoryName(name), category);

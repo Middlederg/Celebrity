@@ -12,7 +12,7 @@ namespace Celebrity.Domain
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<Shared.Subcategory>> ToList()
+        public async Task<IEnumerable<Subcategory>> ToList()
         {
             var categories = await repository.GetSubcategories();
             return categories;

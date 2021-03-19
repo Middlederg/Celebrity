@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Celebrity.Shared
 {
@@ -13,5 +14,7 @@ namespace Celebrity.Shared
         public Difficulty Difficulty { get; set; }
 
         public ConceptType Type { get; set; }
+
+        public IEnumerable<BaseObject> Subcategories { get; set; }
     }
 }

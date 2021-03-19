@@ -6,21 +6,22 @@ namespace Celebrity.Domain
 {
     public class SubcategoryCreator
     {
-        private readonly ISubcategoryRepository subcategoryRepository;
+        private readonly ISubcategoryRepository repository;
         private readonly IUnitOfWork unitOfWork;
 
         public SubcategoryCreator(ISubcategoryRepository repository, 
             IUnitOfWork unitOfWork)
         {
-            this.subcategoryRepository = repository;
+            this.repository = repository;
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task Create(CreateSubcategory dto)
+        public async Task<Subcategory> Create(CreateSubcategory dto)
         {
             var subcategory = Subcategory.Create(dto.Name, dto.Category);
-            await subcategoryRepository.Add(subcategory);
+            await repository.Add(subcategory);
             await unitOfWork.CompleteAsync();
+            return subcategory;
         }
     }
 }

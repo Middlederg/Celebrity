@@ -5,20 +5,20 @@ namespace Celebrity
 {
     public class BaseObject : ValueObject
     {
-        private readonly Id id;
-        public bool Is(Id id) => this.id == id;
+        public Id Id { get; }
+        public bool Is(Id id) => Id == id;
 
         private readonly string name;
 
         public BaseObject(Id id, string name)
         {
-            this.id = id;
+            Id = id;
             this.name = name;
         }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return id;
+            yield return Id;
             yield return name;
         }
     }
