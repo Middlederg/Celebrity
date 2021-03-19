@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>$(NetStandardVersion)</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Rounds\Application\" />
-    <Folder Include="Domain\Teams\Application\" />
+    <Folder Include="Game\Rounds\Application\" />
+    <Folder Include="Game\Teams\Application\" />
   </ItemGroup>
 
   <ItemGroup>

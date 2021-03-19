@@ -6,10 +6,11 @@ namespace Celebrity.Domain
 {
     public class Team : Identity<TeamId>
     {
-        private readonly TeamName name;
-        public Color Color { get; }
+        public TeamName Name { get; private set; }
 
-        public ICollection<Point> Points { get; set; }
+        public Color Color { get; private set; }
+
+        public ICollection<Point> Points { get; private set; }
 
         private readonly List<Point> points;
         public void AddPoint(DeckConcept tarjeta, int ronda) => points.Add(new Point(tarjeta, ronda));
@@ -23,7 +24,7 @@ namespace Celebrity.Domain
 
         public Team(TeamId id, Color color, string name = null) : base(id)
         {
-            this.name = new TeamName(string.IsNullOrWhiteSpace(name) ? color.Description() : name);
+            this.Name = new TeamName(string.IsNullOrWhiteSpace(name) ? color.Description() : name);
             Color = color;
             points = new List<Point>();
             Fails = 0;
@@ -50,7 +51,7 @@ namespace Celebrity.Domain
             }
         }
 
-        public override string ToString() => name.ToString();
+        public override string ToString() => Name.ToString();
     }
 
 }

@@ -6,6 +6,7 @@ namespace Celebrity.Shared
     {
         public int TotalRounds { get; set; }
         public int MaximunNumber { get; set; }
+        public GameCreationCriteria Criteria { get; set; }
         public IEnumerable<CreateTeam> Teams { get; set; }
     }
 }

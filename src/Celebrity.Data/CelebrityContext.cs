@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Celebrity;
 using System.Threading.Tasks;
+using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
@@ -9,12 +10,11 @@ namespace Celebrity.Data
     {
         internal DbSet<Concepts> Concepts { get; set; }
         internal DbSet<Subcategories> Subcategories { get; set; }
-        internal DbSet<SubcategoriesInConcepts> SubcategoriesInConcepts { get; set; }
 
-        internal DbSet<Games> Games { get; set; }
-        internal DbSet<DeckConcepts> DeckConcepts { get; set; }
-        internal DbSet<LoadedGames> LoadedGames { get; set; }
-        internal DbSet<TeamsInGame> TeamsInGame { get; set; }
+        internal DbSet<Game> Games { get; set; }
+        internal DbSet<DeckConcept> DeckConcepts { get; set; }
+        internal DbSet<Team> Teams { get; set; }
+        internal DbSet<Point> Points { get; set; }
 
         public CelebrityContext(DbContextOptions options) : base(options) { }
 
