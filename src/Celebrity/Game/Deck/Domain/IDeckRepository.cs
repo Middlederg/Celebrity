@@ -8,7 +8,8 @@ namespace Celebrity.Domain
 {
     public interface IDeckRepository
     {
-        Task<IEnumerable<DeckConcept>> CreateGameConcepts(IEnumerable<DeckConcept> concepts);
+        Task<IEnumerable<DeckConcept>> CreateGameConcepts(IEnumerable<Concept> concepts);
         Task<IEnumerable<DeckConcept>> GetConceptsFromGame(GameId id);
+        Task UpdateConcept(DeckConcept concept);
     }
 }

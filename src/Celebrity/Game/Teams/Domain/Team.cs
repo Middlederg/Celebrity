@@ -22,9 +22,10 @@ namespace Celebrity.Domain
         public GameId GameId { get; private set; }
         public Game Game { get; private set; }
 
-        public Team(TeamId id, Color color, string name = null) : base(id)
+        public Team(TeamId id, Color color, GameId gameId, string name = null) : base(id)
         {
-            this.Name = new TeamName(string.IsNullOrWhiteSpace(name) ? color.Description() : name);
+            Name = new TeamName(string.IsNullOrWhiteSpace(name) ? color.Description() : name);
+            GameId = gameId;
             Color = color;
             points = new List<Point>();
             Fails = 0;

@@ -2,6 +2,7 @@
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class GameEraser
     {
         private readonly IGameRepository gameRepository;

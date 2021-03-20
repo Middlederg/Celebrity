@@ -1,14 +1,16 @@
-﻿namespace Celebrity.Domain
+﻿using System.Threading.Tasks;
+
+namespace Celebrity.Domain
 {
     public class ConceptGuesser
     {
-        private readonly IGameRepository gameRepository;
-        public void Guess(GameId gameId)
+        private readonly GameFinder gameFinder;
+
+        public async Task<Game> Guess(GameId gameId)
         {
-            var game = gameRepository.Get(gameId);
-            command.GameId
-            var currentTeam = teams.CurrentTeam;
-            currentTeam.AddPoint(deck.VisibleConcept, roundContext.CurrentRoundNumber);
+            var game = await gameFinder.Find(gameId);
+            var currentTeam = game.CurrentTeam();
+            currentTeam.AddPoint(game.VisibleConcept, roundContext.CurrentRoundNumber);
             deck.Guess();
         }
     }

@@ -7,5 +7,6 @@ namespace Celebrity.Domain
     {
         Task<IEnumerable<Team>> GetTeams(GameId id);
         Task<IEnumerable<Team>> GetTeam(TeamId id);
+        Task<Team> AddTeam(Team team);
     }
 }

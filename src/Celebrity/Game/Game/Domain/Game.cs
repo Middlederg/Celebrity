@@ -7,18 +7,38 @@ namespace Celebrity.Domain
     public class Game : Identity<GameId>
     {
         public RoundContext RoundContext { get; private set; }
-        public ICollection<DeckConcept> DeckConcepts { get; private set; }
 
+        public ICollection<DeckConcept> DeckConcepts { get; private set; }
+        public void AddConcepts(IEnumerable<DeckConcept> concepts)
+        {
+            foreach (var concept in concepts) DeckConcepts.Add(concept);
+        }
+
+        public int CurrentTurn { get; private set; }
         public ICollection<Team> Teams { get; private set; }
+        public Team CurrentTeam() => Teams.ElementAt(CurrentTurn);
+        public Ranking Ranking() => new Ranking(Teams);
+        public void AddTeam(Team team)
+        {
+            Teams.Add(team);
+        }
+        public Team MoveToNextTurn()
+        {
+            var turn = new TurnProcessor(game.Teams, game.CurrentTurn);
+            var nextTeam = turn.NextTeam;
+            CurrentTurn = turn.NextTurn;
+            return nextTeam;
+        }
 
         public DateTime CreationDate { get; private set; }
 
-        public Game(GameId id, RoundContext roundContext, IEnumerable<DeckConcept> deckConcepts, IEnumerable<Team> teams, DateTime creationDate): base(id)
+        public Game(GameId id, int totalRounds, DateTime creationDate): base(id)
         {
-            RoundContext = roundContext;
-            DeckConcepts = deckConcepts.ToList();
-            Teams = teams.ToList();
+            RoundContext = new RoundContext(totalRounds);
+            DeckConcepts = new List<DeckConcept>();
+            Teams = new List<Team>();
             CreationDate = creationDate;
+            CurrentTurn = 0;
         }
 
         public Percentage GetPercentage()

@@ -4,16 +4,25 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class GameCreator
     {
         private readonly IGameRepository gameRepository;
         private readonly IConceptRepository conceptRepository;
+        private readonly IDeckRepository deckRepository;
+        private readonly ITeamRepository teamRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public GameCreator(IGameRepository gameRepository, IDeckRepository conceptsRepository, IUnitOfWork unitOfWork)
+        public GameCreator(IGameRepository gameRepository, 
+            IConceptRepository conceptRepository, 
+            IDeckRepository deckRepository,
+            ITeamRepository teamRepository,
+            IUnitOfWork unitOfWork)
         {
             this.gameRepository = gameRepository;
-            this.conceptRepository = conceptsRepository;
+            this.conceptRepository = conceptRepository;
+            this.deckRepository = deckRepository;
+            this.teamRepository = teamRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -21,14 +30,19 @@ namespace Celebrity.Domain
         {
             var concepts = await conceptRepository.GetFromCriteria(command.Criteria);
 
-            var teams = command.Teams.Select(x => new Team(new TeamId(), x.Color, x.Name));
-
             var game = new Game(new GameId(),
-               new RoundContext(command.TotalRounds),
-               concepts,
-               teams,
+               command.TotalRounds,
                DateTime.Now);
             gameRepository.CreateGame(game);
+
+            foreach (var dto in command.Teams)
+            {
+                var team = new Team(new TeamId(), dto.Color, game.Id, dto.Name);
+                await teamRepository.AddTeam(team);
+                game.AddTeam(team);
+            }
+            await deckRepository.CreateGameConcepts(concepts);
+
             await unitOfWork.CompleteAsync();
             return game;
         }
