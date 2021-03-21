@@ -1,8 +1,9 @@
-﻿using Celebrity.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Celebrity.Domain;
+using System.Linq;
 
 namespace Celebrity.Data
 {
@@ -17,42 +18,40 @@ namespace Celebrity.Data
 
         public void AddSubcategory(Subcategory subcategory)
         {
-            var subcategories = new Subcategories()
-            {
-                Id = subcategory.Id,
-                Category = subcategory.Category,
-                Name = subcategory.ToString()
-            };
-            context.Subcategories.Add(subcategories);
+            context.Subcategories.Add(subcategory);
         }
 
-        public async Task DeleteCategory(Subcategory subcategory)
+        public void DeleteCategory(Subcategory subcategory)
         {
-            var subcategories = await context.Subcategories.FindAsync((Guid)subcategory.Id);
-            if (subcategories != null)
-            {
-                context.Subcategories.Remove(subcategories);
-            }
+
+            context.Subcategories.Remove(subcategory);
+
         }
 
-        public async Task EditSubcategory(Subcategory subcategory)
+        public void EditSubcategory(Subcategory subcategory)
         {
-            var subcategories = await context.Subcategories.FindAsync((Guid)subcategory.Id);
-            if (subcategories != null)
-            {
-                subcategories.Name = subcategory.ToString();
-                context.Entry(subcategories).State = EntityState.Modified;
-            }
+            context.Entry(subcategory).State = EntityState.Modified;
+
         }
 
-        public Task<IEnumerable<Subcategory>> GetSubcategories()
+        public async Task<IEnumerable<Subcategory>> GetSubcategories()
         {
-            throw new NotImplementedException();
+            var list = await context
+                .Subcategories
+                .Include(x => x.Concepts)
+                .ToListAsync();
+
+            return list;
         }
 
-        public Task<Subcategory> GetSubcategory(SubcategoryId id)
+        public async Task<Subcategory> GetSubcategory(SubcategoryId id)
         {
-            throw new NotImplementedException();
+            var subcategory = await context
+             .Subcategories
+             .Include(x => x.Concepts)
+             .FirstOrDefaultAsync(x => x.Id == id);
+
+            return subcategory;
         }
     }
 }

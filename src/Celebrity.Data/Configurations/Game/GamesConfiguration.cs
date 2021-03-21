@@ -1,6 +1,7 @@
 ﻿using Celebrity.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Celebrity.Data
 {
@@ -8,7 +9,10 @@ namespace Celebrity.Data
     {
         public void Configure(EntityTypeBuilder<Game> builder)
         {
-            //builder.Property(x => x.Percentage). //precission?
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.Id)
+                .HasConversion(pointId => (Guid)pointId, id => new GameId(id));
+
             builder.HasMany(e => e.DeckConcepts)
                 .WithOne(e => e.Game)
                 .HasForeignKey(e => e.GameId)
@@ -29,8 +33,6 @@ namespace Celebrity.Data
                   round.Ignore(p => p.CurrentRoundNumber);
                   round.Ignore(p => p.TotalRounds);
               });
-
-
         }
     }
 }

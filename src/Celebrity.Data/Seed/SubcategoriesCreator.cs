@@ -1,143 +1,141 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Celebrity.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
 namespace Celebrity.Data
 {
-    public class SubcategoryCreator
+    public class SubcategorySeed
     {
-        private Subcategories Create(string name, CategoryValue category)
+        private Subcategory Create(string name, Shared.CategoryValue category)
         {
-            return new Subcategories()
-            {
-                Id = Guid.NewGuid(),
-                Name = name,
-                Category = category
-            };
+            return Subcategory.Create(
+                name: name,
+                category: category);
         }
 
-        private List<Subcategories> personajesFamosos;
-        private List<Subcategories> personajesDeFiccionFamosos;
-        private List<Subcategories> cultura;
-        private List<Subcategories> lugares;
-        private List<Subcategories> citas;
-        private List<Subcategories> universos;
-        private List<Subcategories> nacionalidades;
-        private List<Subcategories> tecnologia;
-        private List<Subcategories> ciencia;
-        private List<Subcategories> deporte;
+        private List<Subcategory> famousPeople;
+        private List<Subcategory> fictionalfamousPeople;
+        private List<Subcategory> culture;
+        private List<Subcategory> places;
+        private List<Subcategory> cites;
+        private List<Subcategory> universes;
+        private List<Subcategory> nations;
+        private List<Subcategory> technology;
+        private List<Subcategory> science;
+        private List<Subcategory> sports;
 
-        public SubcategoryCreator(ModelBuilder modelBuilder)
+        public SubcategorySeed(ModelBuilder modelBuilder)
         {
             CreateSubcategories();
-            modelBuilder.Entity<Subcategories>().HasData(personajesFamosos);
-            modelBuilder.Entity<Subcategories>().HasData(personajesDeFiccionFamosos);
-            modelBuilder.Entity<Subcategories>().HasData(cultura);
-            modelBuilder.Entity<Subcategories>().HasData(lugares);
-            modelBuilder.Entity<Subcategories>().HasData(citas);
-            modelBuilder.Entity<Subcategories>().HasData(universos);
-            modelBuilder.Entity<Subcategories>().HasData(nacionalidades);
-            //modelBuilder.Entity<Subcategories>().HasData(tecnologia);
-            //modelBuilder.Entity<Subcategories>().HasData(ciencia);
-            //modelBuilder.Entity<Subcategories>().HasData(deporte);
+            modelBuilder.Entity<Subcategory>().HasData(famousPeople);
+            modelBuilder.Entity<Subcategory>().HasData(fictionalfamousPeople);
+            modelBuilder.Entity<Subcategory>().HasData(culture);
+            modelBuilder.Entity<Subcategory>().HasData(places);
+            modelBuilder.Entity<Subcategory>().HasData(cites);
+            modelBuilder.Entity<Subcategory>().HasData(universes);
+            modelBuilder.Entity<Subcategory>().HasData(nations);
+            //modelBuilder.Entity<Subcategory>().HasData(tecnologia);
+            //modelBuilder.Entity<Subcategory>().HasData(ciencia);
+            //modelBuilder.Entity<Subcategory>().HasData(deporte);
         }
 
         private void CreateSubcategories()
         {
-            personajesDeFiccionFamosos = new List<Subcategories>()
+            fictionalfamousPeople = new List<Subcategory>()
             {
-                Create("Personaje de ficción", CategoryValue.FictionalCharacters)
+                Create("Personaje de ficción", Shared.CategoryValue.FictionalCharacters)
             };
-            personajesFamosos = new List<Subcategories>()
+            famousPeople = new List<Subcategory>()
             {
-                Create("Antigüedad", CategoryValue.RealCharacters),
-                Create("Medieval", CategoryValue.RealCharacters),
-                Create("Moderno", CategoryValue.RealCharacters),
-                Create("Contemporáneo", CategoryValue.RealCharacters)
-            };
-
-            cultura = new List<Subcategories>()
-            {
-                Create("Películas", CategoryValue.Culture),
-                Create("Series", CategoryValue.Culture),
-                Create("Literatura", CategoryValue.Culture),
-                Create("Teatro", CategoryValue.Culture),
-                Create("Cómic", CategoryValue.Culture),
-                Create("Música", CategoryValue.Culture),
-                Create("Videojuegos", CategoryValue.Culture),
-                Create("Juegos de mesa", CategoryValue.Culture)
+                Create("Antigüedad", Shared.CategoryValue.RealCharacters),
+                Create("Medieval", Shared.CategoryValue.RealCharacters),
+                Create("Moderno", Shared.CategoryValue.RealCharacters),
+                Create("Contemporáneo", Shared.CategoryValue.RealCharacters)
             };
 
-            citas = new List<Subcategories>()
+            culture = new List<Subcategory>()
             {
-                Create("Citas históricas", CategoryValue.Quotes),
-                Create("Proverbios y refranes", CategoryValue.Quotes),
-                Create("Frases de la tele", CategoryValue.Quotes)
+                Create("Películas", Shared.CategoryValue.Culture),
+                Create("Series", Shared.CategoryValue.Culture),
+                Create("Literatura", Shared.CategoryValue.Culture),
+                Create("Teatro", Shared.CategoryValue.Culture),
+                Create("Cómic", Shared.CategoryValue.Culture),
+                Create("Música", Shared.CategoryValue.Culture),
+                Create("Videojuegos", Shared.CategoryValue.Culture),
+                Create("Juegos de mesa", Shared.CategoryValue.Culture)
             };
 
-            lugares = new List<Subcategories>()
+            cites = new List<Subcategory>()
             {
-                Create("Paises", CategoryValue.Places),
-                Create("Ciudades", CategoryValue.Places),
-                Create("Ríos", CategoryValue.Places),
-                Create("Montañas", CategoryValue.Places),
-                Create("Mares y lagos", CategoryValue.Places)
+                Create("Citas históricas", Shared.CategoryValue.Quotes),
+                Create("Proverbios y refranes", Shared.CategoryValue.Quotes),
+                Create("Frases de la tele", Shared.CategoryValue.Quotes)
             };
 
-            universos = new List<Subcategories>()
+            places = new List<Subcategory>()
             {
-                Create("Star Wars", CategoryValue.FictionalUniverses),
-                Create("Harry Potter", CategoryValue.FictionalUniverses),
-                Create("Los Simpsons", CategoryValue.FictionalUniverses),
-                Create("Marvel", CategoryValue.FictionalUniverses),
-                Create("Disney", CategoryValue.FictionalUniverses)
+                Create("Paises", Shared.CategoryValue.Places),
+                Create("Ciudades", Shared.CategoryValue.Places),
+                Create("Ríos", Shared.CategoryValue.Places),
+                Create("Montañas", Shared.CategoryValue.Places),
+                Create("Mares y lagos", Shared.CategoryValue.Places)
             };
 
-            nacionalidades = new List<Subcategories>()
+            universes = new List<Subcategory>()
             {
-                Create("España", CategoryValue.Nationalities),
-                Create("USA", CategoryValue.Nationalities),
-                Create("Reino Unido", CategoryValue.Nationalities),
-                Create("Italia", CategoryValue.Nationalities),
-                Create("Francia", CategoryValue.Nationalities)
+                Create("Star Wars", Shared.CategoryValue.FictionalUniverses),
+                Create("Harry Potter", Shared.CategoryValue.FictionalUniverses),
+                Create("Los Simpsons", Shared.CategoryValue.FictionalUniverses),
+                Create("Marvel", Shared.CategoryValue.FictionalUniverses),
+                Create("Disney", Shared.CategoryValue.FictionalUniverses)
+            };
+
+            nations = new List<Subcategory>()
+            {
+                Create("España", Shared.CategoryValue.Nationalities),
+                Create("USA", Shared.CategoryValue.Nationalities),
+                Create("Reino Unido", Shared.CategoryValue.Nationalities),
+                Create("Italia", Shared.CategoryValue.Nationalities),
+                Create("Francia", Shared.CategoryValue.Nationalities)
             };
         }
 
-        public Subcategories PersonajesDeFiccion => personajesDeFiccionFamosos[0];
-        public Subcategories Antiguedad => personajesFamosos[0];
-        public Subcategories Medieval => personajesFamosos[1];
-        public Subcategories Moderno => personajesFamosos[2];
-        public Subcategories Contemporaneo => personajesFamosos[3];
+        public Subcategory PersonajesDeFiccion => fictionalfamousPeople[0];
+        public Subcategory Antiguedad => famousPeople[0];
+        public Subcategory Medieval => famousPeople[1];
+        public Subcategory Moderno => famousPeople[2];
+        public Subcategory Contemporaneo => famousPeople[3];
 
-        public Subcategories Peliculas => cultura[0];
-        public Subcategories Series => cultura[1];
-        public Subcategories Literatura => cultura[2];
-        public Subcategories Teatro => cultura[3];
-        public Subcategories Comic => cultura[4];
-        public Subcategories Musica => cultura[5];
-        public Subcategories Videojuegos => cultura[6];
-        public Subcategories JuegosMesa => cultura[7];
+        public Subcategory Peliculas => culture[0];
+        public Subcategory Series => culture[1];
+        public Subcategory Literatura => culture[2];
+        public Subcategory Teatro => culture[3];
+        public Subcategory Comic => culture[4];
+        public Subcategory Musica => culture[5];
+        public Subcategory Videojuegos => culture[6];
+        public Subcategory JuegosMesa => culture[7];
 
-        public Subcategories Paises => lugares[0];
-        public Subcategories Ciudades => lugares[1];
-        public Subcategories Rios => lugares[2];
-        public Subcategories Montes => lugares[3];
-        public Subcategories MaresLagos => lugares[4];
+        public Subcategory Paises => places[0];
+        public Subcategory Ciudades => places[1];
+        public Subcategory Rios => places[2];
+        public Subcategory Montes => places[3];
+        public Subcategory MaresLagos => places[4];
 
-        public Subcategories CitasHistoricas => citas[0];
-        public Subcategories Proverbios => citas[1];
-        public Subcategories FrasesTele => citas[2];
+        public Subcategory CitasHistoricas => cites[0];
+        public Subcategory Proverbios => cites[1];
+        public Subcategory FrasesTele => cites[2];
 
-        public Subcategories StarWars => universos[0];
-        public Subcategories HarryPotter => universos[1];
-        public Subcategories Simpsons => universos[2];
-        public Subcategories Marvel => universos[3];
-        public Subcategories Disney => universos[4];
+        public Subcategory StarWars => universes[0];
+        public Subcategory HarryPotter => universes[1];
+        public Subcategory Simpsons => universes[2];
+        public Subcategory Marvel => universes[3];
+        public Subcategory Disney => universes[4];
 
-        public Subcategories Spain => nacionalidades[0];
-        public Subcategories USA => nacionalidades[1];
-        public Subcategories UK => nacionalidades[2];
-        public Subcategories Italia => nacionalidades[3];
-        public Subcategories Francia => nacionalidades[4];
+        public Subcategory Spain => nations[0];
+        public Subcategory USA => nations[1];
+        public Subcategory UK => nations[2];
+        public Subcategory Italia => nations[3];
+        public Subcategory Francia => nations[4];
     }
 }

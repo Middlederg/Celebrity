@@ -6,10 +6,10 @@ using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
-    public class CelebrityContext : IdentityDbContext<Users>, IUnitOfWork
+    public class CelebrityContext : DbContext, IUnitOfWork
     {
-        internal DbSet<Concepts> Concepts { get; set; }
-        internal DbSet<Subcategories> Subcategories { get; set; }
+        internal DbSet<Concept> Concepts { get; set; }
+        internal DbSet<Subcategory> Subcategories { get; set; }
 
         internal DbSet<Game> Games { get; set; }
         internal DbSet<DeckConcept> DeckConcepts { get; set; }

@@ -13,8 +13,7 @@ namespace Celebrity.Domain
         public ICollection<Point> Points { get; private set; }
 
         private readonly List<Point> points;
-        public void AddPoint(DeckConcept tarjeta, int ronda) => points.Add(new Point(tarjeta, ronda));
-        public IEnumerable<(ConceptId id, int round)> GetPointsInfo() => points.Select(x => x.GetInfo);
+        public void AddPoint(DeckConcept concept, int round) => points.Add(new Point(new PointId(), concept, round));
 
         public int Fails { get; private set; }
         public void AddFailure() => Fails++;
@@ -35,12 +34,12 @@ namespace Celebrity.Domain
         {
             return points
                 .Where(x => x.Round == round.Number)
-                .Select(x => x.Concept.ToString());
+                .Select(x => x.Name.ToString());
         }
 
         public IEnumerable<string> TotalGuessedConcepts()
         {
-            return points.Select(x => x.Concept.ToString());
+            return points.Select(x => x.Name.ToString());
         }
 
         public IEnumerable<RoundSummary> Summary(int totalRounds)

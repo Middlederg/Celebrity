@@ -27,7 +27,7 @@ namespace Celebrity.Api
         {
             var game = await creator.Create(command);
             var result = game.ToDto();
-            return CreatedAtAction(result, new { game.id }, result);
+            return CreatedAtAction(nameof(Get), new { game.Id }, result);
         }
 
         [HttpDelete, Route("{id}")]

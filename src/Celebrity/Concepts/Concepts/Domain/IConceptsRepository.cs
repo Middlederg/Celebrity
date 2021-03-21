@@ -16,7 +16,7 @@ namespace Celebrity.Domain
         Task<IEnumerable<Concept>> GetFromCriteria(Shared.GameCreationCriteria criteria);
 
         void AddConcept(Concept concept);
-        Task Update(Concept concept);
-        Task DeleteConcept(Concept concept);
+        void Update(Concept concept);
+        void DeleteConcept(Concept concept);
     }
 }

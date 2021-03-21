@@ -22,9 +22,10 @@ namespace Celebrity.Domain
         {
             Teams.Add(team);
         }
+
         public Team MoveToNextTurn()
         {
-            var turn = new TurnProcessor(game.Teams, game.CurrentTurn);
+            var turn = new TurnProcessor(Teams, CurrentTurn);
             var nextTeam = turn.NextTeam;
             CurrentTurn = turn.NextTurn;
             return nextTeam;

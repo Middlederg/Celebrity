@@ -10,6 +10,6 @@ namespace Celebrity.Domain
 
         void CreateGame(Game game);
      
-        Task DeleteGame(GameId id);
+        void DeleteGame(Game game);
     }
 }

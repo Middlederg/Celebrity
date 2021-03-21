@@ -1,6 +1,7 @@
 ﻿using Celebrity.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Celebrity.Data
 {
@@ -8,18 +9,18 @@ namespace Celebrity.Data
     {
         public void Configure(EntityTypeBuilder<Team> builder)
         {
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.Id)
+                .HasConversion(pointId => (Guid)pointId, id => new TeamId(id));
+
             builder.OwnsOne(x => x.Name,
               name =>
               {
                   name.Property(p => p.ToString())
                     .IsRequired()
                     .HasMaxLength(Shared.Team.NameMaxLength)
-                    .HasColumnName(nameof(SubcategoryName));
+                    .HasColumnName(nameof(TeamName));
               });
-
-            builder.Property(x => x.TeamName)
-                .IsRequired()
-                .HasMaxLength(TeamName.MaxLength);
 
             builder.HasMany(e => e.Points)
                 .WithOne(e => e.Team)

@@ -1,5 +1,4 @@
-﻿using Celebrity.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using System.Linq;
@@ -17,97 +16,84 @@ namespace Celebrity.Data
             this.context = context;
         }
 
-        public void AddConcept(DeckConcept concept)
-        {
-            var concepts = new Concepts()
-            {
-                Id = Guid.NewGuid(),
-                Name = concept.ToString(),
-                
-            };
-            foreach (var subcategory in concept.Subcategories)
-            {
-                concepts.AddSubcategory(subcategory.Id);
-            }
-            context.Concepts.Add(concepts);
-        }
-
-        public async Task DeleteConcept(DeckConcept concept)
-        {
-            var concepts = await context.Concepts.FindAsync((Guid)concept.Id);
-            if (concepts != null)
-            {
-                context.Concepts.Remove(concepts);
-            }
-        }
-
-        public async Task EditConcept(DeckConcept concept)
-        {
-            var concepts = await context.Concepts
-                .Include(x => x.SubcategoriesInconcepts)
-                .FirstOrDefaultAsync(x => x.Id.Equals(concept.Id));
-
-            if (concepts != null)
-            {
-                concepts.Name = concept.ToString();
-                concepts.Difficulty = concept.Difficulty.Value;
-                concepts.Type = concept.Type;
-                concepts.UpdateSubcategorias(concept.Subcategories.Select(x => (Guid)x.Id));
-                context.Entry(concepts).State = EntityState.Modified;
-            }
-        }
-
-        public async Task<DeckConcept> GetConcept(ConceptId id)
+        public async Task<Concept> GetConcept(ConceptId id)
         {
             var concept = await context.Concepts
-              .Include(x => x.SubcategoriesInconcepts)
-              .ThenInclude(x => x.Subcategories)
-              .FirstOrDefaultAsync(x => x.Id == id);
+               .Include(x => x.Subcategories)
+               .AsNoTracking()
+               .FirstOrDefaultAsync(x => x.Id == id);
 
-            return new ConceptMapper(concept).Map();
+            return concept;
         }
 
-        public async Task<IEnumerable<DeckConcept>> GetConcepts(Shared.GameCreationCriteria criteria)
+        public async Task<IEnumerable<Concept>> GetAll()
         {
             var list = await context.Concepts
-                .WithCriteria(criteria)
-                .Include(x => x.SubcategoriesInconcepts)
-                .ThenInclude(x => x.Subcategories)
+                .Include(x => x.Subcategories)
+                .AsNoTracking()
                 .ToListAsync();
 
-            return list.Select(x => new ConceptMapper(x).Map());
+            return list;
         }
 
-        public async Task<IEnumerable<BaseOption<DeckConcept>>> GetConceptsFromGame(GameId id)
-        {
-            var concepts = await context.DeckConcepts
-                .Where(x => x.GameId == id)
-                .ToListAsync();
-
-            var conceptIds = concepts.Select(x => x.Concept);
-
-            var conceptList = context.Concepts
-                .Where(x => conceptIds.Contains(x.Id))
-                .Include(x => x.SubcategoriesInconcepts)
-                .ThenInclude(x => x.Subcategories)
-                .AsEnumerable()
-                .Select(origin => {
-                    var currentConcept = concepts.First(x => x.Id == origin.Id);
-                    var concept = new ConceptMapper(origin).Map();
-                    return new BaseOption<DeckConcept>(concept, currentConcept.IsGuessed);
-                 });
-            return conceptList;
-        }
-
-        public async Task<IEnumerable<DeckConcept>> GetConceptsFromCategory(CategoryValue category)
+        public async Task<IEnumerable<Concept>> GetAll(IEnumerable<ConceptId> idCollection)
         {
             var list = await context.Concepts
-             .WithCategory(category)
-             .Include(x => x.SubcategoriesInconcepts)
-             .ThenInclude(x => x.Subcategories)
-             .ToListAsync();
+                  .Where(x => idCollection.Contains(x.Id))
+                  .Include(x => x.Subcategories)
+                  .AsNoTracking()
+                  .ToListAsync();
 
-            return list.Select(x => new ConceptMapper(x).Map());
+            return list;
+        }
+
+        public async Task<IEnumerable<Concept>> GetAllFromCategory(Shared.CategoryValue value)
+        {
+            var list = await context.Concepts
+               .WithCategory(value)
+               .Include(x => x.Subcategories)
+               .AsNoTracking()
+               .ToListAsync();
+
+            return list;
+        }
+
+        public async Task<IEnumerable<Concept>> GetAllFromSubcategory(SubcategoryId id)
+        {
+            var list = await context.Concepts
+               .WithSubcategory(id)
+               .Include(x => x.Subcategories)
+               .AsNoTracking()
+               .ToListAsync();
+
+            return list;
+        }
+
+        public async Task<IEnumerable<Concept>> GetFromCriteria(Shared.GameCreationCriteria criteria)
+        {
+            var list = await context.Concepts
+              .WithCriteria(criteria)
+              .Include(x => x.Subcategories)
+              .AsNoTracking()
+              .ToListAsync();
+
+            return list;
+        }
+
+        public void AddConcept(Concept concept)
+        {
+            context.Concepts.Add(concept);
+        }
+
+        public void Update(Concept concept)
+        {
+           context.Entry(concept).State = EntityState.Modified;
+        }
+
+        public void DeleteConcept(Concept concept)
+        {
+           context.Concepts.Remove(concept);
+           
         }
     }
 }

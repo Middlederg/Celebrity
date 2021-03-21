@@ -1,9 +1,9 @@
-﻿using Celebrity.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
@@ -22,24 +22,25 @@ namespace Celebrity.Data
                 .Subcategories
                 .ToListAsync();
             
-            return ((CategoryValue[])Enum.GetValues(typeof(CategoryValue))).Select(value =>
+            return ((Shared.CategoryValue[])Enum.GetValues(typeof(Shared.CategoryValue))).Select(value =>
             {
                 var subcategoriesInCategory = subcategories
                     .Where(x => x.Category == value)
-                    .Select(x => new SubcategoryObject(x.Id, x.Name))
+                    .Select(x => new BaseObject(x.Id, x.Name.ToString()))
                     .ToArray();
 
                 return new Category(value, subcategoriesInCategory);
             });
         }
 
-        public async Task<Category> GetCategory(CategoryValue value)
+        public async Task<Category> GetCategory(Shared.CategoryValue value)
         {
             var subcategories = await context
                .Subcategories
                .Where(x => x.Category == value)
-               .Select(x => new SubcategoryObject(x.Id, x.Name))
+               .Select(x => new BaseObject(x.Id, x.Name.ToString()))
                .ToListAsync();
+
             return new Category(value, subcategories.ToArray());
         }
     }

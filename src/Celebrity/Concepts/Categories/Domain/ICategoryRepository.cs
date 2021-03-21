@@ -7,7 +7,7 @@ namespace Celebrity.Domain
 {
     public interface ICategoryRepository
     {
-        Task<Category> GetCategory(CategoryValue value);
+        Task<Category> GetCategory(Shared.CategoryValue value);
         Task<IEnumerable<Category>> GetCategories();
     }
 }

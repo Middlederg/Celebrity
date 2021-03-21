@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
     public static class ConceptRepositoryHelper
     {
-        public static IQueryable<Concepts> WithCriteria(this IQueryable<Concepts> list, Shared.GameCreationCriteria criteria)
+        public static IQueryable<Concept> WithCriteria(this IQueryable<Concept> list, Shared.GameCreationCriteria criteria)
         {
             return list
                 .IncludeEasy(criteria.IncludeEasy)
                 .IncludeIntermediate(criteria.IncludeIntermediate)
                 .IncludeHard(criteria.IncludeHard)
-                .WithSubcategory(criteria.SubcategoriesToInclude);
+                .WithSubcategory(criteria.SubcategoriesToInclude.Select(x => new SubcategoryId()).ToArray());
         }
 
-        public static IQueryable<Concepts> IncludeEasy(this IQueryable<Concepts> list, bool includeEasy)
+        public static IQueryable<Concept> IncludeEasy(this IQueryable<Concept> list, bool includeEasy)
         {
             if (includeEasy)
             {
@@ -24,7 +25,7 @@ namespace Celebrity.Data
             return list;
         }
 
-        public static IQueryable<Concepts> IncludeIntermediate(this IQueryable<Concepts> list, bool includeIntermediate)
+        public static IQueryable<Concept> IncludeIntermediate(this IQueryable<Concept> list, bool includeIntermediate)
         {
             if (includeIntermediate)
             {
@@ -33,7 +34,7 @@ namespace Celebrity.Data
             return list;
         }
 
-        public static IQueryable<Concepts> IncludeHard(this IQueryable<Concepts> list, bool includeHard)
+        public static IQueryable<Concept> IncludeHard(this IQueryable<Concept> list, bool includeHard)
         {
             if (includeHard)
             {
@@ -42,13 +43,19 @@ namespace Celebrity.Data
             return list;
         }
 
-        public static IQueryable<Concepts> WithSubcategory(this IQueryable<Concepts> list, params Guid[] subcategories)
+        public static IQueryable<Concept> WithSubcategory(this IQueryable<Concept> list, params SubcategoryId[] subcategories)
         {
             if (subcategories.Any())
             {
-                return list.Where(x => x.SubcategoriesInconcepts.Any(x => subcategories.Contains(x.SubcategoryId)));
+                return list.Where(x => x.Subcategories.Any(x => subcategories.Contains(x.Id)));
             }
             return list;
+        }
+
+        public static IQueryable<Concept> WithCategory(this IQueryable<Concept> list, Shared.CategoryValue category)
+        {
+           return list.Where(x => x.Subcategories.Any(x => x.Category == category));
+
         }
     }
 }
