@@ -16,22 +16,21 @@ namespace Celebrity.Data
             this.context = context;
         }
 
-        public void AddSubcategory(Subcategory subcategory)
+        public void Add(Subcategory subcategory)
         {
             context.Subcategories.Add(subcategory);
         }
 
-        public void DeleteCategory(Subcategory subcategory)
+        public void Delete(Subcategory subcategory)
         {
 
             context.Subcategories.Remove(subcategory);
 
         }
 
-        public void EditSubcategory(Subcategory subcategory)
+        public void Save(Subcategory subcategory)
         {
             context.Entry(subcategory).State = EntityState.Modified;
-
         }
 
         public async Task<IEnumerable<Subcategory>> GetSubcategories()

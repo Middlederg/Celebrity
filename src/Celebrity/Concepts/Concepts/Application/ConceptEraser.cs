@@ -21,7 +21,7 @@ namespace Celebrity.Domain
         public async Task Delete(ConceptId id)
         {
             var concept = await finder.Find(id);
-            await repository.DeleteConcept(concept);
+            repository.DeleteConcept(concept);
             await unitOfWork.CompleteAsync();
         }
     }

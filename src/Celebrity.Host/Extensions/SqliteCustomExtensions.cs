@@ -21,11 +21,11 @@ namespace Celebrity.Host
                 });
             });
 
-            services.AddIdentityCore<Users>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedAccount = true;
-            }).AddEntityFrameworkStores<CelebrityContext>();
+            //services.AddIdentityCore<Users>(options =>
+            //{
+            //    options.User.RequireUniqueEmail = true;
+            //    options.SignIn.RequireConfirmedAccount = true;
+            //}).AddEntityFrameworkStores<CelebrityContext>();
 
             return services;
         }

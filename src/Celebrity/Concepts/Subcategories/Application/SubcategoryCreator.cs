@@ -19,7 +19,7 @@ namespace Celebrity.Domain
         public async Task<Subcategory> Create(CreateSubcategory dto)
         {
             var subcategory = Subcategory.Create(dto.Name, dto.Category);
-            await repository.Add(subcategory);
+            repository.Add(subcategory);
             await unitOfWork.CompleteAsync();
             return subcategory;
         }

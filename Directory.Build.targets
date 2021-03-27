@@ -15,6 +15,7 @@
     <PackageReference Update="System.Data.SqlClient" Version="4.8.2" />
     <PackageReference Update="IdentityModel" Version="5.0.1" />
     <PackageReference Update="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Update="Microsoft.Extensions.Http" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="ThirdParty">

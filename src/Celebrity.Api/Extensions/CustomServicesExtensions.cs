@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Linq;
 using Celebrity;
 using Celebrity.Data;
-using Celebrity.Repositories;
+using Celebrity.Domain;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IConceptRepository, ConceptRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IDeckRepository, deckre>();
             return services;
         }
     }

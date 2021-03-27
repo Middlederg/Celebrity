@@ -30,7 +30,7 @@ namespace Celebrity.Host
         {
             Api.Configuration.ConfigureServices(services, environment, Configuration)
                 .AddCustomEntityFrameworkCore(Configuration)
-                .AddCustomAuthentication(Configuration, environment)
+                //.AddCustomAuthentication(Configuration, environment)
                 .AddSwaggerGen(c =>
                  {
                      c.SwaggerDoc("v1", new OpenApiInfo

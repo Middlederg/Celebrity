@@ -7,7 +7,7 @@ namespace Celebrity.Domain
     {
         void Add(Subcategory subcategory);
         void Save(Subcategory subcategory);
-        void DeleteCategory(Subcategory subcategory);
+        void Delete(Subcategory subcategory);
 
         Task<Subcategory> GetSubcategory(SubcategoryId id);
         Task<IEnumerable<Subcategory>> GetSubcategories();

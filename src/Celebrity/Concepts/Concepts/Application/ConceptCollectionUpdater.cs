@@ -33,7 +33,7 @@ namespace Celebrity.Domain
                     concept.UpdateType(dto.Type);
                     concept.UpdateDifficulty(dto.Difficulty);
                 }
-                await repository.Update(concept);
+                repository.Update(concept);
             }
             await unitOfWork.CompleteAsync();
         }

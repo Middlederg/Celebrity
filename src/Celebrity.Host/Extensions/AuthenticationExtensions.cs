@@ -8,44 +8,44 @@ using System.Text;
 
 namespace Celebrity.Host
 {
-    public static class AuthenticationExtensions
-    {
-        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, 
-            IConfiguration configuration,
-            IWebHostEnvironment environment)
-        {
-            string apiKeyValue = configuration.GetValue<string>(key: Celebrity.Api.TokenGenerator.ApiKeyConfigurationName);
+    //public static class AuthenticationExtensions
+    //{
+    //    public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, 
+    //        IConfiguration configuration,
+    //        IWebHostEnvironment environment)
+    //    {
+    //        string apiKeyValue = configuration.GetValue<string>(key: Celebrity.Api.TokenGenerator.ApiKeyConfigurationName);
 
-            var key = Encoding.ASCII.GetBytes(apiKeyValue);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = async context =>
-                        {
-                            var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
-                            var userId = Guid.Parse(context.Principal.Identity.Name);
-                            var user = await userRepository.GetUser(userId);
+    //        var key = Encoding.ASCII.GetBytes(apiKeyValue);
+    //        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    //            .AddJwtBearer(options =>
+    //            {
+    //                options.Events = new JwtBearerEvents
+    //                {
+    //                    OnTokenValidated = async context =>
+    //                    {
+    //                        var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+    //                        var userId = Guid.Parse(context.Principal.Identity.Name);
+    //                        var user = await userRepository.GetUser(userId);
 
-                            if (user is null)
-                            {
-                                context.Fail("Unauthorized");
-                            }
-                            //context.Principal.AddIdentity(new ClaimsIdentity(user.Roles.Select(x => new Claim(ClaimsIdentity.DefaultRoleClaimType, x))));
-                        }
-                    };
-                    //options.RequireHttpsMetadata = environment.EnvironmentName == "Development";
-                    options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
-            return services;
-        }
-    }
+    //                        if (user is null)
+    //                        {
+    //                            context.Fail("Unauthorized");
+    //                        }
+    //                        //context.Principal.AddIdentity(new ClaimsIdentity(user.Roles.Select(x => new Claim(ClaimsIdentity.DefaultRoleClaimType, x))));
+    //                    }
+    //                };
+    //                //options.RequireHttpsMetadata = environment.EnvironmentName == "Development";
+    //                options.SaveToken = true;
+    //                options.TokenValidationParameters = new TokenValidationParameters
+    //                {
+    //                    ValidateIssuerSigningKey = true,
+    //                    IssuerSigningKey = new SymmetricSecurityKey(key),
+    //                    ValidateIssuer = false,
+    //                    ValidateAudience = false
+    //                };
+    //            });
+    //        return services;
+    //    }
+    //}
 }

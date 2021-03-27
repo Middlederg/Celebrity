@@ -6,7 +6,7 @@
         public void Execute(Deck deck, RoundContext roundContext)
         {
             roundContext.MoveToNextRound();
-            deck.Reset();
+            //deck.Reset();
         }
     }
 }

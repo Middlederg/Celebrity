@@ -1,6 +1,6 @@
 ﻿<div class="btn-group btn-group-sm">
 
-    @foreach (var difficulty in Celebrity.Difficulty.Values)
+    @foreach (var difficulty in Enum.GetValues<Celebrity.Difficulty>())
     {
         <button class="btn btn-sm btn-info">
             <span class="oi oi-bolt" title="@difficulty.ToString()" aria-hidden="true"></span>

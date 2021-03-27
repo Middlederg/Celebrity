@@ -24,7 +24,7 @@ namespace Celebrity.Domain
             var subcategory = await finder.Find(id);
             subcategory.EditName(dto.Name);
             subcategory.EditCategory(dto.Category);
-            await repository.Save(subcategory);
+            repository.Save(subcategory);
             await unitOfWork.CompleteAsync();
         }
     }

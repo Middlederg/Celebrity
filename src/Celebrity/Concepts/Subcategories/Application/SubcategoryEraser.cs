@@ -26,7 +26,7 @@ namespace Celebrity.Domain
                 throw new DeleteDependencyException(nameof(Subcategory));
             }
             
-            await subcategoryRepository.DeleteCategory(subcategory);
+            subcategoryRepository.Delete(subcategory);
             await unitOfWork.CompleteAsync();
         }
     }

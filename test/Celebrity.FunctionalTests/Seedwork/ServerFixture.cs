@@ -1,10 +1,18 @@
-﻿using System;
+﻿using Bogus;
+using Celebrity.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using System;
+using System.IO;
 
 namespace Celebrity.FunctionalTests
 {
     public class ServerFixture
     {
-        public IConfiguration Configuration { get; }
+       // public IConfiguration Configuration { get; }
         public TestServer Server { get; private set; }
 
         public ServerFixture()
@@ -31,32 +39,17 @@ namespace Celebrity.FunctionalTests
               })
               .Start();
 
-            host.MigrateDbContext<PlatformContext>();
+            host.MigrateDbContext<CelebrityContext>();
             Server = host.GetTestServer();
-            Configuration = Server.Services.GetService<IConfiguration>();
+            //Configuration = Server.Services.GetService<IConfiguration>();
 
-            Randomizer.Seed = new Random();
             InitializeDatabase();
-            InitializeStorage();
         }
 
         protected virtual void InitializeDatabase()
         {
-            var context = Server.Services.GetService<PlatformContext>();
-
-            new TasksEraser(context).Execute();
-            new SatEraser(context).Execute();
-            new CustomersEraser(context).Execute();
-            new DeleteAllBaseData(context).Execute();
-            new SeedBaseData(context).Execute();
-            new CustomersSeed(context).Execute();
+            //var context = Server.Services.GetService<CelebrityContext>();
         }
 
-        protected void InitializeStorage()
-        {
-            var blobStorage = new BlobStorage(Configuration);
-            blobStorage.DeleteContainer(IntegrationTests.StorageBlobShould.ContainerName);
-            blobStorage.DeleteContainer(StorageContainers.PointPhotos);
-        }
     }
 }
