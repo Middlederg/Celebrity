@@ -7,7 +7,7 @@ namespace Celebrity.FunctionalTests
 {
     public static class SubcategoryExtensions
     {
-        public static async Task<Subcategory> SubcategoryInDatabase(ServerFixture given)
+        public static async Task<Subcategory> SubcategoryInDatabase(this ServerFixture given)
         {
             var dto = SubcategoryMother.Create();
 
@@ -23,7 +23,7 @@ namespace Celebrity.FunctionalTests
             return result;
         }
 
-        public static async Task<Subcategory> GetSubcategoryFromDatabase(ServerFixture given, Guid id)
+        public static async Task<Subcategory> GetSubcategoryFromDatabase(this ServerFixture given, Guid id)
         {
             var dto = SubcategoryMother.Create();
 

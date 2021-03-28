@@ -10,7 +10,7 @@ namespace Celebrity.Shared
         public static string GetSubcategory(Guid subcategoryId) => $"{Base}/{subcategoryId}";
 
         public static string PostCreate => Base;
-        public static string PatchUpdate => Base;
+        public static string PatchUpdate(Guid subcategoryId) => $"{Base}/{subcategoryId}";
 
         public static string DeleteSubcategory(Guid subcategoryId) => $"{Base}/{subcategoryId}";
     }

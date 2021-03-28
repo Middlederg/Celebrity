@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IConceptRepository, ConceptRepository>();
-            services.AddScoped<IDeckRepository, deckre>();
+            services.AddScoped<IDeckRepository, DeckRepository>();
             return services;
         }
     }

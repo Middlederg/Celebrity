@@ -10,6 +10,7 @@ namespace Celebrity.Domain
         {
             var game = await gameFinder.Find(gameId);
             var currentTeam = game.CurrentTeam();
+            //game.vis
             //currentTeam.AddPoint(game.VisibleConcept, roundContext.CurrentRoundNumber);
             //deck.Guess();
         }

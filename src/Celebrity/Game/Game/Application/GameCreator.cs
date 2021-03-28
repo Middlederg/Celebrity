@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,19 +10,16 @@ namespace Celebrity.Domain
     {
         private readonly IGameRepository gameRepository;
         private readonly IConceptRepository conceptRepository;
-        private readonly IDeckRepository deckRepository;
         private readonly ITeamRepository teamRepository;
         private readonly IUnitOfWork unitOfWork;
 
         public GameCreator(IGameRepository gameRepository, 
             IConceptRepository conceptRepository, 
-            IDeckRepository deckRepository,
             ITeamRepository teamRepository,
             IUnitOfWork unitOfWork)
         {
             this.gameRepository = gameRepository;
             this.conceptRepository = conceptRepository;
-            this.deckRepository = deckRepository;
             this.teamRepository = teamRepository;
             this.unitOfWork = unitOfWork;
         }
@@ -41,7 +39,9 @@ namespace Celebrity.Domain
                 await teamRepository.AddTeam(team);
                 game.AddTeam(team);
             }
-            await deckRepository.CreateGameConcepts(concepts);
+
+            var deckConcepts = concepts.Select(x => new DeckConcept(x));
+            game.AddConcepts(deckConcepts);
 
             await unitOfWork.CompleteAsync();
             return game;

@@ -7,35 +7,6 @@ using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
-    public class DeckRepository : IDeckRepository
-    {
-        private readonly CelebrityContext context;
-
-        public ConceptRepository(CelebrityContext context)
-        {
-            this.context = context;
-        }
-
-        public Task<IEnumerable<DeckConcept>> CreateGameConcepts(IEnumerable<Concept> concepts)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<DeckConcept>> GetConceptsFromGame(GameId id)
-        {
-            var concept = await context.deck
-               .Include(x => x.Subcategories)
-               .AsNoTracking()
-               .FirstOrDefaultAsync(x => x.Id == id);
-
-            return concept;
-        }
-
-        public Task UpdateConcept(DeckConcept concept)
-        {
-            throw new NotImplementedException();
-        }
-    }
     public class ConceptRepository : IConceptRepository
     {
         private readonly CelebrityContext context;
