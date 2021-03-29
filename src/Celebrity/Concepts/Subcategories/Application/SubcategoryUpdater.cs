@@ -4,6 +4,7 @@ using Celebrity.Shared;
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class SubcategoryUpdater
     {
         private readonly SubcategoryFinder finder;

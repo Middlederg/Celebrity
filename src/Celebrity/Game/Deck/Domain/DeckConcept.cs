@@ -16,7 +16,7 @@ namespace Celebrity.Domain
 
         public IEnumerable<BaseObject> Subcategories { get; private set; }
 
-        public Guid GameId { get; private set; }
+        public GameId GameId { get; private set; }
         public Game Game { get; private set; }
 
         public bool IsGuessed { get; private set; }
@@ -31,6 +31,7 @@ namespace Celebrity.Domain
                   concept.Subcategories.Select(x => new BaseObject(x.Id, x.ToString())),
                   isGuessed:false) { }
 
+        private DeckConcept() { }
         public DeckConcept(ConceptId id, 
             ConceptName name, 
             ConceptType type,

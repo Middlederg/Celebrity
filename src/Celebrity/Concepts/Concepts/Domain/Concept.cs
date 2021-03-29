@@ -15,6 +15,7 @@ namespace Celebrity.Domain
         public ConceptType Type { get; private set; }
         public void UpdateType(ConceptType value) => Type = value;
 
+        private Concept() { }
         public Concept(ConceptId id, ConceptName name, Difficulty difficulty, ConceptType type, 
             ICollection<Subcategory> subcategories) : base(id)
         {

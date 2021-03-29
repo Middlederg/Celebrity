@@ -18,6 +18,19 @@ namespace Celebrity.Api
         private readonly SubcategoryUpdater updater;
         private readonly SubcategoryEraser eraser;
 
+        public SubcategoryController(SubcategoryFinder finder, 
+            SubcategoryLister lister,
+            SubcategoryCreator creator, 
+            SubcategoryUpdater updater, 
+            SubcategoryEraser eraser)
+        {
+            this.finder = finder;
+            this.lister = lister;
+            this.creator = creator;
+            this.updater = updater;
+            this.eraser = eraser;
+        }
+
         [HttpGet, Route("{id}")]
         public async Task<ActionResult<Shared.Subcategory>> Get(Guid id)
         {
@@ -43,7 +56,7 @@ namespace Celebrity.Api
             return CreatedAtAction(nameof(Get), new { id = subcategory.Id }, result);
         }
 
-        [HttpPatch, Route("id:Guid")]
+        [HttpPatch, Route("{id}")]
         public async Task<IActionResult> Update(Guid id, UpdateSubcategory command)
         {
             var subcategoryId = new SubcategoryId(id);

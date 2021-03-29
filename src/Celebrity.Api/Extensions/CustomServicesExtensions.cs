@@ -24,14 +24,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
-            //services.AddScoped<Random>();
-            //services.AddScoped<IRandomProvider, RandomProvider>();
-            services.AddScoped<IUnitOfWork, CelebrityContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IConceptRepository, ConceptRepository>();
             services.AddScoped<IDeckRepository, DeckRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
             return services;
         }
     }

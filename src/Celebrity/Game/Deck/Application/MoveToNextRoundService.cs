@@ -1,5 +1,6 @@
 ﻿namespace Celebrity.Domain
 {
+    [Service]
     public class MoveToNextRoundService
     {
         public bool IsNextRoundTime(Deck deck, RoundContext roundContext) => deck.IsFinished;

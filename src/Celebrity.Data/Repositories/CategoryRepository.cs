@@ -18,13 +18,14 @@ namespace Celebrity.Data
 
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            var subcategories = await context
+            var query = await context
                 .Subcategories
+                .AsNoTracking()
                 .ToListAsync();
-            
+
             return ((Shared.CategoryValue[])Enum.GetValues(typeof(Shared.CategoryValue))).Select(value =>
             {
-                var subcategoriesInCategory = subcategories
+                var subcategoriesInCategory = query
                     .Where(x => x.Category == value)
                     .Select(x => new BaseObject(x.Id, x.Name.ToString()))
                     .ToArray();
@@ -35,13 +36,20 @@ namespace Celebrity.Data
 
         public async Task<Category> GetCategory(Shared.CategoryValue value)
         {
-            var subcategories = await context
+            var query = await context
                .Subcategories
                .Where(x => x.Category == value)
-               .Select(x => new BaseObject(x.Id, x.Name.ToString()))
+               .AsNoTracking()
+               .Select(x => new
+               {
+                   x.Id,
+                   Name = x.Name.ToString()
+               })
                .ToListAsync();
 
-            return new Category(value, subcategories.ToArray());
+            var subcategories = query.Select(x => new BaseObject(x.Id, x.Name.ToString())).ToArray();
+
+            return new Category(value, subcategories);
         }
     }
 }

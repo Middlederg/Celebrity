@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.IO;
@@ -49,6 +50,8 @@ namespace Celebrity.FunctionalTests
         protected virtual void InitializeDatabase()
         {
             //var context = Server.Services.GetService<CelebrityContext>();
+            //context.Add(Celebrity.Domain.Subcategory.Create("Test", Shared.CategoryValue.FictionalUniverses));
+            //context.SaveChanges();
         }
 
     }

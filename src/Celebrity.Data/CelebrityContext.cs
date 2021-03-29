@@ -28,7 +28,7 @@ namespace Celebrity.Data
         }
 
         public void Complete() => SaveChanges();
-        public Task CompleteAsync() => SaveChangesAsync();
+        public async Task CompleteAsync() => await SaveChangesAsync();
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //{

@@ -2,6 +2,7 @@
 
 namespace Celebrity.Domain
 {
+    //[Service]
     //public class TimesUpService
     //{
     //    private readonly IDeckRepository deckRepository;

@@ -14,6 +14,12 @@ namespace Celebrity.Api
         private readonly CategoryFinder finder;
         private readonly CategoryLister lister;
 
+        public CategoryController(CategoryFinder finder, CategoryLister lister)
+        {
+            this.finder = finder;
+            this.lister = lister;
+        }
+
         [HttpGet, Route("{categoryId}")]
         public async Task<ActionResult<Shared.Category>> Get(int categoryId)
         {

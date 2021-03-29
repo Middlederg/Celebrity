@@ -13,6 +13,15 @@ namespace Celebrity.Api
         private readonly GameCreator creator;
         private readonly GameEraser eraser;
 
+        public GameController(GameFinder finder, 
+            GameCreator creator, 
+            GameEraser eraser)
+        {
+            this.finder = finder;
+            this.creator = creator;
+            this.eraser = eraser;
+        }
+
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

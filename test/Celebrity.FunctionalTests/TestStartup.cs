@@ -28,7 +28,7 @@ namespace Celebrity.FunctionalTests
                 {
                     configure.IncludeExceptionDetails = (context, exception) => true;
                 })
-                .AddDbContext<CelebrityContext>(setup =>
+                .AddDbContextPool<CelebrityContext>(setup =>
                 {
                     string connectionString = configuration.GetConnectionString("Sqlite");
                     setup.UseSqlite(connectionString, sqlServerOptions =>

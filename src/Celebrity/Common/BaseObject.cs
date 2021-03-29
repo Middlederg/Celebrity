@@ -21,5 +21,7 @@ namespace Celebrity
             yield return Id;
             yield return name;
         }
+
+        public override string ToString() => name;
     }
 }

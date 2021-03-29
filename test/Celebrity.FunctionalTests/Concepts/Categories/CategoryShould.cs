@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq;
 
 namespace Celebrity.FunctionalTests
 {
@@ -17,8 +18,6 @@ namespace Celebrity.FunctionalTests
         {
             Given = fixture ?? throw new ArgumentNullException(nameof(fixture));
         }
-
-
 
         [Fact]
         public async Task Be_found()
@@ -54,17 +53,11 @@ namespace Celebrity.FunctionalTests
             await response.ShouldBe(StatusCodes.Status200OK);
             var result = await response.ReadJsonResponse<IEnumerable<Category>>();
 
-            result.Should().ContainEquivalentOf(new Shared.Category()
+            result.Should().Contain(x => x.Value == subcategory.Category);
+            result.First(x => x.Value == subcategory.Category).Subcategories.Should().ContainEquivalentOf(new Shared.BaseObject()
             {
-                Value = subcategory.Category,
-                Subcategories = new List<Shared.BaseObject>()
-                {
-                    new Shared.BaseObject()
-                    {
-                        Id = subcategory.Id,
-                        Name = subcategory.Name
-                    }
-                }
+                Id = subcategory.Id,
+                Name = subcategory.Name
             });
         }
 

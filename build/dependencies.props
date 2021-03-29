@@ -2,6 +2,6 @@
     <PropertyGroup Label="Default project values">
         <NetVersion>net5.0</NetVersion>
         <NetStandardVersion>netstandard2.0</NetStandardVersion>
-        <LangVersion>8.0</LangVersion>
+        <LangVersion>9.0</LangVersion>
     </PropertyGroup>
 </Project>

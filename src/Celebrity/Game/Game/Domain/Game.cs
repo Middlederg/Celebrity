@@ -33,6 +33,7 @@ namespace Celebrity.Domain
 
         public DateTime CreationDate { get; private set; }
 
+        private Game() { }
         public Game(GameId id, int totalRounds, DateTime creationDate): base(id)
         {
             RoundContext = new RoundContext(totalRounds);

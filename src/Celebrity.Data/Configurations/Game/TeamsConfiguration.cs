@@ -16,7 +16,7 @@ namespace Celebrity.Data
             builder.OwnsOne(x => x.Name,
               name =>
               {
-                  name.Property(p => p.ToString())
+                  name.Property("value")
                     .IsRequired()
                     .HasMaxLength(Shared.Team.NameMaxLength)
                     .HasColumnName(nameof(TeamName));

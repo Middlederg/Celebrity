@@ -16,9 +16,7 @@ namespace Celebrity.Domain
         public static Subcategory Create(string name, CategoryValue category) 
             => new Subcategory(new SubcategoryId(), new SubcategoryName(name), category);
 
-        public static Subcategory Create(Guid id, string name, CategoryValue category)
-           => new Subcategory(new SubcategoryId(id), new SubcategoryName(name), category);
-
+        private Subcategory() { }
         private Subcategory(SubcategoryId subcategoryId, SubcategoryName name, CategoryValue category) : base(subcategoryId)
         {
             Name = name;

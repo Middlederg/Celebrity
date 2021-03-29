@@ -21,6 +21,7 @@ namespace Celebrity.Domain
         public GameId GameId { get; private set; }
         public Game Game { get; private set; }
 
+        private Team() { }
         public Team(TeamId id, Color color, GameId gameId, string name = null) : base(id)
         {
             Name = new TeamName(string.IsNullOrWhiteSpace(name) ? color.Description() : name);

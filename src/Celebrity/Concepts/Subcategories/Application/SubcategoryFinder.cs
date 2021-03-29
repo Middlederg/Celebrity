@@ -2,6 +2,7 @@
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class SubcategoryFinder
     {
         private readonly ISubcategoryRepository repository;

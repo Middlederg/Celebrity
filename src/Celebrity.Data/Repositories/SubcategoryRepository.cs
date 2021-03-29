@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using Microsoft.EntityFrameworkCore;
 using Celebrity.Domain;
-using System.Linq;
 
 namespace Celebrity.Data
 {

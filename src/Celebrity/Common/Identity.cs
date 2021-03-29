@@ -7,6 +7,7 @@ namespace Celebrity
         private readonly Id id;
         public T Id => id as T;
 
+        protected Identity() { }
         public Identity(Id id)
         {
             this.id = id;

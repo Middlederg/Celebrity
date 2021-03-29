@@ -9,8 +9,8 @@
 ### Database migrations
 
 ````
-dotnet ef migrations add "nombremigracion" --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Blazor\Celebrity.Blazor.csproj -v
-dotnet ef database update --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Blazor\Celebrity.Blazor.csproj
+dotnet ef migrations add "Initial" --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Host\Celebrity.Host.csproj -v
+dotnet ef database update --project .\src\Celebrity.Data\Celebrity.Data.csproj --startup-project .\src\Celebrity.Host\Celebrity.Host.csproj
 ````
 
 

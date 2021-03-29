@@ -2,6 +2,7 @@
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class ConceptGuesser
     {
         private readonly GameFinder gameFinder;

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class SubcategoryCreator
     {
         private readonly ISubcategoryRepository repository;

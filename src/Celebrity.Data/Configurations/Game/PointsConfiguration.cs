@@ -13,7 +13,7 @@ namespace Celebrity.Data
             builder.Property(e => e.Id)
                 .HasConversion(pointId => (Guid)pointId, id => new PointId(id));
 
-            builder.OwnsOne(x => x.Id,
+            builder.OwnsOne(x => x.ConceptId,
                  name =>
                  {
                      name.Property("identificator")

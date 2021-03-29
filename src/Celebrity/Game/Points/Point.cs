@@ -10,6 +10,7 @@
         public TeamId TeamId { get; private set; }
         public Team Team { get; private set; }
 
+        private Point() { }
         public Point(PointId id, DeckConcept concept, int round) : base(id)
         {
             ConceptId = concept.ConceptId;

@@ -8,7 +8,7 @@ namespace Celebrity
 
         protected Id()
         {
-            identificator = new Guid();
+            identificator = Guid.NewGuid();
         }
 
         protected Id(Guid identificator)
@@ -20,11 +20,16 @@ namespace Celebrity
 
         public override bool Equals(object obj)
         {
-            if (obj != null || GetType().Equals(obj.GetType()))
+            if (obj is not null && this is null)
+                return false;
+
+            if (obj is  null && this is not null)
                 return false;
 
             if (obj is Id identity)
+            {
                 return identity.identificator.Equals(identificator);
+            }
 
             return false;
         }

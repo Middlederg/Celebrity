@@ -14,6 +14,7 @@ namespace Celebrity.Domain
         public int CurrentRoundNumber => CurrentRound.Number;
         public int TotalRounds => rounds.Count();
 
+        private RoundContext() { }
         public RoundContext(int totalRounds)
         {
             rounds = new RoundFactory(totalRounds).Create();

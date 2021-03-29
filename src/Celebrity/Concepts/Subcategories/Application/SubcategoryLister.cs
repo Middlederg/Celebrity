@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Domain
 {
+    [Service]
     public class SubcategoryLister
     {
         private readonly ISubcategoryRepository repository;
