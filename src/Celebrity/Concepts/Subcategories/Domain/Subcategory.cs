@@ -8,7 +8,7 @@ namespace Celebrity.Domain
     public class Subcategory : Identity<SubcategoryId>
     {
         public SubcategoryName Name { get; private set; }
-        public void EditName(string newName) => new SubcategoryName(newName);
+        public void EditName(string newName) => Name = new SubcategoryName(newName);
 
         public CategoryValue Category { get; private set; }
         public void EditCategory(CategoryValue category) => Category = category;

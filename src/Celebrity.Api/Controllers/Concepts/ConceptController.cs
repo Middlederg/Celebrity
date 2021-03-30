@@ -18,6 +18,19 @@ namespace Celebrity.Api
         private readonly ConceptCollectionUpdater updater;
         private readonly ConceptEraser eraser;
 
+        public ConceptController(ConceptFinder finder,
+            ConceptLister lister, 
+            ConceptCollectionCreator creator, 
+            ConceptCollectionUpdater updater, 
+            ConceptEraser eraser)
+        {
+            this.finder = finder;
+            this.lister = lister;
+            this.creator = creator;
+            this.updater = updater;
+            this.eraser = eraser;
+        }
+
         [HttpGet, Route("{id}")]
         public async Task<ActionResult<Shared.Subcategory>> Get(Guid id)
         {
