@@ -32,11 +32,7 @@ namespace Celebrity.FunctionalTests
             await response.ShouldBe(StatusCodes.Status200OK);
             var result = await response.ReadJsonResponse<Category>();
 
-            result.Subcategories.Should().ContainEquivalentOf(new Shared.BaseObject()
-            {
-                Id = subcategory.Id,
-                Name = subcategory.Name
-            });
+            result.Subcategories.Should().ContainEquivalentOf(subcategory.AsBaseObject());
             result.Value.Should().Be(subcategory.Category);
         }
 
@@ -54,11 +50,8 @@ namespace Celebrity.FunctionalTests
             var result = await response.ReadJsonResponse<IEnumerable<Category>>();
 
             result.Should().Contain(x => x.Value == subcategory.Category);
-            result.First(x => x.Value == subcategory.Category).Subcategories.Should().ContainEquivalentOf(new Shared.BaseObject()
-            {
-                Id = subcategory.Id,
-                Name = subcategory.Name
-            });
+            result.First(x => x.Value == subcategory.Category).Subcategories
+                .Should().ContainEquivalentOf(subcategory.AsBaseObject());
         }
 
     }

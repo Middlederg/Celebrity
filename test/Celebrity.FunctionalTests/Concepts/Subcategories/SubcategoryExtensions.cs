@@ -38,5 +38,14 @@ namespace Celebrity.FunctionalTests
 
             return result;
         }
+
+        public static Shared.BaseObject AsBaseObject(this Shared.Subcategory subcategory)
+        {
+            return new Shared.BaseObject()
+            {
+                Id = subcategory.Id,
+                Name = subcategory.Name
+            };
+        }
     }
 }

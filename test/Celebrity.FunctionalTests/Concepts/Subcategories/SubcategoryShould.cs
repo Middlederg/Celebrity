@@ -6,7 +6,6 @@ using Xunit;
 using Microsoft.AspNetCore.TestHost;
 using FluentAssertions;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Celebrity.FunctionalTests
 {
@@ -41,7 +40,7 @@ namespace Celebrity.FunctionalTests
         }
 
         [Fact]
-        public async Task Be_found_after_created()
+        public async Task Be_found_after_create()
         {
             var subcategory = await Given.SubcategoryInDatabase();
 
@@ -120,10 +119,5 @@ namespace Celebrity.FunctionalTests
               .GetAsync();
             await response.ShouldBe(StatusCodes.Status404NotFound);
         }
-
-
-
-
-
     }
 }

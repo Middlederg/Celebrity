@@ -14,7 +14,7 @@ namespace Celebrity.FunctionalTests
                 .RuleFor(x => x.Difficulty, f => f.PickRandom<Difficulty>())
                 .RuleFor(x => x.Type, f => f.PickRandom<ConceptType>())
                 .RuleFor(x => x.SubcategoryId, subcategoryId)
-                .RuleFor(x => x.Name, f => f.Commerce.ProductAdjective() + " " + f.Commerce.ProductName());
+                .RuleFor(x => x.Name, f => f.Commerce.ProductName());
 
             faker.Locale = Constants.CurrentLocale;
 
@@ -28,7 +28,7 @@ namespace Celebrity.FunctionalTests
                 .RuleFor(x => x.Difficulty, f => f.PickRandom<Difficulty>())
                 .RuleFor(x => x.Type, f => f.PickRandom<ConceptType>())
                 .RuleFor(x => x.Id, id)
-                .RuleFor(x => x.Name, f => f.Commerce.ProductAdjective() + " " + f.Commerce.ProductName());
+                .RuleFor(x => x.Name, f => f.Commerce.ProductName());
 
             faker.Locale = Constants.CurrentLocale;
 

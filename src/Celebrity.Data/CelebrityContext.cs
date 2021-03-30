@@ -8,13 +8,13 @@ namespace Celebrity.Data
 {
     public class CelebrityContext : DbContext, IUnitOfWork
     {
-        internal DbSet<Concept> Concepts { get; set; }
-        internal DbSet<Subcategory> Subcategories { get; set; }
+        public DbSet<Concept> Concepts { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
 
-        internal DbSet<Game> Games { get; set; }
-        internal DbSet<DeckConcept> DeckConcepts { get; set; }
-        internal DbSet<Team> Teams { get; set; }
-        internal DbSet<Point> Points { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<DeckConcept> DeckConcepts { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Point> Points { get; set; }
 
         public CelebrityContext(DbContextOptions options) : base(options) { }
 

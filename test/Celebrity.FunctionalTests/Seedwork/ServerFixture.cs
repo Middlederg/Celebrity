@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Celebrity.FunctionalTests
 {
@@ -49,9 +50,11 @@ namespace Celebrity.FunctionalTests
 
         protected virtual void InitializeDatabase()
         {
-            //var context = Server.Services.GetService<CelebrityContext>();
-            //context.Add(Celebrity.Domain.Subcategory.Create("Test", Shared.CategoryValue.FictionalUniverses));
-            //context.SaveChanges();
+            var context = Server.Services.GetService<CelebrityContext>();
+
+            context.Concepts.RemoveRange(context.Concepts.ToList());
+            context.Subcategories.RemoveRange(context.Subcategories.ToList());
+            context.SaveChanges();
         }
 
     }

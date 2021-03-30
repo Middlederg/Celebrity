@@ -31,7 +31,7 @@ namespace Celebrity.Api
             this.eraser = eraser;
         }
 
-        [HttpGet, Route("{id}")]
+        [HttpGet, Route("concepts/{id}")]
         public async Task<ActionResult<Shared.Subcategory>> Get(Guid id)
         {
             var conceptId = new ConceptId(id);
@@ -43,8 +43,8 @@ namespace Celebrity.Api
         [HttpGet, Route("categories/{id:int}/concepts")]
         public async Task<ActionResult<IEnumerable<Shared.Subcategory>>> GetAllFromCategory(int id)
         {
-            var categories = await lister.GetFromCategory(id);
-            var result = categories.Select(x => x.ToDto());
+            var concepts = await lister.GetFromCategory(id);
+            var result = concepts.Select(x => x.ToDto());
             return Ok(result);
         }
 
@@ -52,26 +52,27 @@ namespace Celebrity.Api
         public async Task<ActionResult<IEnumerable<Shared.Subcategory>>> GetAllFromSubcategory(Guid id)
         {
             var subcategoryId = new SubcategoryId(id);
-            var categories = await lister.GetFromSubcategory(subcategoryId);
-            var result = categories.Select(x => x.ToDto());
+            var concepts = await lister.GetFromSubcategory(subcategoryId);
+            var result = concepts.Select(x => x.ToDto());
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost, Route("concepts")]
         public async Task<IActionResult> Create(IEnumerable<CreateConcept> command)
         {
-            await creator.Create(command);
-            return Ok();
+            var concepts = await creator.Create(command);
+            var result = concepts.Select(x => x.ToDto());
+            return Ok(result);
         }
 
-        [HttpPatch]
+        [HttpPatch, Route("concepts")]
         public async Task<IActionResult> Update(IEnumerable<UpdateConcept> command)
         {
             await updater.Edit(command);
             return NoContent();
         }
 
-        [HttpDelete, Route("{id:Guid}")]
+        [HttpDelete, Route("concepts/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var conceptId = new ConceptId(id);

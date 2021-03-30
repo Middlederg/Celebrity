@@ -39,9 +39,8 @@ namespace Celebrity.Data
         public async Task<IEnumerable<Concept>> GetAll(IEnumerable<ConceptId> idCollection)
         {
             var list = await context.Concepts
-                  .Where(x => idCollection.Contains(x.Id))
+                  .Where(x => idCollection.Any(id => id == x.Id))
                   .Include(x => x.Subcategories)
-                  .AsNoTracking()
                   .ToListAsync();
 
             return list;

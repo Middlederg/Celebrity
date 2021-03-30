@@ -21,16 +21,19 @@ namespace Celebrity.Domain
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task Create(IEnumerable<Shared.CreateConcept> dtoCollection)
+        public async Task<IEnumerable<Concept>> Create(IEnumerable<Shared.CreateConcept> dtoCollection)
         {
             var categories = await subCategoryRepository.GetSubcategories();
+            var results = new List<Concept>();
             foreach (var dto in dtoCollection)
             {
                 var subcategories = GetSubCategory(categories, dto.SubcategoryId).ToList();
                 var concept = new Concept(new ConceptId(), new ConceptName(dto.Name), dto.Difficulty, dto.Type, subcategories);
                 conceptRepository.AddConcept(concept);
+                results.Add(concept);
             }
             await unitOfWork.CompleteAsync();
+            return results;
         }
 
         private IEnumerable<Subcategory> GetSubCategory(IEnumerable<Subcategory> categories, Guid? subcategoryId)
