@@ -18,5 +18,6 @@ namespace Celebrity.Domain
         void AddConcept(Concept concept);
         void Update(Concept concept);
         void DeleteConcept(Concept concept);
+        void UpdateSubcategories(ConceptId conceptId, IEnumerable<Guid> subcategories);
     }
 }

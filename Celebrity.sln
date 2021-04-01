@@ -36,6 +36,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celebrity.Api", "src\Celebr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celebrity.Shared", "src\Celebrity.Shared\Celebrity.Shared.csproj", "{D219B846-D7B2-4DE2-8820-02E2A45415A1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celebrity.Web", "src\Celebrity.Web\Celebrity.Web.csproj", "{E9B90780-D926-46A8-904E-CE7A612E347F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{D219B846-D7B2-4DE2-8820-02E2A45415A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D219B846-D7B2-4DE2-8820-02E2A45415A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D219B846-D7B2-4DE2-8820-02E2A45415A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9B90780-D926-46A8-904E-CE7A612E347F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9B90780-D926-46A8-904E-CE7A612E347F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9B90780-D926-46A8-904E-CE7A612E347F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9B90780-D926-46A8-904E-CE7A612E347F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{47BBFD68-1777-4B52-ACFA-D463AF593035} = {1BA073CF-3C16-4AA5-B359-E7B64CEE4B02}
 		{79B62F08-B790-497C-AA50-06D0F4FC0CDA} = {1BA073CF-3C16-4AA5-B359-E7B64CEE4B02}
 		{D219B846-D7B2-4DE2-8820-02E2A45415A1} = {1BA073CF-3C16-4AA5-B359-E7B64CEE4B02}
+		{E9B90780-D926-46A8-904E-CE7A612E347F} = {1BA073CF-3C16-4AA5-B359-E7B64CEE4B02}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52257EC6-6FF8-4E64-A0D2-85C00E413BDA}

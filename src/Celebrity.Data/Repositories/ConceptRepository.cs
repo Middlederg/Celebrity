@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Celebrity.Domain;
+using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 
 namespace Celebrity.Data
 {
@@ -92,7 +94,21 @@ namespace Celebrity.Data
         public void DeleteConcept(Concept concept)
         {
            context.Concepts.Remove(concept);
-           
+        }
+
+        public void UpdateSubcategories(ConceptId conceptId, IEnumerable<Guid> subcategories)
+        {
+            var commandtext = $"DELETE FROM ConceptSubcategory where conceptsId = @ConceptId";
+            var conceptParameter = new SqliteParameter("@ConceptId", conceptId.ToString().ToUpper());
+            context.Database.ExecuteSqlRaw(commandtext, conceptParameter);
+
+            commandtext = $"INSERT INTO ConceptSubcategory (ConceptsId, SubcategoriesId) VALUES (@ConceptId, @SubcategoryId)";
+            foreach (var subcategoryId in subcategories)
+            {
+                var subcategoryParameter = new SqliteParameter("@SubcategoryId", subcategoryId.ToString().ToUpper());
+                context.Database.ExecuteSqlRaw(commandtext, conceptParameter, subcategoryParameter);
+            }
+            context.SaveChanges();
         }
     }
 }

@@ -196,5 +196,29 @@ namespace Celebrity.FunctionalTests
 
             await response.ShouldBe(StatusCodes.Status404NotFound);
         }
+
+        [Fact]
+        public async Task Have_subcategories_updated()
+        {
+            var concept = await Given.ConceptInDatabase();
+
+            var subcategory1 = await Given.SubcategoryInDatabase();
+            var subcategory2 = await Given.SubcategoryInDatabase();
+
+            var response = await Given
+               .Server
+               .CreateRequest(ConceptEndpoints.PutSubcategoriesFromConcept(concept.Id))
+               .WithJsonBody(new List<Guid>() { subcategory1.Id, subcategory2.Id })
+               .PutAsync();
+
+            await response.ShouldBe(StatusCodes.Status204NoContent);
+
+            var result = await Given.GetConceptFromDatabase(concept.Id);
+
+            result.Id.Should().Be(concept.Id);
+            result.Subcategories.Should().HaveCount(2);
+            result.Subcategories.Should().ContainEquivalentOf(subcategory1.AsBaseObject());
+            result.Subcategories.Should().ContainEquivalentOf(subcategory2.AsBaseObject());
+        }
     }
 }

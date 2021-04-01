@@ -12,6 +12,7 @@ namespace Celebrity.Shared
 
         public static string PostCreateList => Base;
         public static string PatchUpdateList => Base;
+        public static string PutSubcategoriesFromConcept(Guid conceptId) => $"api/concepts/{conceptId}/subcategories";
 
         public static string DeleteConcept(Guid conceptId) => $"{Base}/{conceptId}";
     }

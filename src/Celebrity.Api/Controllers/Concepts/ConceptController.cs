@@ -16,18 +16,21 @@ namespace Celebrity.Api
         private readonly ConceptLister lister;
         private readonly ConceptCollectionCreator creator;
         private readonly ConceptCollectionUpdater updater;
+        private readonly SubcategoriesInConceptUpdater subcategoryUpdater;
         private readonly ConceptEraser eraser;
 
         public ConceptController(ConceptFinder finder,
             ConceptLister lister, 
             ConceptCollectionCreator creator, 
-            ConceptCollectionUpdater updater, 
+            ConceptCollectionUpdater updater,
+            SubcategoriesInConceptUpdater subcategoryUpdater,
             ConceptEraser eraser)
         {
             this.finder = finder;
             this.lister = lister;
             this.creator = creator;
             this.updater = updater;
+            this.subcategoryUpdater = subcategoryUpdater;
             this.eraser = eraser;
         }
 
@@ -48,7 +51,7 @@ namespace Celebrity.Api
             return Ok(result);
         }
 
-        [HttpGet, Route("subcategories/{id:Guid}/concepts")]
+        [HttpGet, Route("subcategories/{id}/concepts")]
         public async Task<ActionResult<IEnumerable<Shared.Subcategory>>> GetAllFromSubcategory(Guid id)
         {
             var subcategoryId = new SubcategoryId(id);
@@ -69,6 +72,14 @@ namespace Celebrity.Api
         public async Task<IActionResult> Update(IEnumerable<UpdateConcept> command)
         {
             await updater.Edit(command);
+            return NoContent();
+        }
+
+        [HttpPut, Route("concepts/{id}/subcategories")]
+        public async Task<IActionResult> UpdateSubcategories(Guid id, IEnumerable<Guid> subcategoryCollection)
+        {
+            var conceptId = new ConceptId(id);
+            await subcategoryUpdater.Update(conceptId, subcategoryCollection);
             return NoContent();
         }
 
