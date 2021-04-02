@@ -1,4 +1,4 @@
-﻿namespace Celebrity.Api
+﻿namespace Celebrity.Shared
 {
     public static class Roles
     {

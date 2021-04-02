@@ -35,7 +35,7 @@ namespace Celebrity.FunctionalTests
                     {
                         sqlServerOptions.MigrationsAssembly(typeof(CelebrityContext).Assembly.FullName);
                     });
-                })
+                }).AddCustomIdentityOptions()
                 .AddAuthorization()
                 .AddAuthentication(setup =>
                 {

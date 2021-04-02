@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Configuration
 {
-
     public static class ConfigurationExtensions
     {
         public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace Celebrity.Api
@@ -15,7 +16,7 @@ namespace Celebrity.Api
             options.AddPolicy(IsAdminPolicy, policyBuilder =>
             {
                 policyBuilder.RequireAuthenticatedUser();
-                policyBuilder.RequireClaim(claimType: ClaimTypes.Role, Roles.Admin);
+                policyBuilder.RequireClaim(claimType: JwtClaimTypes.Role, Celebrity.Shared.Roles.Admin);
             });
         }
     }

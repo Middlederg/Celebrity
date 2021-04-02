@@ -1,5 +1,6 @@
 ﻿using Celebrity.Shared;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.TestHost;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Celebrity.FunctionalTests
             var response = await given
                .Server
                .CreateRequest(ConceptEndpoints.PostCreateList)
+               .WithIdentity(Identities.Administrator)
                .WithJsonBody(new List<CreateConcept>() { dto })
                .PostAsync();
 
@@ -33,6 +35,7 @@ namespace Celebrity.FunctionalTests
             var response = await given
                .Server
                .CreateRequest(ConceptEndpoints.GetConcept(id))
+               .WithIdentity(Identities.Administrator)
                .WithJsonBody(dto)
                .GetAsync();
 

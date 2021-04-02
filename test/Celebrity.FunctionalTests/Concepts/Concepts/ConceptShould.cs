@@ -6,6 +6,7 @@ using Xunit;
 using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.TestHost;
 
 namespace Celebrity.FunctionalTests
 {
@@ -29,6 +30,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(ConceptEndpoints.PostCreateList)
                .WithJsonBody(new List<CreateConcept>() { dto })
+               .WithIdentity(Identities.Administrator)
                .PostAsync();
 
             await response.ShouldBe(StatusCodes.Status200OK);
@@ -52,6 +54,7 @@ namespace Celebrity.FunctionalTests
             var response = await Given
                .Server
                .CreateRequest(ConceptEndpoints.GetConcept(concept.Id))
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
 
             await response.ShouldBe(StatusCodes.Status200OK);
@@ -71,6 +74,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(ConceptEndpoints.PostCreateList)
                .WithJsonBody(new List<CreateConcept>() { dto1, dto2 })
+               .WithIdentity(Identities.Administrator)
                .PostAsync();
             await response.ShouldBe(StatusCodes.Status200OK);
             var created = await response.ReadJsonResponse<IEnumerable<Concept>>();
@@ -79,6 +83,7 @@ namespace Celebrity.FunctionalTests
             response = await Given
                .Server
                .CreateRequest(ConceptEndpoints.GetAllFromCategory(subcategory.Category))
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
 
             await response.ShouldBe(StatusCodes.Status200OK);
@@ -99,6 +104,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(ConceptEndpoints.PostCreateList)
                .WithJsonBody(new List<CreateConcept>() { dto1, dto2 })
+               .WithIdentity(Identities.Administrator)
                .PostAsync();
             await response.ShouldBe(StatusCodes.Status200OK);
             var created = await response.ReadJsonResponse<IEnumerable<Concept>>();
@@ -107,6 +113,7 @@ namespace Celebrity.FunctionalTests
             response = await Given
                .Server
                .CreateRequest(ConceptEndpoints.GetAllFromSubcategory(subcategory.Id))
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
 
             await response.ShouldBe(StatusCodes.Status200OK);
@@ -127,6 +134,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(ConceptEndpoints.PatchUpdateList)
                .WithJsonBody(new List<UpdateConcept>() { dto })
+               .WithIdentity(Identities.Administrator)
                .PatchAsync();
 
             await response.ShouldBe(StatusCodes.Status204NoContent);
@@ -153,6 +161,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(ConceptEndpoints.PatchUpdateList)
                .WithJsonBody(new List<UpdateConcept>() { dto1, dto2 })
+               .WithIdentity(Identities.Administrator)
                .PatchAsync();
 
             await response.ShouldBe(StatusCodes.Status204NoContent);
@@ -180,18 +189,21 @@ namespace Celebrity.FunctionalTests
             var response = await Given
                .Server
                .CreateRequest(ConceptEndpoints.GetConcept(concept.Id))
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
             await response.ShouldBe(StatusCodes.Status200OK);
 
             response = await Given
                .Server
                .CreateRequest(ConceptEndpoints.DeleteConcept(concept.Id))
+               .WithIdentity(Identities.Administrator)
                .DeleteAsync();
             await response.ShouldBe(StatusCodes.Status204NoContent);
 
             response = await Given
               .Server
               .CreateRequest(ConceptEndpoints.GetConcept(concept.Id))
+              .WithIdentity(Identities.Administrator)
               .GetAsync();
 
             await response.ShouldBe(StatusCodes.Status404NotFound);
@@ -209,6 +221,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(ConceptEndpoints.PutSubcategoriesFromConcept(concept.Id))
                .WithJsonBody(new List<Guid>() { subcategory1.Id, subcategory2.Id })
+               .WithIdentity(Identities.Administrator)
                .PutAsync();
 
             await response.ShouldBe(StatusCodes.Status204NoContent);
@@ -219,6 +232,20 @@ namespace Celebrity.FunctionalTests
             result.Subcategories.Should().HaveCount(2);
             result.Subcategories.Should().ContainEquivalentOf(subcategory1.AsBaseObject());
             result.Subcategories.Should().ContainEquivalentOf(subcategory2.AsBaseObject());
+        }
+
+
+        [Fact]
+        public async Task Fail_to_be_found_when_user_is_not_admin()
+        {
+            var concept = await Given.ConceptInDatabase();
+
+            var response = await Given
+               .Server
+               .CreateRequest(ConceptEndpoints.GetConcept(concept.Id))
+               .GetAsync();
+
+            await response.ShouldBe(StatusCodes.Status401Unauthorized);
         }
     }
 }

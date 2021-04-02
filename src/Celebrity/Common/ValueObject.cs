@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace Celebrity
 {
+
     public abstract class ValueObject
     {
         protected static bool EqualOperator(ValueObject left, ValueObject right)

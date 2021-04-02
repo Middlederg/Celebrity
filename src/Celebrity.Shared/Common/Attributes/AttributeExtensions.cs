@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace Celebrity
+namespace Celebrity.Shared
 {
     public static class AttributeExtensions
     {
@@ -11,7 +11,6 @@ namespace Celebrity
         {
             return Attribute.IsDefined(type, typeof(ServiceAttribute));
         }
-
         public static string Description<T>(this T source) where T : Enum
         {
             var attribute = source.GetAttribute<T, DescriptionAttribute>();

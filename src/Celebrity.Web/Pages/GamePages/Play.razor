@@ -1,5 +1,5 @@
 ﻿@page "/play/{gameId:guid}"
-@inject GameLoaderService gameLoaderService
+@*@inject GameLoaderService gameLoaderService*@
 @*@inject UserFinderService userFinderService
 @inject ClientInfoFinderService clientInfoFinderService*@
 
@@ -16,7 +16,7 @@
     [Parameter]
     public Guid gameId { get; set; }
 
-    private Celebrity.Game game;
+    private Game game;
 
     protected override async Task OnInitializedAsync()
     {

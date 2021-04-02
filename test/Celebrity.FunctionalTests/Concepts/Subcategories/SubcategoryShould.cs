@@ -28,6 +28,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(SubcategoryEndpoints.PostCreate)
                .WithJsonBody(dto)
+               .WithIdentity(Identities.Administrator)
                .PostAsync();
 
             await response.ShouldBe(StatusCodes.Status201Created);
@@ -47,6 +48,7 @@ namespace Celebrity.FunctionalTests
             var response = await Given
                .Server
                .CreateRequest(SubcategoryEndpoints.GetSubcategory(subcategory.Id))
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
 
             await response.ShouldBe(StatusCodes.Status200OK);
@@ -64,6 +66,7 @@ namespace Celebrity.FunctionalTests
             var response = await Given
                .Server
                .CreateRequest(SubcategoryEndpoints.GetSubcategories())
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
 
             await response.ShouldBe(StatusCodes.Status200OK);
@@ -85,6 +88,7 @@ namespace Celebrity.FunctionalTests
                .Server
                .CreateRequest(SubcategoryEndpoints.PatchUpdate(subcategory.Id))
                .WithJsonBody(dto)
+               .WithIdentity(Identities.Administrator)
                .PatchAsync();
 
             await response.ShouldBe(StatusCodes.Status204NoContent);
@@ -104,20 +108,36 @@ namespace Celebrity.FunctionalTests
             var response = await Given
                .Server
                .CreateRequest(SubcategoryEndpoints.GetSubcategory(subcategory.Id))
+               .WithIdentity(Identities.Administrator)
                .GetAsync();
             await response.ShouldBe(StatusCodes.Status200OK);
 
             response = await Given
                .Server
                .CreateRequest(SubcategoryEndpoints.DeleteSubcategory(subcategory.Id))
+               .WithIdentity(Identities.Administrator)
                .DeleteAsync();
             await response.ShouldBe(StatusCodes.Status204NoContent);
 
             response = await Given
               .Server
               .CreateRequest(SubcategoryEndpoints.GetSubcategory(subcategory.Id))
+              .WithIdentity(Identities.Administrator)
               .GetAsync();
             await response.ShouldBe(StatusCodes.Status404NotFound);
+        }
+
+        [Fact]
+        public async Task Fail_to_be_found_when_user_is_not_admin()
+        {
+            var subcategory = await Given.SubcategoryInDatabase();
+
+            var response = await Given
+               .Server
+               .CreateRequest(SubcategoryEndpoints.GetSubcategory(subcategory.Id))
+               .GetAsync();
+
+            await response.ShouldBe(StatusCodes.Status401Unauthorized);
         }
     }
 }

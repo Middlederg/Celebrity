@@ -19,7 +19,7 @@ namespace Celebrity.Host
                 {
                     options.MigrationsAssembly(migrationsAssembly);
                 });
-            });
+            }).AddCustomIdentityOptions();
 
             //services.AddIdentityCore<Users>(options =>
             //{

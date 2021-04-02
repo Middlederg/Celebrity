@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IdentityModel;
+using System;
 using System.Security.Claims;
 
 namespace Celebrity.Api
@@ -7,8 +8,8 @@ namespace Celebrity.Api
     {
         public static bool IsAdmin(this ClaimsPrincipal currentUser)
         {
-            var claim = currentUser.FindFirstValue(ClaimTypes.Role);
-            return !string.IsNullOrWhiteSpace(claim) && claim.Equals(Roles.Admin);
+            var claim = currentUser.FindFirstValue(JwtClaimTypes.Role);
+            return !string.IsNullOrWhiteSpace(claim) && claim.Equals(Celebrity.Shared.Roles.Admin);
         }
     }
 }

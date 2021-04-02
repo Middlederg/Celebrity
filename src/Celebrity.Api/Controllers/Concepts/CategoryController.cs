@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Celebrity.Api
 {
     [ApiController]
+    [Authorize(Policies.IsAdminPolicy)]
     [Route(CategoryEndpoints.Base)]
     public class CategoryController : ControllerBase
     {

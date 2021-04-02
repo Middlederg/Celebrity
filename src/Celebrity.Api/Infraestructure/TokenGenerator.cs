@@ -14,26 +14,24 @@ namespace Celebrity.Api
 {
     public class TokenGenerator
     {
-        public const string ApiKeyConfigurationName = "SecretKey";
         public const int ExpirationDays = 1;
 
-        private readonly IConfiguration configuration;
+        private readonly ApiConfiguration configuration;
 
-        public TokenGenerator(IConfiguration configuration)
+        public TokenGenerator(ApiConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
-        public string GenerateToken(Guid userId, string userName, string[] roles)
+        public string GenerateToken(IUser user, string[] roles)
         {
-            string secret = configuration.GetValue<string>(ApiKeyConfigurationName);
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secret);
+            var key = Encoding.ASCII.GetBytes(configuration.Secret);
 
             var claims = new List<Claim>()
             {
-                new Claim(JwtClaimTypes.Subject, userId.ToString()),
-                new Claim(JwtClaimTypes.Name, userName)
+                new Claim(JwtClaimTypes.Subject, user.Id),
+                new Claim(JwtClaimTypes.Name, user.UserName)
             };
             claims.AddRange(roles.Select(role => new Claim(JwtClaimTypes.Role, role)));
 

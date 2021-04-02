@@ -1,4 +1,4 @@
-﻿@inject SubcategoriesQuery subcategoriesQuery
+﻿@inject SubcategoryRepository repository
 
 <select class="form-control" @onchange=CategoryChanged>
 
@@ -18,17 +18,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        subcategories = await subcategoriesQuery.GetAll();
+        subcategories = await repository.GetAll();
     }
-
-    [Parameter]
-    public Subcategory SelectedSubcategory { get; set; }
 
     private async Task CategoryChanged(ChangeEventArgs e)
     {
         var selectedId = (Guid)e.Value;
-        SelectedSubcategory = subcategories.FirstOrDefault(x => x.Id == selectedId);
-        await OnSubcategoryChanged.InvokeAsync(SelectedSubcategory);
+        var subcategory = subcategories.FirstOrDefault(x => x.Id == selectedId);
+        await OnSubcategoryChanged.InvokeAsync(subcategory);
     }
 
     [Parameter]

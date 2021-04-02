@@ -6,7 +6,7 @@ using Celebrity.Domain;
 
 namespace Celebrity.Data
 {
-    public class CelebrityContext : DbContext, IUnitOfWork
+    public class CelebrityContext : IdentityDbContext<User>, IUnitOfWork
     {
         public DbSet<Concept> Concepts { get; set; }
         public DbSet<Subcategory> Subcategories { get; set; }

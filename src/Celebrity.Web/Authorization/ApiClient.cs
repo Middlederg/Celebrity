@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using System.Net.Http;
 
 namespace Celebrity.Web
 {
@@ -11,5 +12,7 @@ namespace Celebrity.Web
             Client = client;
         }
     }
+
+  
 
 }

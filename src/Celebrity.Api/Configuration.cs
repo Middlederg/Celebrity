@@ -6,6 +6,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Celebrity.Api
 {
@@ -45,4 +46,5 @@ namespace Celebrity.Api
                 });
         }
     }
+ 
 }

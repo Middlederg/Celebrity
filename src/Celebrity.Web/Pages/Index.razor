@@ -3,13 +3,13 @@
 
 <h1 class="display-4 text-center text-secondary mt-5 text-uppercase">Welcome to your new app</h1>
 
-<p>Current culture : @user.Culture.DisplayName (@user.Culture.NativeName)</p>
+@*<p>Current culture : @user.Culture.DisplayName (@user.Culture.NativeName)</p>*@
 
 <p>Current date : @DateTime.Now</p>
 
 @code
 {
-    private User user;
+    //private IUser user;
 
     protected override async Task OnInitializedAsync()
     {

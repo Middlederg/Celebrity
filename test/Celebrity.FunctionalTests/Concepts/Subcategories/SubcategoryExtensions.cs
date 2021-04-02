@@ -1,5 +1,6 @@
 ﻿using Celebrity.Shared;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.TestHost;
 using System;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace Celebrity.FunctionalTests
             var response = await given
                .Server
                .CreateRequest(SubcategoryEndpoints.PostCreate)
+               .WithIdentity(Identities.Administrator)
                .WithJsonBody(dto)
                .PostAsync();
 
@@ -30,6 +32,7 @@ namespace Celebrity.FunctionalTests
             var response = await given
                .Server
                .CreateRequest(SubcategoryEndpoints.GetSubcategory(id))
+               .WithIdentity(Identities.Administrator)
                .WithJsonBody(dto)
                .GetAsync();
 

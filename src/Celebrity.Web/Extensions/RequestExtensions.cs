@@ -10,8 +10,36 @@
 //using System.Linq;
 //using System.Security.Claims;
 
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
 namespace Celebrity.Web
 {
+    public static class RequestExtensions
+    {
+        public static string ToJson<TContent>(this TContent content)
+        {
+            var json = JsonSerializer.Serialize<TContent>(content);
+            return json;
+        }
+
+        public static StringContent ToJsonBody<TContent>(this TContent content, string contentType = "application/json")
+        {
+            var body = new StringContent(content.ToJson(), Encoding.UTF8, contentType);
+            return body;
+        }
+
+        public static async Task<HttpResponseMessage> PatchJsonAsync<TContent>(this HttpClient client, string url, TContent content, string contentType = "application/json")
+        {
+            var body = content.ToJsonBody(contentType);
+            var response = await client.PatchAsync(url, body);
+            response.EnsureSuccessStatusCode();
+            return response;
+        }
+    }
+
     //public static class IServiceCollectionExtensions
     //{
     //    /// <summary>
