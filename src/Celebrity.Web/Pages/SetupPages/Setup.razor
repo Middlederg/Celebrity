@@ -1,7 +1,7 @@
 ﻿@page "/setup"
 @inject NavigationManager NavigationManager
-@inject CategoriesQuery query
-@inject GameCreatorService gameCreatorService
+@*@inject CategoriesQuery query
+@inject GameCreatorService gameCreatorService*@
 @*@inject UserFinderService userFinderService
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Setup> L*@
 
@@ -36,22 +36,22 @@
 
 
 @code {
-    private GameOptionsViewModel options;
-    private CategoriesViewModel categories;
+    //private GameOptionsViewModel options;
+    //private CategoriesViewModel categories;
     private List<Team> teams;
 
     protected override async Task OnInitializedAsync()
     {
-        teams = new List<Team>()
-        {
-            new Team(Color.Bluemoon),
-            new Team(Color.Lemon)
-        };
+        //teams = new List<Team>()
+        //{
+        //    new Team(Color.Bluemoon),
+        //    new Team(Color.Lemon)
+        //};
 
-        options = new GameOptionsViewModel();
+        //options = new GameOptionsViewModel();
 
-        var list = await query.Execute();
-        categories = new CategoriesViewModel(list);
+        //var list = await query.Execute();
+        //categories = new CategoriesViewModel(list);
     }
 
     private async Task StartGame()

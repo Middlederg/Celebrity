@@ -14,7 +14,7 @@
 
     private async Task CategoryChanged(ChangeEventArgs e)
     {
-        await OnCategoryChanged.InvokeAsync(selectedCategory);
+        await OnCategoryChanged.InvokeAsync((CategoryValue)e.Value);
     }
 
     [Parameter]

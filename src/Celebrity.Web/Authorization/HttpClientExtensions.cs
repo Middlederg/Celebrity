@@ -14,7 +14,7 @@ namespace Celebrity.Web
             services.AddHttpClient<ApiClient>(cl =>
             {
                 cl.BaseAddress = new Uri(settings.BaseUrl);
-            }).AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
+            });
 
             return services;
         }

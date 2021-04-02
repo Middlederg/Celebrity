@@ -15,8 +15,7 @@
                        type="search"
                        placeholder="Search"
                        aria-label="Search"
-                       aria-describedby="searchButton"
-                       @bind="Categories.SearchText">
+                       aria-describedby="searchButton">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary btn-sm my-2 my-sm-0" 
                             type="submit" 
@@ -38,7 +37,7 @@
 
 </div>
 
-@foreach (var category in Categories.Categories.Where(x => x.Visible))
+@foreach (var category in Categories)
 {
     <CategoryCard Category="category"></CategoryCard>
 }
@@ -46,22 +45,22 @@
 @code {
 
     [Parameter]
-    public CategoriesViewModel Categories { get; set; }
+    public IEnumerable<Category> Categories { get; set; }
 
     private void Search()
     {
-        Categories.Search();
+       
     }
 
     private void SelectAll()
     {
-        Categories.SelectAll();
+       
 
     }
 
     private void UnselectAll()
     {
-        Categories.UnselectAll();
+     
 
     }
 }

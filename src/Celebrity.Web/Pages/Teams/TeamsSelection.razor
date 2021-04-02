@@ -5,16 +5,16 @@
         add team
     </button>
 
-  <CreateTeam Show="createTeamModal" OnTeamAdded="TeamCreated" ></CreateTeam>
+  <Create Show="createTeamModal" OnTeamAdded="TeamCreated" ></Create>
 </div>
 
 <hr class="mt-0 mb-2" />
 
 <div class="card-columns">
 
-    @foreach (Team team in Teams)
+    @foreach (var team in Teams)
     {
-        <TeamCard Team="team" OnTeamRemoved="(team) => Teams.Remove(team)"></TeamCard>
+        <TeamCard Team="team"></TeamCard>
     }
 </div>
 
@@ -22,9 +22,9 @@
     private bool createTeamModal = false;
 
     [Parameter]
-    public List<Team> Teams { get; set; } 
+    public List<CreateTeam> Teams { get; set; } 
 
-    void TeamCreated(Team team)
+    void TeamCreated(CreateTeam team)
     {
         Teams.Add(team);
     }

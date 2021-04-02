@@ -62,13 +62,17 @@
     public bool Show { get; set; }
 
     [Parameter]
-    public EventCallback<Team> OnTeamAdded { get; set; }
+    public EventCallback<CreateTeam> OnTeamAdded { get; set; }
 
     async Task OnCreateTeam(Color? color, string name)
     {
         if (color.HasValue)
         {
-            var team = new Team(color.Value, name);
+            var team = new Celebrity.Shared.CreateTeam()
+            {
+                Color = color.Value,
+                Name = name
+            };
             await OnTeamAdded.InvokeAsync(team);
             CloseWindow();
         }

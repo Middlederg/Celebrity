@@ -12,8 +12,7 @@
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" 
                            class="custom-control-input" 
-                           id="@subcategory.ToString()"
-                           @bind="subcategory.IsChecked">
+                           id="@subcategory.ToString()">
                     <label class="custom-control-label" for="@subcategory.ToString()">@subcategory.ToString()</label>
                 </div>
             }
@@ -26,23 +25,22 @@
     private string icon;
 
     [Parameter]
-    public CategoryViewModel Category { get; set; }
+    public Category Category { get; set; }
 
     protected override void OnInitialized()
     {
-        allSelected = Category.AllSelected;
         ChangeIcon();
     }
 
     private void Toggle()
     {
         allSelected = !allSelected;
-        if (allSelected) Category.SelectAll(); else Category.UnselectAll();
+        //if (allSelected) Category.SelectAll(); else Category.UnselectAll();
         ChangeIcon();
     }
 
     private void ChangeIcon()
     {
-        icon = Category.AllSelected ?  "oi oi-media-stop" : "oi oi-task";
+        //icon = Category.AllSelected ?  "oi oi-media-stop" : "oi oi-task";
     }
 }
