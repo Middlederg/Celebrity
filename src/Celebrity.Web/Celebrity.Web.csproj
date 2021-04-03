@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Celebrity.Shared\Celebrity.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>

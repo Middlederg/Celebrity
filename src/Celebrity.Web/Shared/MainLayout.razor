@@ -1,20 +1,7 @@
 ﻿@inherits LayoutComponentBase
+<NavMenu />
 
-<div class="page">
+<main class="px-2 md:px-8 mb-2 md:mb-8">
+    @Body
+</main>
 
-    <NavMenu />
-
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @Body
-        </main>
-    </div>
-
-    <footer class="footer border-top text-muted">
-        <div class="container">
-            &copy; 2020 - Celebrity.Blazor - <a asp-area="" asp-page="Privacy">Privacy</a>
-        </div>
-    </footer>
-
-</div>

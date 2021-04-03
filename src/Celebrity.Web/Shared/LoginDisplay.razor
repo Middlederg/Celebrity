@@ -2,18 +2,75 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 @inject NavigationManager Navigation
+@inject AuthService AuthService
 
 <AuthorizeView>
     <Authorized>
-        Hello, @context.User.Identity.Name!
-        <a href="LogOut">Log out</a>
+        <div class="ml-3 relative">
+            <div class="flex items-center">
+
+
+                <button class="max-w-xs flex items-center text-sm text-white
+                px-3 py-2 bg-transparent rounded-lg  hover:bg-gray-200
+                        hover:text-black transition border-2 border-gray-200 focus:outline-none focus:text-black focus:bg-gray-200"
+                        id="user-menu"
+                        aria-haspopup="true" @onclick="ToggleProfilePanel">
+                    <span class="sr-only">Open user menu</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
+                </button>
+
+
+            </div>
+            <!--
+              Profile dropdown panel, show/hide based on dropdown state.
+
+              Entering: "transition ease-out duration-100"
+                From: "transform opacity-0 scale-95"
+                To: "transform opacity-100 scale-100"
+              Leaving: "transition ease-in duration-75"
+                From: "transform opacity-100 scale-100"
+                To: "transform opacity-0 scale-95"
+            -->
+            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1
+                                 ring-black ring-opacity-5 @ProfilePanelCssClass"
+                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Options</a>
+
+                <a class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                   @onclick="BeginSignOut"
+                   role="menuitem">
+                    Logout
+                </a>
+
+            </div>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <a href="Register">Register</a>
-        <a href="Login">Log in</a>
+
+        <a href="Login">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                </path>
+            </svg>
+            <span>Login</span>
+        </a>
     </NotAuthorized>
 </AuthorizeView>
 
 @code{
+    private bool collapseProfilePanel = true;
+    private string ProfilePanelCssClass => collapseProfilePanel ? "hidden" : "";
 
+    private void ToggleProfilePanel() => collapseProfilePanel = !collapseProfilePanel;
+
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await AuthService.Logout();
+        Navigation.NavigateTo("/");
+    }
 }
