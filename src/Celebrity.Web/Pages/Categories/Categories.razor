@@ -1,0 +1,16 @@
+﻿@page "/categories"
+
+@inject NavigationManager navigationManager
+@inject SubcategoryRepository repository
+
+
+@code {
+    private IEnumerable<Subcategory> allSubcategories;
+    private IEnumerable<Subcategory> subcategories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var allSubcategories = await repository.GetAll();
+        subcategories = allSubcategories;
+    }
+}
