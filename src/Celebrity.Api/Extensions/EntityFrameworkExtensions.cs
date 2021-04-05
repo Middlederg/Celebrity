@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using System;
 
-namespace Celebrity.FunctionalTests
+namespace Celebrity.Data
 {
     public static class EntityFrameworkExtensions
     {
