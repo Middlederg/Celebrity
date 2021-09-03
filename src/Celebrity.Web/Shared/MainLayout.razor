@@ -1,7 +1,22 @@
 ﻿@inherits LayoutComponentBase
-<NavMenu />
+<main class="flex flex-col h-full">
 
-<main class="px-2 md:px-8 mb-2 md:mb-8">
-    @Body
+    <NavMenu />
+
+    <main class="flex-1 px-2 md:px-8 mb-2 md:mb-8">
+        @Body
+    </main>
+
+    <footer class="bg-@Constants.Primary text-sm text-white">
+        <div class="px-2 md:px-8 flex justify-between align-center py-2">
+
+            <span class="font-semibold">
+                Celebrity
+            </span>
+
+            <span class="font-mono">
+                @DateTime.Today.Year
+            </span>
+        </div>
+    </footer>
 </main>
-

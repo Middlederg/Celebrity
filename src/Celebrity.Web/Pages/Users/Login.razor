@@ -2,33 +2,49 @@
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
 
-<h1>Login</h1>
 
-@if (ShowErrors)
-{
-    <div class="alert alert-danger" role="alert">
-        <p>@Error</p>
-    </div>
-}
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Please enter your details</h5>
+<div class="flex justify-center items-center h-full">
+    <div class="border border-blue-200 p-10 bg-gray-100 rounded flex justify-center items-center flex-col shadow-md">
+        <img src="img/logos/blue.png" class="w-16 h-16" alt="Logo">
+        <h1 class="text-3xl uppercase text-@Constants.Primary font-semibold tracking-wide">Login</h1>
         <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
             <DataAnnotationsValidator />
-            <ValidationSummary />
 
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <InputText Id="email" Class="form-control" @bind-Value="loginModel.Email" />
-                <ValidationMessage For="@(() => loginModel.Email)" />
+            <div class="px-10 flex flex-col mt-6">
+                <label for="email" class="text-sm font-semibold ml-1 text-blue-800">Email address</label>
+                <InputText Id="email"
+                           Class="@Constants.InputStyle"
+                           @bind-Value="loginModel.Email" />
+                <div class="text-sm text-yellow-500 tracking-wide">
+                    <ValidationMessage For="@(() => loginModel.Email)" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText Id="password" type="password" Class="form-control" @bind-Value="loginModel.Password" />
-                <ValidationMessage For="@(() => loginModel.Password)" />
+            <div class="px-10 flex flex-col mt-6">
+                <label for="password" class="text-sm font-semibold ml-1 text-blue-800">Password</label>
+
+                <InputText Id="password"
+                           type="password"
+                           Class="@Constants.InputStyle"
+                           @bind-Value="loginModel.Password" />
+
+                <div class="text-sm text-yellow-500 tracking-wide">
+
+                    <ValidationMessage For="@(() => loginModel.Password)" />
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <div class="px-10 mt-6 text-lg">
+                <CustomButton Type="ButtonType.Submit"
+                              Style="@Constants.Button"
+                              AdditionalStyles="w-full">
+                    Login
+                </CustomButton>
+            </div>
+            <div class="px-10 mt-6">
+            <CustomAlert Response="response" />
+
+            </div>
         </EditForm>
     </div>
 </div>
@@ -37,22 +53,17 @@
 
     private LoginModel loginModel = new LoginModel();
     private bool ShowErrors;
-    private string Error = "";
+    private Response<LoginResult> response;
 
     private async Task HandleLogin()
     {
         ShowErrors = false;
 
-        var result = await AuthService.Login(loginModel);
+        response = await AuthService.Login(loginModel);
 
-        if (result.Successful)
+        if (!response.HasError)
         {
             NavigationManager.NavigateTo("/");
-        }
-        else
-        {
-            Error = result.Error;
-            ShowErrors = true;
         }
     }
 

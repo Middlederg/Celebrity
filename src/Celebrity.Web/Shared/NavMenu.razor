@@ -7,7 +7,7 @@
                 <strong class="hidden md:block uppercase text-@Constants.Primary hover:text-@Constants.PrimaryDarker tracking-widest text-2xl">Celebrity</strong>
             </NavLink>
         </div>
-        <nav class="flex justify-end items-center flex-row space-x-2 text-@Constants.Primary hover:text-@Constants.PrimaryLighter">
+        <nav class="text-sm flex justify-end items-center flex-row space-x-2 text-@Constants.Primary hover:text-@Constants.PrimaryLighter">
             <NavLink class="@InactiveText"
                      href="main" ActiveClass=@ActiveText>
 
@@ -47,7 +47,7 @@
 
 
 @code {
-    public static string InactiveText = $"flex px-4 py-2 text-sm font-semibold rounded-lg";
+    public static string InactiveText = $"flex px-4 py-2 font-semibold rounded-lg";
     public static string ActiveText = $"text-white bg-{Constants.Primary} hover:text-white";
 }
 

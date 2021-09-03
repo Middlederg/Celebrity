@@ -3,6 +3,7 @@ using System.Linq;
 using Celebrity;
 using Celebrity.Data;
 using Celebrity.Domain;
+using Celebrity.Api;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -30,6 +31,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IConceptRepository, ConceptRepository>();
             services.AddScoped<IDeckRepository, DeckRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+
+            services.AddScoped<TokenGenerator>();
             return services;
         }
     }
