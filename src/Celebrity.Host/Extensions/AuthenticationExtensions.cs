@@ -13,9 +13,11 @@ namespace Celebrity.Host
     public static class AuthenticationExtensions
     {
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services,
-            ApiConfiguration apiConfiguration)
+            IConfiguration configuration)
         {
-            var key = Encoding.ASCII.GetBytes(apiConfiguration.Secret);
+            var settings = configuration.GetSection("ApiConfiguration").Get<ApiConfiguration>();
+
+            var key = Encoding.ASCII.GetBytes(settings.Secret);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -42,8 +44,8 @@ namespace Celebrity.Host
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = apiConfiguration.Issuer,
-                        ValidAudience = apiConfiguration.Audience,
+                        ValidIssuer = settings.Issuer,
+                        ValidAudience = settings.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                     };
                 });

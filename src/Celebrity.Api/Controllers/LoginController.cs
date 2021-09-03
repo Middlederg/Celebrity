@@ -25,7 +25,7 @@ namespace Celebrity.Api
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginModel login)
+        public async Task<IActionResult> Login(LoginModel login)
         {
             var result = await signInManager.PasswordSignInAsync(login.Email, login.Password, false, true);
 

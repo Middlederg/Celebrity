@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Celebrity.Api
 {
     [ApiController]
-    //[Authorize(Policies.IsAdminPolicy)]
+    [Authorize(Policies.IsAdminPolicy)]
     [Route(SubcategoryEndpoints.Base)]
     public class SubcategoryController : ControllerBase
     {
