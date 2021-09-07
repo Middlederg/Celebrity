@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Celebrity.Shared;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,8 @@ namespace Celebrity.Web
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddBlazoredLocalStorage();
-            builder.Services.AddAuthorizationCore();
+            builder.Services.AddOptions();
+            builder.Services.AddAuthorizationCore(Policies.Configure);
             builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddApiClient(builder.Configuration);

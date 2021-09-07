@@ -11,6 +11,4 @@ namespace Celebrity.Web
             Client = client;
         }
     }
-
-
 }

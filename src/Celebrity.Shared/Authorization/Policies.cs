@@ -1,10 +1,7 @@
-﻿using IdentityModel;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Celebrity.Api
+namespace Celebrity.Shared
 {
-
     public static class Policies
     {
         public const string IsAdminPolicy = nameof(IsAdminPolicy);
@@ -12,11 +9,11 @@ namespace Celebrity.Api
         public static void Configure(AuthorizationOptions options)
         {
             options.InvokeHandlersAfterFailure = true;
-
+            
             options.AddPolicy(IsAdminPolicy, policyBuilder =>
             {
                 policyBuilder.RequireAuthenticatedUser();
-                policyBuilder.RequireClaim(claimType: JwtClaimTypes.Role, Celebrity.Shared.Roles.Admin);
+                policyBuilder.RequireClaim(claimType: "role", Celebrity.Shared.Roles.Admin);
             });
         }
     }

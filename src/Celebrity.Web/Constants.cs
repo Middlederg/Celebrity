@@ -8,7 +8,7 @@
 
         public static string InputStyle => $"p-3 w-80 focus:border-{Primary} rounded-lg border-2 outline-none border-blue-300";
 
-        public static string Button = $"text-white bg-{Primary} hover:bg-{PrimaryLighter} border-{Primary}  hover:border-{PrimaryLighter}";
+        public static string Button = $"text-white bg-{Primary} hover:bg-{PrimaryLighter} border-{Primary} hover:border-{PrimaryLighter}";
         public static string ButtonOutlined = $"text-{Primary} hover:bg-{Primary} border-{Primary}";
     }
 

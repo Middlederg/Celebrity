@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>$(NetVersion)</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" />
+    <PackageReference Include="Microsoft.Aspnetcore.Authorization" />
+    <PackageReference Include="IdentityModel" />
   </ItemGroup>
 
 </Project>

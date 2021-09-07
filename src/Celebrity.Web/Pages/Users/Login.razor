@@ -1,4 +1,6 @@
 ﻿@page "/login"
+@page "/login/{returnUrl}"
+
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
 
@@ -55,6 +57,9 @@
     private bool ShowErrors;
     private Response<LoginResult> response;
 
+    [Parameter]
+    public string ReturnUrl { get; set; }
+
     private async Task HandleLogin()
     {
         ShowErrors = false;
@@ -63,7 +68,8 @@
 
         if (!response.HasError)
         {
-            NavigationManager.NavigateTo("/");
+            string url = string.IsNullOrWhiteSpace(ReturnUrl) ? "/" : ReturnUrl; 
+            NavigationManager.NavigateTo(url);
         }
     }
 

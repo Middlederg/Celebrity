@@ -3,5 +3,6 @@
         <NetVersion>net5.0</NetVersion>
         <NetStandardVersion>netstandard2.0</NetStandardVersion>
         <LangVersion>9.0</LangVersion>
+        <AspnetcoreVersion>5.0.4</AspnetcoreVersion>
     </PropertyGroup>
 </Project>
