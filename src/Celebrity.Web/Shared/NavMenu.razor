@@ -1,13 +1,13 @@
-﻿<header class="w-full text-white bg-gray-100 mb-8 border-b-2 border-@Constants.Primary">
+﻿<header class="w-full text-white bg-gray-100 mb-8 border-b-2 border-@Colors.Primary">
     <div class="flex flex-row items-center justify-between py-2 md:py-3 px-4 md:px-8 ">
         <div class="flex flex-row items-center justify-between">
             <NavLink class="flex items-center"
                      href="" Match="NavLinkMatch.All">
                 <img src="img/logos/blue.png" class="w-8 h-8 mr-2" alt="Logo">
-                <strong class="hidden md:block uppercase text-@Constants.Primary hover:text-@Constants.PrimaryDarker tracking-widest text-2xl">Celebrity</strong>
+                <strong class="hidden md:block uppercase text-@Colors.Primary hover:text-@Colors.PrimaryDarker tracking-widest text-2xl">Celebrity</strong>
             </NavLink>
         </div>
-        <nav class="text-sm flex justify-end items-center flex-row space-x-2 text-@Constants.Primary hover:text-@Constants.PrimaryLighter">
+        <nav class="text-sm flex justify-end items-center flex-row space-x-2 text-@Colors.Primary hover:text-@Colors.PrimaryLighter">
 
             <AuthorizeView Policy="@Policies.IsAdminPolicy">
                 <Authorized>
@@ -55,6 +55,6 @@
 
 @code {
     public static string InactiveText = $"flex px-4 py-2 font-semibold rounded-lg";
-    public static string ActiveText = $"text-white bg-{Constants.Primary} hover:text-white";
+    public static string ActiveText = $"text-white bg-{Colors.Primary} hover:text-white";
 }
 

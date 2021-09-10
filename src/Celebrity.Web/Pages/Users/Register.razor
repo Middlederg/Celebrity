@@ -1,117 +1,105 @@
 ﻿@layout EmptyLayout
 
 @page "/register"
+@page "/register/{returnUrl}"
+
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
 
 
-<div class="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
-    <div class="flex flex-col overflow-hidden bg-white rounded-md shadow-lg md:flex-row md:flex-1
+<div class="flex items-center min-h-screen p-4 bg-@Colors.LightBackground lg:justify-center">
+    <div class="flex flex-col overflow-hidden bg-@Colors.Background rounded-md shadow-lg md:flex-row md:flex-1
         lg:max-w-screen-md">
-        <div class="p-4 py-6 text-white bg-blue-800 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
-            <div class="my-3 text-4xl font-bold text-center hidden md:block uppercase text-white-800 tracking-widest">
+        <div class="p-4 py-6 text-@Colors.Background bg-@Colors.Primary md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+            <div class="my-3 text-4xl font-bold text-center hidden md:block uppercase text-@Colors.Background tracking-widest">
                 Celebrity
-
             </div>
-            <p class="mt-6 font-normal text-center text-blue-100 md:mt-0">
+            <p class="mt-6 font-normal text-center text-@Colors.Primary100 md:mt-0">
                 Create and edit your own concepts and categories
             </p>
-            <p class="flex flex-col items-center justify-center mt-10 text-center text-white">
+            <p class="flex flex-col items-center justify-center mt-10 text-center text-@Colors.Background">
                 <span>You already have an account?</span>
-                <a href="#" class="underline hover:text-blue-200">Login</a>
+                <a @onclick="GoToLogin" class="@Styles.InverseLink">Login</a>
             </p>
-            <p class="mt-6 text-sm text-center text-blue-100">
-                You always can <a href="#" class="underline hover:text-blue-200">play without an acount</a>
+            <p class="mt-6 text-sm text-center text-@Colors.Primary100">
+                You always can <a href="setup" class="@Styles.InverseLink">play without an acount</a>
             </p>
         </div>
-        <div class="p-5 md:flex-1 bg-white py-20">
-            <h3 class="my-4 text-2xl font-semibold text-gray-900">Create Account</h3>
-            <form action="#" class="flex flex-col space-y-5">
-                <div class="flex flex-col space-y-1">
-                    <label for="email" class="text-sm font-semibold text-gray-600">Email address</label>
-                    <input type="email"
-                           id="email"
-                           autofocus
-                           class="px-4 py-2 transition duration-300 border border-gray-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200" />
-                </div>
-                <div class="flex flex-col space-y-1">
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="text-sm font-semibold text-gray-600">Password</label>
+        <div class="p-5 md:flex-1 bg-@Colors.Background py-20">
+            <h3 class="my-4 text-2xl font-semibold text-@Colors.TextDark">Create Account</h3>
+            <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
+                <div class="flex flex-col space-y-5">
+                    <DataAnnotationsValidator />
+
+                    <div class="flex flex-col space-y-1">
+                        <label for="email" class="@Styles.LabelStyle">Email address</label>
+                        <InputText type="email"
+                                   Id="email"
+                                   class="@Styles.InputStyle"
+                                   autofocus
+                                   @bind-Value="RegisterModel.Email" />
+                        <div class="@Styles.ValidationMessageStyle">
+                            <ValidationMessage For="@(() => RegisterModel.Email)" />
+                        </div>
                     </div>
-                    <input type="password"
-                           id="password"
-                           class="px-4 py-2 transition duration-300 border border-gray-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200" />
-                </div>
 
-                <div class="flex flex-col space-y-1">
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="text-sm font-semibold text-gray-600">Confirm Password</label>
+                    <div class="flex flex-col space-y-1">
 
+                        <label for="password" class="@Styles.LabelStyle">Password</label>
+
+                        <InputText type="password"
+                                   Id="password"
+                                   Class="@Styles.InputStyle"
+                                   @bind-Value="RegisterModel.Password" />
+                        <div class="@Styles.ValidationMessageStyle">
+                            <ValidationMessage For="@(() => RegisterModel.Password)" />
+                        </div>
                     </div>
-                    <input type="password"
-                           id="password"
-                           class="px-4 py-2 transition duration-300 border border-gray-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200" />
-                </div>
 
-                <div class="pt-8">
-                    <button type="submit"
-                            class="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-800 rounded-md shadow hover:bg-blue-900 focus:outline-none focus:ring-blue-300 focus:ring-4">
-                        Register
-                    </button>
-                </div>
+                    <div class="flex flex-col space-y-1">
+                        <label for="confirmPassword" class="@Styles.LabelStyle">Confirm Password</label>
+                        <InputText type="password"
+                                   Id="confirmPassword"
+                                   Class="@Styles.InputStyle"
+                                   @bind-Value="RegisterModel.ConfirmPassword" />
+                        <div class="@Styles.ValidationMessageStyle">
+                            <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" />
+                        </div>
+                    </div>
 
-            </form>
+                    <div class="pt-8">
+                        <button type="submit"
+                                class="@Styles.BigButton">
+                            Register
+                        </button>
+                    </div>
+
+                    <div class="pt-6">
+                        <CustomAlert Response="response" />
+                    </div>
+                </div>
+            </EditForm>
+
         </div>
     </div>
 </div>
 
-@if (ShowErrors)
-{
-    <div class="alert alert-danger" role="alert">
-        @foreach (var error in Errors)
-        {
-            <p>@error</p>
-        }
-    </div>
-}
-
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Please enter your details</h5>
-        <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
-                <ValidationMessage For="@(() => RegisterModel.Email)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.Password" />
-                <ValidationMessage For="@(() => RegisterModel.Password)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
-                <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" />
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </EditForm>
-    </div>
-</div>
 
 @code {
 
     private RegisterModel RegisterModel = new RegisterModel();
-    private bool ShowErrors;
-    private IEnumerable<string> Errors;
+    private Response<RegisterResult> response;
+
+    [Parameter]
+    public string ReturnUrl { get; set; }
+
+    private void GoToLogin() => NavigationManager.NavigateTo(
+        string.IsNullOrWhiteSpace(ReturnUrl) ?
+        "login" :
+        $"login/{ReturnUrl}");
 
     private async Task HandleRegistration()
     {
-        ShowErrors = false;
-
         var result = await AuthService.Register(RegisterModel);
 
         if (result.Successful)
@@ -120,8 +108,8 @@
         }
         else
         {
-            Errors = result.Errors;
-            ShowErrors = true;
+            string url = string.IsNullOrWhiteSpace(ReturnUrl) ? "login" : $"login/{ReturnUrl}";
+            NavigationManager.NavigateTo(url);
         }
     }
 

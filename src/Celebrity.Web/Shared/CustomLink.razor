@@ -1,0 +1,16 @@
+﻿<a @onclick="async() => await OnClick.InvokeAsync(null)"
+   class="cursor-pointer text-sm text-blue-600 hover:underline hover:text-@Colors.Primary ">
+    @ChildContent
+</a>
+
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public string Style { get; set; } = Styles.DefaultLink;
+}
