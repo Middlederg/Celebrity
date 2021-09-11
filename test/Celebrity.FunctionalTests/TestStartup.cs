@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace Celebrity.FunctionalTests
 {
+
     public class TestStartup
     {
         private readonly IConfiguration configuration;
@@ -28,6 +30,7 @@ namespace Celebrity.FunctionalTests
                 {
                     configure.IncludeExceptionDetails = (context, exception) => true;
                 })
+                .AddSingleton<IEmailSender, FakeEmailSender>()
                 .AddDbContextPool<CelebrityContext>(setup =>
                 {
                     string connectionString = configuration.GetConnectionString("Sqlite");

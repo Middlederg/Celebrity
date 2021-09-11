@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<CelebrityContext>();
+                .AddEntityFrameworkStores<CelebrityContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {

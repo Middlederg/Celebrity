@@ -14,7 +14,8 @@ namespace Celebrity.FunctionalTests
 {
     public class ServerFixture
     {
-       // public IConfiguration Configuration { get; }
+        public T GetService<T>() => Server.Services.GetService<T>();
+
         public TestServer Server { get; private set; }
 
         public ServerFixture()

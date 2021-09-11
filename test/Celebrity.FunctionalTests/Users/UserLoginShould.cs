@@ -21,7 +21,7 @@ namespace Celebrity.FunctionalTests
         [Fact]
         public async Task Success()
         {
-            var dto = UserMother.GoodUser();
+            var dto = UserMother.RegisterModel();
             await Given.ConfirmedUserInDatabase(dto);
 
             var response = await Given
@@ -45,7 +45,7 @@ namespace Celebrity.FunctionalTests
         [Fact]
         public async Task Fail_when__account_is_not_confirmed()
         {
-            var dto = UserMother.GoodUser();
+            var dto = UserMother.RegisterModel();
             await Given.UserInDatabase(dto);
 
             var response = await Given
@@ -86,7 +86,7 @@ namespace Celebrity.FunctionalTests
         [Fact]
         public async Task Fail_when_password_is_wrong()
         {
-            var dto = UserMother.GoodUser();
+            var dto = UserMother.RegisterModel();
             await Given.UserInDatabase(dto);
 
             var response = await Given

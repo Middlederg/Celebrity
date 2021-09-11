@@ -5,7 +5,7 @@ namespace Celebrity.FunctionalTests
 {
     public static class UserMother
     {
-        public static RegisterModel GoodUser()
+        public static RegisterModel RegisterModel()
         {
             var faker = new Faker<RegisterModel>()
                 .StrictMode(false)
@@ -19,7 +19,7 @@ namespace Celebrity.FunctionalTests
             return result;
         }
 
-        public static RegisterModel WithWrongPassword()
+        public static RegisterModel DifferentPasswordRegisterModel()
         {
             var faker = new Faker<RegisterModel>()
                 .StrictMode(false)

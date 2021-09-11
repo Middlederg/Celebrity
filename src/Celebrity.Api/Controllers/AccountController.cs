@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Celebrity.Api
@@ -12,10 +13,12 @@ namespace Celebrity.Api
     public class AccountController : ControllerBase
     {
         private readonly UserManager<User> userManager;
+        private readonly IEmailSender emailSender;
 
-        public AccountController(UserManager<User> userManager)
+        public AccountController(UserManager<User> userManager, IEmailSender emailSender)
         {
             this.userManager = userManager;
+            this.emailSender = emailSender;
         }
 
         [HttpPost, Route(UserEndpoints.Register)]
@@ -35,44 +38,38 @@ namespace Celebrity.Api
                 throw new DomainException(string.Join(", ", result.Errors.Select(x => x.Description)));
             }
 
-
-            var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var code = await userManager.GenerateEmailConfirmationTokenAsync(newUser);
             var callbackUrl = Url.Action("ConfirmEmail", "Account",
                 values: new { userId = user.Id, code },
                 protocol: Request.Scheme);
 
-            //string encodedUrl = HttpUtility.UrlEncode(code);
             string encodedUrl = HtmlEncoder.Default.Encode(callbackUrl);
-            await emailSender.SendEmailAsync(user.Email, EmailSender.ConfirmEmailSubject,
-                $"Por favor, confirme su correo electrónico <a href='{encodedUrl}'>aquí</a>.");
+            await emailSender.SendEmailAsync(user.Email, EmailSubjects.ConfirmEmailSubject,
+                $"Please, <a href='{encodedUrl}'>confirm</a> your email to be able to login.");
 
-            return new RegisterResult { Email = model.Email };
+            return new RegisterResult { Email = model.Email, UserId = Guid.Parse(newUser.Id) };
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        [HttpPost, Route(UserEndpoints.ConfirmEmail)]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailModel model)
         {
-            if (userId == null || code == null)
+            if (!model.UserId.HasValue ||  string.IsNullOrWhiteSpace(model.Code))
             {
-                throw new DomainException("Incorrect code");
+                throw new DomainException("Incorrect user or code");
             }
 
-            var user = await userManager.FindByIdAsync(userId);
-            if (user == null)
+            var user = await userManager.FindByIdAsync(model.UserId.ToString());
+            if (user is null)
             {
-                return new NotFoundException(userId);
+                throw new NotFoundException(model.UserId.Value);
             }
 
-            var result = await userManager.ConfirmEmailAsync(user, code);
+            var result = await userManager.ConfirmEmailAsync(user, model.Code);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
+                throw new InvalidOperationException($"Error confirming email for user with Id '{model.UserId}':");
             }
-
-            await emailSender.NotifyToSuscriber($"Se ha registrado correctamente el usuario {user.Email}. " +
-                $"Establezca los permisos en las aplicaciones que sean necesarios");
-
-            return View();
+            return Ok();
         }
 
     }

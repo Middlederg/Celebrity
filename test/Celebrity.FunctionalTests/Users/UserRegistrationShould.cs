@@ -21,7 +21,7 @@ namespace Celebrity.FunctionalTests
         [Fact]
         public async Task Success()
         {
-            var dto = UserMother.GoodUser();
+            var dto = UserMother.RegisterModel();
 
             var response = await Given
                .Server
@@ -33,6 +33,38 @@ namespace Celebrity.FunctionalTests
             var result = await response.ReadJsonResponse<RegisterResult>();
 
             result.Email.Should().Be(dto.Email);
+        }
+
+        [Fact]
+        public async Task Success_and_confirm_email()
+        {
+            var dto = UserMother.RegisterModel();
+
+            var response = await Given
+               .Server
+               .CreateRequest(UserEndpoints.Register)
+               .WithJsonBody(dto)
+               .PostAsync();
+
+            await response.ShouldBe(StatusCodes.Status200OK);
+            var result = await response.ReadJsonResponse<RegisterResult>();
+            result.Email.Should().Be(dto.Email);
+            result.UserId.Should().NotBeEmpty();
+
+            var emailSender = Given.GetService<FakeEmailSender>();
+            emailSender.EmailWasSentTo(dto.Email, EmailSubjects.ConfirmEmailSubject, 1);
+            var code = emailSender.SearchForCode(dto.Email);
+
+            response = await Given
+               .Server
+               .CreateRequest(UserEndpoints.ConfirmEmail)
+               .WithJsonBody(new ConfirmEmailModel()
+               {
+                   Code = code,
+                   UserId = result.UserId
+               })
+               .PostAsync();
+            await response.ShouldBe(StatusCodes.Status200OK);
         }
 
         [Fact]
@@ -99,5 +131,32 @@ namespace Celebrity.FunctionalTests
             result.Title.Should().NotBeNullOrEmpty();
         }
 
+        [Fact]
+        public async Task Fail_when_confirming_email()
+        {
+            var dto = UserMother.RegisterModel();
+
+            var response = await Given
+               .Server
+               .CreateRequest(UserEndpoints.Register)
+               .WithJsonBody(dto)
+               .PostAsync();
+
+            await response.ShouldBe(StatusCodes.Status200OK);
+            var result = await response.ReadJsonResponse<RegisterResult>();
+            result.Email.Should().Be(dto.Email);
+            result.UserId.Should().NotBeEmpty();
+
+            response = await Given
+               .Server
+               .CreateRequest(UserEndpoints.ConfirmEmail)
+               .WithJsonBody(new ConfirmEmailModel()
+               {
+                   Code = Guid.NewGuid().ToString(),
+                   UserId = result.UserId
+               })
+               .PostAsync();
+            await response.ShouldBe(StatusCodes.Status400BadRequest);
+        }
     }
 }

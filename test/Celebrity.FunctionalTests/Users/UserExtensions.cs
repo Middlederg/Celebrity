@@ -12,7 +12,7 @@ namespace Celebrity.FunctionalTests
     {
         public static async Task<RegisterResult> UserInDatabase(this ServerFixture given)
         {
-            var dto = UserMother.GoodUser();
+            var dto = UserMother.RegisterModel();
 
             var response = await given
                .Server
@@ -41,7 +41,21 @@ namespace Celebrity.FunctionalTests
         public static async Task<RegisterResult> ConfirmedUserInDatabase(this ServerFixture given, RegisterModel dto)
         {
             var result = await given.UserInDatabase(dto);
-            //TODO here confirm user
+
+            var emailSender = given.GetService<FakeEmailSender>();
+            var code = emailSender.SearchForCode(dto.Email);
+
+            var response = await given
+               .Server
+               .CreateRequest(UserEndpoints.ConfirmEmail)
+               .WithJsonBody(new ConfirmEmailModel()
+               {
+                   Code = code,
+                   UserId = result.UserId
+               })
+               .PostAsync();
+            await response.ShouldBe(StatusCodes.Status200OK);
+
             return result;
         }
     }

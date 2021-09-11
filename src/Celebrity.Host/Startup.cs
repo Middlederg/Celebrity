@@ -30,6 +30,7 @@ namespace Celebrity.Host
         public void ConfigureServices(IServiceCollection services)
         {
             Api.Configuration.ConfigureServices(services, environment, Configuration)
+                .AddScoped<IEmailSender, SendgridEmailSender>()
                 .AddCustomEntityFrameworkCore(Configuration)
                 .AddCustomAuthentication(Configuration)
                 .AddSwaggerGen(c =>
