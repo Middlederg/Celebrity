@@ -1,7 +1,6 @@
 ﻿@layout EmptyLayout
 
 @page "/login"
-@page "/login/{returnUrl}"
 
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
@@ -73,7 +72,7 @@
                 </div>
 
             </EditForm>
-           
+
         </div>
     </div>
 </div>
@@ -84,13 +83,25 @@
 
     private Response<LoginResult> response;
 
-    [Parameter]
-    public string ReturnUrl { get; set; }
+    private string returnUrl;
 
-    private void GoToRegister() { Console.WriteLine(ReturnUrl ?? "nothing"); NavigationManager.NavigateTo(
-        string.IsNullOrWhiteSpace(ReturnUrl) ?
-        "register" :
-        $"register/{ReturnUrl}"); }
+    protected override void OnInitialized()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        if (Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query)
+            .TryGetValue("returnUrl", out var valueFromQueryString))
+        {
+            returnUrl = valueFromQueryString.ToString();
+        }
+    }
+
+    private void GoToRegister()
+    {
+        NavigationManager.NavigateTo(
+            string.IsNullOrWhiteSpace(returnUrl) ?
+            "register" :
+            $"register?returnUrl={Uri.EscapeDataString(returnUrl)}");
+    }
 
     private void GoToForgotPassword() => NavigationManager.NavigateTo("reset-password");
 
@@ -100,8 +111,8 @@
 
         if (!response.HasError)
         {
-            string url = string.IsNullOrWhiteSpace(ReturnUrl) ? "/" : ReturnUrl;
-            NavigationManager.NavigateTo(url);
+            string url = string.IsNullOrWhiteSpace(returnUrl) ? "/" : Uri.EscapeDataString(returnUrl);
+            NavigationManager.NavigateTo(Uri.EscapeDataString(url));
         }
     }
 

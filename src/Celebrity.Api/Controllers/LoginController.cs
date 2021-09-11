@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Api
 {
-    [Route("api/login")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -24,14 +23,19 @@ namespace Celebrity.Api
             this.userManager = userManager;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginModel login)
+        [HttpPost, Route(UserEndpoints.Login)]
+        public async Task<ActionResult<LoginResult>> Login(LoginModel login)
         {
             var result = await signInManager.PasswordSignInAsync(login.Email, login.Password, false, true);
 
+            if (result.IsNotAllowed)
+            {
+                throw new DomainException("You must confirm your account before log in");
+            }
+
             if (!result.Succeeded)
             {
-                return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
+                throw new DomainException("Username and password are invalid");
             }
 
             var user = await userManager.FindByEmailAsync(login.Email);
@@ -39,9 +43,9 @@ namespace Celebrity.Api
 
             string token = tokenGenerator.GenerateToken(user, roles.ToArray());
 
-            var loginResult = new LoginResult { Successful = true, Token = token };
+            var loginResult = new LoginResult { Email = login.Email, Token = token };
 
-            return Ok(loginResult);
+            return loginResult;
         }
     }
 }

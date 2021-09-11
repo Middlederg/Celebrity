@@ -1,7 +1,6 @@
 ﻿@layout EmptyLayout
 
 @page "/register"
-@page "/register/{returnUrl}"
 
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
@@ -90,25 +89,33 @@
     private RegisterModel RegisterModel = new RegisterModel();
     private Response<RegisterResult> response;
 
-    [Parameter]
-    public string ReturnUrl { get; set; }
+    private string returnUrl { get; set; }
 
-    private void GoToLogin() => NavigationManager.NavigateTo(
-        string.IsNullOrWhiteSpace(ReturnUrl) ?
-        "login" :
-        $"login/{ReturnUrl}");
+    protected override void OnInitialized()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        if (Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query)
+            .TryGetValue("returnUrl", out var valueFromQueryString))
+        {
+            returnUrl = valueFromQueryString.ToString();
+        }
+    }
+
+    private void GoToLogin()
+    {
+        NavigationManager.NavigateTo(
+            string.IsNullOrWhiteSpace(returnUrl) ?
+            "login" :
+            $"login?returnUrl={Uri.EscapeDataString(returnUrl)}");
+    }
 
     private async Task HandleRegistration()
     {
         var result = await AuthService.Register(RegisterModel);
-
+        Console.Write(result.ToJson());
         if (result.Successful)
         {
-            NavigationManager.NavigateTo("/login");
-        }
-        else
-        {
-            string url = string.IsNullOrWhiteSpace(ReturnUrl) ? "login" : $"login/{ReturnUrl}";
+            string url = string.IsNullOrWhiteSpace(returnUrl) ? "login" : $"login?returnUrl={Uri.EscapeDataString(returnUrl)}";
             NavigationManager.NavigateTo(url);
         }
     }
