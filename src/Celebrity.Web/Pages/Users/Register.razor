@@ -111,9 +111,8 @@
 
     private async Task HandleRegistration()
     {
-        var result = await AuthService.Register(RegisterModel);
-        Console.Write(result.ToJson());
-        if (result.Successful)
+        response = await AuthService.Register(RegisterModel);
+        if (!response.HasError)
         {
             string url = string.IsNullOrWhiteSpace(returnUrl) ? "login" : $"login?returnUrl={Uri.EscapeDataString(returnUrl)}";
             NavigationManager.NavigateTo(url);

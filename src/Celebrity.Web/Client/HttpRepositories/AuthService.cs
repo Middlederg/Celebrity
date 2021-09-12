@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Celebrity.Web
 {
-
     public class AuthService
     {
         private readonly ApiClient apiClient;
@@ -27,11 +26,11 @@ namespace Celebrity.Web
             this.localStorage = localStorage;
         }
 
-        public async Task<RegisterResult> Register(RegisterModel registerModel)
+        public async Task<Response<RegisterResult>> Register(RegisterModel registerModel)
         {
             var response = await apiClient.Client.PostAsJsonAsync("api/accounts", registerModel);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadFromJsonAsync<RegisterResult>();
+            var result = await Response<RegisterResult>.Build(response);
             return result;
         }
 
@@ -43,8 +42,6 @@ namespace Celebrity.Web
             Console.WriteLine(result.Content.ToJson());
             if (!result.HasError)
             {
-
-
                 await localStorage.SetItemAsync("authToken", result.Content.Token);
                 ((ApiAuthenticationStateProvider)authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Email);
                 apiClient.Client.DefaultRequestHeaders.Authorization = 

@@ -42,7 +42,7 @@ namespace Celebrity.FunctionalTests
         {
             var result = await given.UserInDatabase(dto);
 
-            var emailSender = given.GetService<FakeEmailSender>();
+            var emailSender = given.GetService<IEmailSender>() as FakeEmailSender;
             var code = emailSender.SearchForCode(dto.Email);
 
             var response = await given

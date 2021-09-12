@@ -24,8 +24,8 @@ namespace Celebrity.Api
         [HttpPost, Route(UserEndpoints.Register)]
         public async Task<ActionResult<RegisterResult>> Post(RegisterModel model)
         {
-            var user = await userManager.FindByNameAsync(model.Email);
-            if (user != null)
+            var searched = await userManager.FindByNameAsync(model.Email);
+            if (searched != null)
             {
                 throw new DomainException($"User {model.Email} is already taken");
             }
@@ -40,11 +40,11 @@ namespace Celebrity.Api
 
             var code = await userManager.GenerateEmailConfirmationTokenAsync(newUser);
             var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                values: new { userId = user.Id, code },
+                values: new { userId = newUser.Id, code },
                 protocol: Request.Scheme);
 
             string encodedUrl = HtmlEncoder.Default.Encode(callbackUrl);
-            await emailSender.SendEmailAsync(user.Email, EmailSubjects.ConfirmEmailSubject,
+            await emailSender.SendEmailAsync(newUser.Email, EmailSubjects.ConfirmEmailSubject,
                 $"Please, <a href='{encodedUrl}'>confirm</a> your email to be able to login.");
 
             return new RegisterResult { Email = model.Email, UserId = Guid.Parse(newUser.Id) };
@@ -67,7 +67,7 @@ namespace Celebrity.Api
             var result = await userManager.ConfirmEmailAsync(user, model.Code);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Error confirming email for user with Id '{model.UserId}':");
+                throw new DomainException($"Error confirming email for user with Id '{model.UserId}':");
             }
             return Ok();
         }

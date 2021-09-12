@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Celebrity.FunctionalTests
 {
@@ -25,9 +28,11 @@ namespace Celebrity.FunctionalTests
                 return null;
             }
             var (to, subject, message) = emails.First(x => email.Equals(x.to));
-            string code = message.Substring(message.IndexOf("href='") + "href='".Length);
-            code = code.Substring(0, code.IndexOf("'>"));
-            return code;
+            string code = message.Substring(message.IndexOf("code=") + "code=".Length);
+            code = code.Substring(0, code.IndexOf("'>confirm"));
+            //code = WebUtility.HtmlDecode(code);
+            string decoded = HttpUtility.UrlDecode(code);
+            return decoded;
         }
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
