@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup Label="Default project values">
-        <NetVersion>net5.0</NetVersion>
+        <NetVersion>net6.0</NetVersion>
         <NetStandardVersion>netstandard2.0</NetStandardVersion>
         <LangVersion>9.0</LangVersion>
         <AspnetcoreVersion>5.0.4</AspnetcoreVersion>

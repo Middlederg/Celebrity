@@ -41,8 +41,14 @@ namespace Celebrity.Data
                });
 
             builder.Property(e => e.Subcategories).HasConversion(
-                v => JsonSerializer.Serialize(v, null),
-                v => JsonSerializer.Deserialize<IEnumerable<BaseObject>>(v, null));
+                v => JsonSerializer.Serialize(v, new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                }),
+                v => JsonSerializer.Deserialize<IEnumerable<BaseObject>>(v, new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                }));
 
             builder.OwnsOne(x => x.ConceptId,
              name =>
